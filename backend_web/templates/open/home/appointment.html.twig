@@ -1,0 +1,51 @@
+{% extends 'open/open.html.twig' %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/styles/contact.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/styles/contact_responsive.css">
+{% endblock %}
+
+{% block body %}
+<div class="footer">
+    <div class="parallax_background" data-image-src="/assets/themes/beauty/images/footer.jpg"></div>
+    <div class="footer_container">
+        <div class="container">
+            <div class="row footer_row">
+                <div class="col-lg-4 footer_col">
+                    <div class="contact_info">
+                        <div class="footer_title"><h1>Reserva cita</h1></div>
+                        <div class="contact_info_list">
+                            <ul>
+                                <li class="d-flex flex-row align-items-start justify-content-start">
+                                    <div><div class="contact_info_icon"><img src="/assets/themes/beauty/images/placeholder.svg" alt="Calle Clara Del Rey 57"></div></div>
+                                    <div class="contact_info_content">Calle Clara Del Rey 57</div>
+                                </li>
+                                <li class="d-flex flex-row align-items-center justify-content-start">
+                                    <div><div class="contact_info_icon"><img src="/assets/themes/beauty/images/phone-call.svg" alt="+34 91 455 74 43"></div></div>
+                                    <div class="contact_info_content">+34 91 455 74 43</div>
+                                </li>
+                                <li class="d-flex flex-row align-items-center justify-content-start">
+                                    <div><div class="contact_info_icon"><img src="/assets/themes/beauty/images/clock.svg" alt="Horario"></div></div>
+                                    <div class="contact_info_content">
+                                        <b>Horario</b><br/>
+                                        Lunes a Viernes de 9:00 a 19:00<br/>
+                                        Sábados de 9:00 a 14:00
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                   </div>
+                </div>
+                <div class="col-lg-8">
+                    {{ include("open/home/forms/form-appointment.html.twig") }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block javascripts %}
+    <script src="/assets/themes/beauty/js/contact.js"></script>
+{% endblock %}

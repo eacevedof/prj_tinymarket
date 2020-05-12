@@ -1,0 +1,31 @@
+<!-- Header -->
+{% set requri = app.request.get('_route') %}
+<header class="header trans_400" style="background-color: rgba(0,0,0,.7);">
+    <div class="header_content d-flex flex-row align-items-center justify-content-center trans_400">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="/">
+                <div>Doble <span>RR</span></div>
+                <div>peluquería</div>
+            </a>
+            <div class="hamburger"><div></div><div></div><div></div></div>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav class="main_nav">
+            <ul class="d-flex flex-row align-items-start justify-content-start">
+                {{ include("open/common/nav-lis.html.twig") }}
+            </ul>
+        </nav>
+        {{ include("open/common/forms/form-appointment-right.html.twig") }}
+    </div>
+</header>
+
+<!-- Menu mobile -->
+<div class="menu">
+    <nav class="menu_nav">
+        <ul class="d-flex flex-column align-items-start justify-content-start">
+            {{ include("open/common/nav-lis.html.twig") }}
+        </ul>
+    </nav>
+</div>

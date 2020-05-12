@@ -1,0 +1,31 @@
+<!-- Servicios Slider -->
+<div class="services_slider_container">
+    <div class="owl-carousel owl-theme services_slider">
+    {% set items=0 %}
+    {% for service in services %}
+        {% if items is same as(0) %}
+            <div class="owl-item">
+        {% endif %}
+        <!-- Service -->
+        <div class="service d-flex flex-row align-items-center justify-content-start trans_200">
+            <div class="service_icon"><div><img src="/assets/themes/beauty/images/{{ service.icon }}" class="svg" alt="{{ service.service_title }}"></div></div>
+            <div class="service_content">
+                <div class="service_title trans_200">{{ service.service_title }}</div>
+                <div class="service_text trans_200">
+                    <p>
+                        {{ service.service_text }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        {% if items is same as(1) %}
+            </div>
+            {% set items=0 %}
+        {% else %}
+            {% set items=items + 1 %}
+        {% endif %}
+
+    {% endfor %}
+    </div>
+</div>

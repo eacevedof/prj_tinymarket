@@ -1,0 +1,108 @@
+<div class="contact_form_container">
+    {% verbatim %}
+    <form id="form-appointment" action="/mail" @submit="checkform" method="post" class="app_form">
+        <input type="text" v-model="name" class="app_input" placeholder="Nombre" required="required">
+        <input type="email" v-model="email"  class="app_input" placeholder="Email" required="required">
+        <input type="text" v-model="phone"  class="app_input" placeholder="Teléfono" required="required">
+        <input type="date" v-model="datetime" class="app_input" placeholder="Fecha y hora" required="required">
+
+        <select v-model="selservices" class="app_input" multiple size="8" required="required" style="height: 158px">
+            <option disabled="" selected="">Que te vas a hacer?</option>
+            <option v-for="option in serviceopts" v-bind:value="option.value">
+            {{ option.text }}
+            </option>
+        </select>
+
+        <select v-model="selperson" class="app_input" required="required">
+            <option disabled="" selected="">Con quién?</option>
+            <option v-for="option in personsopts" v-bind:value="option.value">
+            {{ option.text }}
+            </option>
+        </select>
+        <button id="btn-appointment" class="app_form_button">Enviar</button>
+    </form>
+    {% endverbatim %}
+</div>
+
+<script>
+var app1 = new Vue({
+    el: "#form-appointment",
+    data: {
+        errors:[],
+        name: "",
+        email: "",
+        phone: "",
+        datetime: "",
+        selservices: [],
+        serviceopts:[
+            { text: 'Cortar', value: 'Cortar' },
+            { text: 'Peinar', value: 'Peinar' },
+            { text: 'Lavar', value: 'Lavar' },
+            { text: 'Tratamiento', value: 'Tratamiento' },
+            { text: 'Estética', value: 'Estética' },
+            { text: 'Masaje', value: 'Masaje' },
+            { text: 'Otro', value: 'Otro' }
+        ],
+        selperson: "",
+        personsopts:[
+            { text: 'Carlos', value: 'Carlos' },
+            { text: 'Miriam', value: 'Miriam' },
+            { text: 'Beatriz', value: 'Beatriz' },
+            { text: 'Otro', value: 'Otro' },
+        ],
+
+    },
+    methods:{
+        checkform: function(e) {
+            console.log("checkform")
+            $("#btn-appointment").hide()
+            e.preventDefault()
+
+            const data = new FormData();
+            data.append("action","appointment")
+            data.append("name",this.name)
+            data.append("email",this.email)
+            data.append("phone",this.phone)
+            data.append("datetime",this.datetime)
+            data.append("services",this.selservices)
+            data.append("person",this.selperson)
+            console.log("data-prefetch",data);
+            fetch('/mail', {
+                method: 'post',
+                body: data
+            })
+                .then(function(response) {
+                    $("#btn-appointment").show()
+                    console.log("reponse",response)
+                    if(response.ok) {
+                        $(".app_button_close").click()
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Enhorabuena! la cita se ha procesado ',
+                            html: 'En breves momentos recibirás una copia de la misma en tu email. Recuerda que te llamaremos para <b>confirmarla</b>',
+                        })
+                        /*this.name = ""
+                        this.email = ""
+                        this.phone = ""
+                        this.datetime = ""
+                        this.selservices = []
+                        this.selperson = ""*/
+                        e.target.reset()
+
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Vaya! Algo no ha ido bien',
+                            text: 'No se ha podido procesar la cita. Por favor inténtalo más tarde o prueba por teléfono (34 91 455 74 43).  Disculpa las molestias.',
+                        })
+                    }
+
+                })
+        }
+    },//methods
+    mounted(){
+        console.log("mounted")
+        document.getElementById("form-appointment").reset()
+    }
+})
+</script>

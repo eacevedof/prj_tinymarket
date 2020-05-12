@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Vogue template project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" />
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/styles/bootstrap-4.1.2/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/styles/errors.css">
+    {% block styles %}{% endblock %}
+</head>
+<body>
+<div class="super_container">
+{% block body %}
+{% endblock %}
+</div>
+
+<script src="/assets/themes/beauty/js/jquery-3.2.1.min.js"></script>
+<script src="/assets/themes/beauty/styles/bootstrap-4.1.2/popper.js"></script>
+<script src="/assets/themes/beauty/styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

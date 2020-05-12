@@ -1,0 +1,111 @@
+{% extends 'open/open.html.twig' %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/plugins/colorbox/colorbox.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/styles/services.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/styles/services_responsive.css">
+{% endblock %}
+
+{% block body %}
+<!-- Pricing -->
+<div class="pricing" style="">
+    <div class="parallax_background" data-image-src="/assets/themes/beauty/images/pricing_background.jpg"></div>
+    <div class="container">
+        <div class="row" style="padding-top:40px;">
+            <div class="col-lg-9">
+                <div class="section_title_container">
+                    <div class="section_title"><h1 style="font-size: 48px;">Servicios y Productos</h1></div>
+                    <p>
+                    Ofrecemos una gama variada de productos y servicios.<br/>
+                    Tras muchos años prestando servicio nos ha permitido hacer una selección de los mejores porductos para cada tipo de cliente.<br/>
+                    Hacemos precios especiales para grupos y eventos. Consultalo <a href="{{ path("contact") }}" target="_blank"><b>aqui</b></a>
+                    </p>
+                    <h2>Servicios:</h2>
+                    <p>
+                        Peluquería, estética y masajes (fisioterapia)
+                    </p>
+                    <h2>Productos:</h2>
+                    <p>
+                        Tratamiento capilar, champús, perfumes, pintura de uñas, etc..
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row pricing_row">
+            <div class="col">
+
+                {{ include("open/home/elements/services-pricing-slider.html.twig") }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row services_row">
+    <div class="col">
+        <div class="section_expander">
+            <!-- Services Slider -->
+            {{ include("open/home/elements/services-slider.html.twig") }}
+            <!--
+            <div class="services_more">
+                <div class="services_more_button ml-auto mr-auto trans_200"><a href="#">load more</a></div>
+            </div>
+            -->
+        </div>
+    </div>
+</div>
+<div class="row" style="background: white; height: 5em; display: flex; align-items: center; justify-content: center;">
+    <div style="height: 1px; width: 50%; background: black;  display: flex; align-items: center; justify-content: center;"></div>
+</div>
+
+<!-- Gallery -->
+<div class="gallery">
+    <div class="gallery_slider_container">
+        <div class="owl-carousel owl-theme gallery_slider">
+
+            <!-- Slide -->
+            <div class="owl-item gallery_item">
+                <a class="colorbox" href="/assets/themes/beauty/images/gallery_1.jpg">
+                    <div class="background_image" style="background-image:url('/assets/themes/beauty/images/gallery_1.jpg')"></div>
+                </a>
+                <div class="gallery_overlay trans_200 d-flex flex-column align-items-center justify-content-center"><div>+</div></div>
+            </div>
+
+            <!-- Slide -->
+            <div class="owl-item gallery_item">
+                <a class="colorbox" href="/assets/themes/beauty/images/gallery_2.jpg">
+                    <div class="background_image" style="background-image:url('/assets/themes/beauty/images/gallery_2.jpg')"></div>
+                </a>
+                <div class="gallery_overlay trans_200 d-flex flex-column align-items-center justify-content-center"><div>+</div></div>
+            </div>
+
+            <!-- Slide -->
+            <div class="owl-item gallery_item">
+                <a class="colorbox" href="/assets/themes/beauty/images/gallery_3.jpg">
+                    <div class="background_image" style="background-image:url('/assets/themes/beauty/images/gallery_3.jpg')"></div>
+                </a>
+                <div class="gallery_overlay trans_200 d-flex flex-column align-items-center justify-content-center"><div>+</div></div>
+            </div>
+
+            <!-- Slide -->
+            <div class="owl-item gallery_item">
+                <a class="colorbox" href="/assets/themes/beauty/images/gallery_4.jpg">
+                    <div class="background_image" style="background-image:url('/assets/themes/beauty/images/gallery_4.jpg')"></div>
+                </a>
+                <div class="gallery_overlay trans_200 d-flex flex-column align-items-center justify-content-center"><div>+</div></div>
+            </div>
+
+            <!-- Slide -->
+            <div class="owl-item gallery_item">
+                <a class="colorbox" href="/assets/themes/beauty/images/gallery_5.jpg">
+                    <div class="background_image" style="background-image:url('/assets/themes/beauty/images/gallery_5.jpg')"></div>
+                </a>
+                <div class="gallery_overlay trans_200 d-flex flex-column align-items-center justify-content-center"><div>+</div></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script src="/assets/themes/beauty/js/services.js"></script>
+    <script src="/assets/themes/beauty/plugins/colorbox/jquery.colorbox-min.js"></script>
+{% endblock %}

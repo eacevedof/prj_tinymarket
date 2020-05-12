@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ seo.title }}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="{{ seo.description }}">
+    <meta name="keywords" content="{{ seo.keywords }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" />
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/styles/bootstrap-4.1.2/bootstrap.min.css">
+    <link href="/assets/themes/beauty/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/plugins/OwlCarousel2-2.2.1/animate.css">
+    {% block styles %}{% endblock %}
+    {{ include("common/elements/gtag.html.twig") }}
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div class="super_container">
+    {{ include("open/common/header.html.twig") }}
+{% block body %}
+{% endblock %}
+</div>
+
+<script src="/assets/themes/beauty/js/jquery-3.2.1.min.js"></script>
+<script src="/assets/themes/beauty/styles/bootstrap-4.1.2/popper.js"></script>
+<script src="/assets/themes/beauty/styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+<script src="/assets/themes/beauty/plugins/greensock/TweenMax.min.js"></script>
+<script src="/assets/themes/beauty/plugins/greensock/TimelineMax.min.js"></script>
+<script src="/assets/themes/beauty/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="/assets/themes/beauty/plugins/greensock/animation.gsap.min.js"></script>
+<script src="/assets/themes/beauty/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="/assets/themes/beauty/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="/assets/themes/beauty/plugins/easing/easing.js"></script>
+<script src="/assets/themes/beauty/plugins/progressbar/progressbar.min.js"></script>
+<script src="/assets/themes/beauty/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="/assets/themes/beauty/plugins/scrollTo/jquery.scrollTo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

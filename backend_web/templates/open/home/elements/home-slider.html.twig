@@ -1,0 +1,45 @@
+<!-- Home -->
+<div class="home">
+    <!-- Home Slider -->
+
+
+    <div class="home_slider_container">
+        <div class="owl-carousel owl-theme home_slider">
+            {% for slide in arslider %}
+                <!-- Slide {{ loop.index }}-->
+                <div class="owl-item home_slide">
+                    <div class="background_image" style="background-image:url(/assets/themes/beauty/images/{{ slide.background_image }})"></div>
+
+                    <div class="slide_container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-11">
+                                    <div class="slide_content" data-animation-in="fadeInRight" data-animation-out="animate-out fadeOut">
+                                        <div class="home_title">{{ slide.home_title|raw }}</div>
+                                        <div class="home_text">
+                                            {% if slide.home_link is defined and slide.home_link is not empty %}
+                                            <div class="home_link"><a href="/promocion/corte-cabello-1"><b>Ver esta promoción</b></a></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Scroll Down -->
+    <div class="scroll_down scroll_to d-flex flex-column align-items-center justify-content-center" data-scroll-to="#services">
+        <div class="scroll_icon"></div>
+        <div>Scroll Down</div>
+    </div>
+
+    <!-- Slider Progress -->
+    <div class="slide_progress">
+        <div class="slide_num">01.</div>
+        <div class="slide_bar"><div></div></div>
+    </div>
+</div>

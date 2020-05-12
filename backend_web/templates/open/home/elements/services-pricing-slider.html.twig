@@ -1,0 +1,28 @@
+<!-- Pricing Slider -->
+<div class="pricing_slider_container">
+    <div class="owl-carousel owl-theme pricing_slider">
+        {% for category in categories %}
+        <div class="owl-item">
+            <div class="pricing_item">
+                <div class="background_image" style="background-image:url('/assets/themes/beauty/images/pricing.jpg')"></div>
+                <div class="pricing_border"></div>
+                <div class="pricing_content">
+                    <div class="pricing_title">{{ category }}</div>
+                    <div class="pricing_list">
+                        <ul>
+                    {% for service in services %}
+                        {% if service.category is same as(category) %}
+                            <li class="d-flex flex-row align-items-start justify-content-start">
+                                <div>{{ service.service_title }}</div>
+                                <div class="ml-auto">{{ service.price }}</div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

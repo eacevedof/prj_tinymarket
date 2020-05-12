@@ -1,0 +1,89 @@
+<!-- Google Map -->
+<div class="map">
+    <div id="google_map" class="google_map">
+        <div class="map_container">
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDimWax6oDetilbXKqdmmoIIxHREyJ4aY0"></script>
+
+<script>
+var map;
+
+function initialize()
+{
+    var myLatlng = new google.maps.LatLng(40.4453711, -3.6682841);
+    var mapOptions =
+        {
+            center: myLatlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            draggable: true,
+            scrollwheel: false,
+            zoomControl: true,
+            zoomControlOptions:
+                {
+                    position: google.maps.ControlPosition.RIGHT_CENTER
+                },
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: true,
+            styles:
+                [
+
+
+                ]
+        }
+
+    // Initialize a map with options
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    // Use an image for a marker
+    //var image = '/assets/themes/beauty/images/marker.png';
+    var marker = new google.maps.Marker(
+    {
+        position: new google.maps.LatLng(40.4453211, -3.6706501),
+        map: map,
+        //icon: image
+    });
+    var infowindow = new google.maps.InfoWindow({
+        content: `<p>
+                    <b>Peluquería Doble RR</b><br/>
+                    Calle Clara Del Rey 57<br/>
+                    28002 - Madrid <br/>
+                    Tel: +34 91 455 74 43
+                 </p>`
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map, marker);
+    });
+    //marker.setMap(marker);
+    google.maps.event.trigger(marker, 'click');
+
+
+    if($(window).width() > 990)
+    {
+        map.panBy(100, 0);
+    }
+
+    // Re-center map after window resize
+    google.maps.event.addDomListener(window, 'resize', function()
+    {
+        setTimeout(function()
+        {
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(myLatlng);
+            if($(window).width() > 990)
+            {
+                map.panBy(100, 0);
+            }
+        }, 1400);
+    });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>

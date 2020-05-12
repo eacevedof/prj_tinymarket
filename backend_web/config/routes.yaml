@@ -1,0 +1,78 @@
+home:
+    path: /
+    controller: App\Controller\Open\HomeController::index
+
+about-us:
+    path: /la-empresa
+    controller: App\Controller\Open\HomeController::about_us
+
+services:
+    path: /servicios
+    controller: App\Controller\Open\HomeController::services
+
+contact:
+    path: /contacto
+    controller: App\Controller\Open\HomeController::contact
+
+appointment:
+    path: /cita
+    controller: App\Controller\Open\HomeController::appointment
+
+mail:
+    path: /mail
+    controller: App\Controller\Open\HomeController::mail
+
+products:
+    path: /products
+    controller: App\Controller\Open\ProductController
+
+# zona privada
+register:
+    path: /register
+    controller: App\Controller\Common\UserController::register
+    # defaults: {_controller: app.common.user_controller}
+
+login:
+    path: /login
+    controller: App\Controller\Common\SecurityController
+    # defaults: {_controller: app.common.security_controller}
+
+react:
+    path: /react
+    controller: App\Controller\Restrict\ReactController
+
+users:
+    path: /users
+    controller: App\Controller\Common\UserController::index
+
+logout:
+    path: /logout
+    # ya viene por defecto
+
+tasks:
+    path: /tareas
+    controller: App\Controller\Restrict\TaskController::index
+
+task_detail:
+    path: /tarea/{id}
+    controller: App\Controller\Restrict\TaskController::detail
+
+tasks_creation:
+    path: /tarea
+    controller: App\Controller\Restrict\TaskController::creation    
+
+my_tasks:
+    path: /mis-tareas
+    controller: App\Controller\Restrict\TaskController::myTasks  
+    
+task_edit:
+    path: /editar-tarea/{id}
+    controller: App\Controller\Restrict\TaskController::edit
+
+task_delete:
+    path: /tarea/delete/{id}
+    controller: App\Controller\Restrict\TaskController::delete    
+
+
+    
+    

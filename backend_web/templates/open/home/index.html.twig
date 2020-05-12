@@ -1,0 +1,17 @@
+{% extends 'open/open.html.twig' %}
+
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/beauty/styles/responsive.css">
+{% endblock %}
+
+
+{% block body %}
+    {{ include("open/home/elements/home-slider.html.twig") }}
+    {{ include("open/home/elements/home-services.html.twig") }}
+{% endblock %}
+
+{% block javascripts %}
+<script src="/assets/themes/beauty/js/custom.js"></script>
+{% endblock %}
