@@ -1,5 +1,5 @@
 <?php
-//backend_web/src/Controller/Open/Home.php
+//backend_web/src/Controller/Open/ProductController.php
 declare(strict_types=1);
 
 namespace App\Controller\Open;

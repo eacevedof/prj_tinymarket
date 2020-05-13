@@ -28,34 +28,6 @@ class HomeController extends BaseController
         return $this->render('open/home/index.html.twig',["arslider"=>$arslider,"services"=>$services,"seo"=>$seo]);
     }
 
-    public function about_us()
-    {
-        $seo = SeoProvider::get_meta("about-us");
-        return $this->render('open/home/about-us.html.twig',["seo"=>$seo]);
-    }
-
-    public function services()
-    {
-        $seo = SeoProvider::get_meta("services");
-        $categories = $this->provider->get_categories();
-        $services = $this->provider->get_text_services();
-        $products = $this->provider->get_text_products();
-        $services = array_merge($services,$products);
-        return $this->render('open/home/services.html.twig',["categories"=>$categories,"services"=>$services,"seo"=>$seo]);
-    }
-
-    public function contact()
-    {
-        $seo = SeoProvider::get_meta("contact");
-        return $this->render('open/home/contact.html.twig',["seo"=>$seo]);
-    }
-
-    public function appointment()
-    {
-        $seo = SeoProvider::get_meta("appointment");
-        return $this->render('open/home/appointment.html.twig',["seo"=>$seo]);
-    }
-
     public function mail(MailerInterface $mailer)
     {
         $this->logd($_POST,"mail.post");
