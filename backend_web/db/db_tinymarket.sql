@@ -4,7 +4,6 @@
     *********************************************************************
     */
 
-
     /*!40101 SET NAMES utf8 */;
 
     /*!40101 SET SQL_MODE=''*/;
@@ -16,6 +15,7 @@
     CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_tinymarket` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
     USE `db_tinymarket`;
+    -- USE `dbs430012`;
 
     /*Table structure for table `app_order_head` */
 
@@ -45,7 +45,7 @@
     `status` varchar(25) DEFAULT NULL,
     `notes` varchar(2000) DEFAULT NULL,
     PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='cabecera de pedidos';
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='cabecera de pedidos';
 
     /*Data for the table `app_order_head` */
 
@@ -75,7 +75,7 @@
     `id_product` int(11) DEFAULT NULL,
     `price` decimal(10,3) DEFAULT NULL,
     PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='lineas de pedido';
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='lineas de pedido';
 
     /*Data for the table `app_order_lines` */
 
@@ -107,7 +107,7 @@
     `order_by` int(11) DEFAULT 100,
     `code_cache` varchar(500) DEFAULT NULL,
     PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
     /*Data for the table `app_product_images` */
 
@@ -135,7 +135,7 @@
     `id_tag` int(11) DEFAULT NULL,
     `code_cache` varchar(500) DEFAULT NULL,
     PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
     /*Data for the table `app_products_tags` */
 
@@ -302,7 +302,7 @@
     `code_cache` varchar(500) DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `base_user_email_uindex` (`email`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+    ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
     /*Data for the table `base_user` */
 
@@ -335,33 +335,12 @@
     `order_by` int(5) NOT NULL DEFAULT 100,
     `code_cache` varchar(500) DEFAULT NULL,
     PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
     /*Data for the table `base_user_array` */
 
-    /*Table structure for table `tasks` */
-
-    DROP TABLE IF EXISTS `tasks`;
-
-    CREATE TABLE `tasks` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `user_id` int(11) DEFAULT NULL,
-    `title` varchar(100) DEFAULT NULL,
-    `content` text DEFAULT NULL,
-    `priority` varchar(20) DEFAULT NULL,
-    `hours` int(8) DEFAULT NULL,
-    `created_at` datetime DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    KEY `fk_task_user` (`user_id`),
-    CONSTRAINT `fk_task_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
-    /*Data for the table `tasks` */
-
-    insert  into `tasks`(`id`,`user_id`,`title`,`content`,`priority`,`hours`,`created_at`) values (3,1,'tttt','cccc','low',10,'2020-05-06 12:12:32'),(4,1,'45454','4544545','high',4,'2020-05-06 12:12:49');
 
     /*Table structure for table `users` */
-
     DROP TABLE IF EXISTS `users`;
 
     CREATE TABLE `users` (
@@ -373,7 +352,7 @@
     `password` varchar(255) DEFAULT NULL,
     `created_at` datetime DEFAULT NULL,
     PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+    ) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
     /*Data for the table `users` */
 
