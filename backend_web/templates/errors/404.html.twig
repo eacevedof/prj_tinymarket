@@ -1,19 +1,16 @@
 {% extends 'errors/errors.html.twig' %}
-{% block title %}Doble RR | Error 404{% endblock %}
+{% block title %}Error 404{% endblock %}
 {% block body %}
 <div class="agileits-main">
     <div class="agileinfo-row align-items-center">
         <div class="w3layouts-errortext" style="background: black; opacity: 0.9">
             <h2>4<span>0</span>4</h2>
-            <h1>Vaya! Este contenido no se ha encontrado</h1>
+            <h1></h1>
             <p class="w3lstext">
-                Si estás seguro que esta información es importante por favor comunicate con nosotros para ver como podemos proporcionartela.<br/>
-                Lo puedes hacer rellenando el formulario de <a href="{{ path("contact") }}">Contacto</a><br/>
+
             </p>
             <div class="w3top-nav-right">
                 <ul>
-                    {% set requri = app.request.get('_route') %}
-                    {{ include("open/common/nav-lis.html.twig") }}
                 </ul>
             </div>
         </div>
