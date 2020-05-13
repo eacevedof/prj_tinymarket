@@ -10,7 +10,7 @@ use App\Entity\BaseEntity;
  * @ORM\Table(name="app_tag")
  * @ORM\Entity
  */
-class AppTag extends BaseEntity
+class AppTag //extends BaseEntity
 {
     /**
      * @var int

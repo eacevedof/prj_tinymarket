@@ -10,7 +10,7 @@ use App\Entity\BaseEntity;
  * @ORM\Table(name="app_tag_array")
  * @ORM\Entity
  */
-class AppTagArray extends BaseEntity
+class AppTagArray //extends BaseEntity
 {
     /**
      * @var int

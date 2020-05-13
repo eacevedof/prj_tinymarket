@@ -11,7 +11,7 @@ use App\Entity\BaseEntity;
  * @ORM\Table(name="app_products_tags")
  * @ORM\Entity
  */
-class AppProductsTags extends BaseEntity
+class AppProductsTags //extends BaseEntity
 {
     /**
      * @var int

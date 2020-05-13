@@ -11,7 +11,7 @@ use App\Entity\BaseEntity;
  * @ORM\Table(name="app_product_images")
  * @ORM\Entity
  */
-class AppProductImages extends BaseEntity
+class AppProductImages //extends BaseEntity
 {
     /**
      * @var int

@@ -11,7 +11,7 @@ use App\Entity\BaseEntity;
  * @ORM\Table(name="app_order_head")
  * @ORM\Entity
  */
-class AppOrderHead extends BaseEntity
+class AppOrderHead //extends BaseEntity
 {
     /**
      * @var int
