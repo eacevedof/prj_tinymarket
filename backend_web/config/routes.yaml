@@ -6,9 +6,10 @@ mail:
     path: /mail
     controller: App\Controller\Open\HomeController::mail
 
-products:
-    path: /products
-    controller: App\Controller\Open\ProductController
+# Api
+api-1-products:
+    path: /api/v1/products
+    controller: App\Api\Product\ProductList
 
 # zona privada
 register:

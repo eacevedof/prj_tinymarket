@@ -1,14 +1,14 @@
 <?php
-//backend_web/src/Controller/Open/ProductController.php
+//backend_web/src/Api/Product/ProductList.php
 declare(strict_types=1);
 
-namespace App\Controller\Open;
+namespace App\Api\Product;
 use App\Component\Serialize;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\BaseController;
 use App\Services\Common\ProductService;
 
-class ProductController extends BaseController
+class ProductList extends BaseController
 {
     private ProductService $productService;
 
@@ -28,4 +28,4 @@ class ProductController extends BaseController
         return $response;
     }
 
-}//ProductController
+}//ProductList
