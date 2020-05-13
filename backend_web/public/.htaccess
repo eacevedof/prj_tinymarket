@@ -32,6 +32,10 @@ AddOutputFilterByType DEFLATE application/x-javascript
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
+
+    RewriteCond %{SERVER_PORT} 80
+    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
     # redirect http|s//www -> https//<dominio>
     RewriteBase /
     RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
