@@ -20,6 +20,7 @@ DirectoryIndex index.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    #https://simonecarletti.com/blog/2016/08/redirect-domain-http-https-www-apache/
     RewriteCond %{HTTPS} off [OR]
     RewriteCond %{HTTP_HOST} ^www\. [NC]
     RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
