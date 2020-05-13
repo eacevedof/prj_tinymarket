@@ -134,12 +134,6 @@ class User extends BaseEntity implements UserInterface
     private $codeCache = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\App\Task", mappedBy="user")
-     */
-    private $tasks;
-
-
-    /**
      * @return int
      */
     public function getId(): int {return $this->id;}
@@ -207,10 +201,5 @@ class User extends BaseEntity implements UserInterface
      * @inheritDoc
      */
     public function eraseCredentials(){;}
-
-    /**
-     * @return Collection|Task[]
-     */
-    public function getTasks():Collection {return $this->tasks;}
 
 }
