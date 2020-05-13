@@ -22,7 +22,7 @@ function userErrorHandler($errno,$errmsg,$filename,$linenum,$vars)
 
     //Write error to log file (CSV format)
     $oErrCSV=fopen("errors.csv","a");
-    fputs($oErrCSV,"$time,$filename,$linenum,$errlevel,$errmsg\rn");
+    fputs($oErrCSV,"time:$time,file:$filename,line:$linenum,level:$errlevel,error:$errmsg\n");
     fclose($oErrCSV);
 
     if($errno!=2 && $errno!=8)
