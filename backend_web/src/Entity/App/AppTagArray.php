@@ -3,7 +3,7 @@
 namespace App\Entity\App;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use App\Entity\BaseEntity;
 /**
  * AppTagArray
  *
