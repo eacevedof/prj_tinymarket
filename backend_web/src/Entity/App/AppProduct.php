@@ -36,13 +36,13 @@ class AppProduct extends BaseEntity
      * @var int
      * @ORM\Column(name="units_min", type="integer", nullable=false, options={"default"="1"})
      */
-    private $unitsMin = '1';
+    private $unitsMin = 1;
 
     /**
      * @var int
      * @ORM\Column(name="units_max", type="integer", nullable=false, options={"default"="99999"})
      */
-    private $unitsMax = '99999';
+    private $unitsMax = 99999;
 
     /**
      * @var string|null
