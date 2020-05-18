@@ -29,8 +29,7 @@ class ProductService extends BaseService
         $products = $this->productRepository->findAllByPage($currentPage, $limit);
 //dump($products);die("xxx");
         $productsPage = $products['paginator'];
-        $productsQueryCompleta =  $products['query'];
-
+        //$productsQueryCompleta =  $products['query'];
         $maxPages = ceil($products['paginator']->count() / $limit);
 
         $return = [
