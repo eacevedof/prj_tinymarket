@@ -84,11 +84,13 @@ abstract class BaseRepository
     {
         $paginator = new Paginator($dql);
 
-        $paginator->getQuery()
-            ->setFirstResult($limit * ($page - 1)); // Offset
-            //->setMaxResults($limit); // Limit
+        $offset = $limit * ($page -1);
 
-        //dump($paginator);die;
+        $paginator->getQuery()
+            ->setFirstResult($offset)   // Offset
+            ->setMaxResults($limit);    // Limit
+
+        //dump($offset); dump($limit);die;
         return $paginator;
     }
 }

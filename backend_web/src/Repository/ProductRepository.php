@@ -43,13 +43,14 @@ class ProductRepository extends BaseRepository
         $qb = $this->createQueryBuilder2('p');
         $qb->select("p")
             ->from(self::entityClass(),"p")
-            //->where("1")
+            //->where("1=1")
             //->where("p.id=:identifier")
             ->orderBy("p.description","ASC");
             //->setParameter("identifier",100);
         $query = $qb->getQuery();
         $paginator = $this->paginate($query, $currentPage, $limit);
-        return array('paginator' => $paginator, 'query' => $query);
+
+        return ['paginator' => $paginator, 'query' => $query];
     }
 
     public function save(AppProduct $product): void
