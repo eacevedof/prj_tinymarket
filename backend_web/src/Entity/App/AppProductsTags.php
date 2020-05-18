@@ -137,7 +137,7 @@ class AppProductsTags //extends BaseEntity
     /**
      * @var string|null
      *
-     * @ORM\Column(name="code_cache", type="string", length=500, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="code_cache", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
     private $codeCache = 'NULL';
 

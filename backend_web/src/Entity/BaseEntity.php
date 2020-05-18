@@ -31,7 +31,7 @@ class BaseEntity
 
     /**
      * @var \DateTime|null
-     * @Groups({"all","admin","system"})
+     * @Groups({"all"})
      * @ORM\Column(name="insert_date", type="datetime", nullable=true, options={"default"="NULL"})
      */
     protected $insertDate = null;
@@ -45,14 +45,14 @@ class BaseEntity
 
     /**
      * @var string|null
-     * @Groups({"all","admin","system"})
+     * @Groups({"all"})
      * @ORM\Column(name="update_user", type="string", length=15, nullable=true, options={"default"="NULL"})
      */
     protected $updateUser = null;
 
     /**
      * @var \DateTime|null
-     * @Groups({"all","admin","system"})
+     * @Groups({"all"})
      * @ORM\Column(name="update_date", type="datetime", nullable=true, options={"default"="NULL"})
      */
     protected $updateDate = null;
@@ -108,17 +108,24 @@ class BaseEntity
 
     /**
      * @var string|null
-     * @Groups({"all","admin","system"})
+     * @Groups({"all"})
      * @ORM\Column(name="code_erp", type="string", length=25, nullable=true, options={"default"="NULL"})
      */
     protected $codeErp = null;
 
     /**
      * @var string|null
-     * @Groups({"all","admin","system"})
+     * @Groups({"all"})
      * @ORM\Column(name="description", type="string", length=250, nullable=true, options={"default"="NULL"})
      */
     protected $description = null;
+
+
+/**
+ * ==========================================================================================================
+ * ==========================================================================================================
+ * ==========================================================================================================
+ */
 
     /**
      * @return string|null
