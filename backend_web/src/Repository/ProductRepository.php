@@ -37,6 +37,21 @@ class ProductRepository extends BaseRepository
         return $this->objectRepository->findAll();
     }
 
+    public function findAllByPage($currentPage=1, $limit=3)
+    {
+        // Create our query
+        $qb = $this->createQueryBuilder2('p');
+        $qb->select("p")
+            ->from(self::entityClass(),"p")
+            //->where("1")
+            //->where("p.id=:identifier")
+            ->orderBy("p.description","ASC");
+            //->setParameter("identifier",100);
+        $query = $qb->getQuery();
+        $paginator = $this->paginate($query, $currentPage, $limit);
+        return array('paginator' => $paginator, 'query' => $query);
+    }
+
     public function save(AppProduct $product): void
     {
         $this->saveEntity($product);

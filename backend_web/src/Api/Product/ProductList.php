@@ -20,7 +20,8 @@ class ProductList extends BaseController
     public function __invoke(Request $request)
     {
         $products = $this->productService->get_list();
-        //print_r($products);
+        $products = $this->productService->get_list_paginated();
+        //print_r($products);die;
         //$products = $this->productService->get_list_filter(["id"=>3]);
         $response = $this->get_response_json();
         $json = Serialize::get_jsonarray($products);

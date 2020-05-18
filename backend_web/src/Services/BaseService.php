@@ -31,8 +31,10 @@ class BaseService
     {
         return $this->request->request->get($key) ?? null;
     }
+
     protected function get_get($key)
     {
         return $this->request->query->get($key) ?? null;
     }
+
 }

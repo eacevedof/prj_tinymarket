@@ -23,6 +23,24 @@ class ProductService extends BaseService
         //print_r($products);die;
         return $products;
     }
+    
+    public function get_list_paginated($currentPage = 2)
+    {
+        $limit = 100;
+        $products = $this->productRepository->findAllByPage($currentPage, $limit);
+        $productsResultado = $products['paginator'];
+        $productsQueryCompleta =  $products['query'];
+
+        $maxPages = ceil($products['paginator']->count() / $limit);
+
+        $return = array(
+            'products' => $productsResultado,
+            'maxPages'=>$maxPages,
+            'thisPage' => $currentPage,
+            'all_items' => $productsQueryCompleta
+        );
+        return $return;
+    }
 
     public function get_list_filter(array $criteria=[])
     {

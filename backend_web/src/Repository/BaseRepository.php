@@ -11,6 +11,8 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\ORM\QueryBuilder as Qb;
 
 abstract class BaseRepository
 {
@@ -46,6 +48,11 @@ abstract class BaseRepository
         return $this->getEntityManager()->createQueryBuilder();
     }
 
+    protected function createQueryBuilder2(): Qb
+    {
+        return $this->getEntityManager()->createQueryBuilder();
+    }
+
     /**
      * @throws DBALException
      * para hacer queries abiertas
@@ -71,5 +78,17 @@ abstract class BaseRepository
         }
 
         return $this->managerRegistry->resetManager();
+    }
+
+    public function paginate($dql, $page = 1, $limit = 3)
+    {
+        $paginator = new Paginator($dql);
+
+        $paginator->getQuery()
+            ->setFirstResult($limit * ($page - 1)); // Offset
+            //->setMaxResults($limit); // Limit
+
+        //dump($paginator);die;
+        return $paginator;
     }
 }
