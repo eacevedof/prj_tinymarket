@@ -70,6 +70,18 @@ class AppProduct extends BaseEntity
     private $priceSale = 0;
 
     /**
+     * @var string|null
+     * @ORM\Column(name="price_sale1", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000","comment"="precio en otra moneda"})
+     */
+    private $priceSale1 = 0;
+
+    /**
+     * @var string|null
+     * @ORM\Column(name="price_sale2", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000","comment"="percio en otra moneda"})
+     */
+    private $priceSale2 = 0;
+
+    /**
      * @var int
      * @ORM\Column(name="id_user", type="integer", nullable=false, options={"comment"="empresa o usuario propietario"})
      */
@@ -79,7 +91,7 @@ class AppProduct extends BaseEntity
      * @var int|null
      * @ORM\Column(name="order_by", type="integer", nullable=true, options={"default"="100"})
      */
-    private $orderBy = '100';
+    private $orderBy = 100;
 
     /**
      * @var string|null
@@ -87,27 +99,29 @@ class AppProduct extends BaseEntity
      */
     private $codeCache = null;
 
-/**
- * ==========================================================================================================
- * ==========================================================================================================
- * ==========================================================================================================
- */
+    /**
+     * @var bool|null
+     * @ORM\Column(name="display", type="boolean", nullable=true, options={"default"="NULL"})
+     */
+    private $display = null;
 
     /**
-     * @return int
+     * @var string|null
+     * @ORM\Column(name="stock_units", type="decimal", precision=10, scale=0, nullable=true)
      */
-    public function getId(): int
-    {
-        return $this->id;
-    }
+    private $stockUnits = 0;
 
     /**
-     * @return string|null
+     * @var int|null
+     * @ORM\Column(name="id_unit", type="integer", nullable=true, options={"default"="1","comment"="kg, cajas, unidades, etc"})
      */
-    public function getDescriptionFull(): ?string
-    {
-        return $this->descriptionFull;
-    }
+    private $idUnit = 1;
+
+    /**
+     * ==========================================================================================================
+     * ==========================================================================================================
+     * ==========================================================================================================
+     */
 
     /**
      * @param string|null $descriptionFull
@@ -277,3 +291,4 @@ class AppProduct extends BaseEntity
         $this->codeCache = $codeCache;
     }
 }
+
