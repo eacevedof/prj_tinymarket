@@ -2,7 +2,8 @@
 SQLyog Community v12.1 (32 bit)
 MySQL - 10.4.11-MariaDB-1:10.4.11+maria~bionic : Database - db_tinymarket
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -42,7 +43,7 @@ CREATE TABLE `app_array` (
   `description` varchar(250) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL COMMENT 'propietario del tipo o categoria',
   `order_by` int(5) NOT NULL DEFAULT 100,
-  `code_cache` varchar(500) DEFAULT NULL,
+  `code_cache` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
@@ -144,7 +145,7 @@ CREATE TABLE `app_product` (
   `price_sale2` decimal(10,3) DEFAULT 0.000 COMMENT 'percio en otra moneda',
   `id_user` int(11) NOT NULL COMMENT 'empresa o usuario propietario',
   `order_by` int(11) DEFAULT 100,
-  `code_cache` varchar(500) DEFAULT NULL,
+  `code_cache` varchar(50) DEFAULT NULL,
   `display` tinyint(4) DEFAULT NULL,
   `stock_units` decimal(10,0) DEFAULT 0,
   `id_unit` int(11) DEFAULT 1 COMMENT 'kg, cajas, unidades, etc',
@@ -183,7 +184,7 @@ CREATE TABLE `app_product_images` (
   `slug` varchar(75) DEFAULT NULL,
   `display` tinyint(4) DEFAULT 1,
   `order_by` int(11) DEFAULT 100,
-  `code_cache` varchar(500) DEFAULT NULL,
+  `code_cache` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
@@ -211,7 +212,7 @@ CREATE TABLE `app_products_tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_product` int(11) DEFAULT NULL,
   `id_tag` int(11) DEFAULT NULL,
-  `code_cache` varchar(500) DEFAULT NULL,
+  `code_cache` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
@@ -239,7 +240,7 @@ CREATE TABLE `app_promotion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(250) DEFAULT NULL,
   `id_type` int(11) DEFAULT NULL,
-  `code_cache` varchar(500) DEFAULT NULL,
+  `code_cache` varchar(50) DEFAULT NULL,
   `date_from` datetime DEFAULT NULL,
   `date_to` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -271,7 +272,7 @@ CREATE TABLE `app_promotion_users` (
   `id_user` int(11) DEFAULT NULL COMMENT 'el usuario que se ha apuntado',
   `code` varchar(25) DEFAULT NULL COMMENT 'la clave que llega en el email',
   `date_exec` datetime DEFAULT NULL COMMENT 'cuando se ejecuta la promo',
-  `code_cache` varchar(500) DEFAULT NULL,
+  `code_cache` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
@@ -302,7 +303,7 @@ CREATE TABLE `app_tag` (
   `id_user` int(11) DEFAULT NULL,
   `slug` varchar(100) DEFAULT NULL COMMENT 'la descripcion en slug',
   `order_by` int(5) NOT NULL DEFAULT 100,
-  `code_cache` varchar(500) DEFAULT NULL,
+  `code_cache` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
@@ -377,7 +378,7 @@ CREATE TABLE `base_user` (
   `log_attempts` int(5) DEFAULT 0,
   `rating` int(11) DEFAULT NULL COMMENT 'la puntuacion',
   `date_validated` varchar(14) DEFAULT NULL COMMENT 'cuando valido su cuenta por email',
-  `code_cache` varchar(500) DEFAULT NULL,
+  `code_cache` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `base_user_email_uindex` (`email`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
@@ -411,7 +412,7 @@ CREATE TABLE `base_user_array` (
   `id_tosave` varchar(25) DEFAULT NULL,
   `description` varchar(250) DEFAULT NULL,
   `order_by` int(5) NOT NULL DEFAULT 100,
-  `code_cache` varchar(500) DEFAULT NULL,
+  `code_cache` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
