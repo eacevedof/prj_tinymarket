@@ -7,18 +7,33 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
+use Doctrine\Common\Annotations\AnnotationReader;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
+
 class Serialize
 {
+
+
+    private static function get_metadata_class()
+    {
+        return $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+    }
 
     public static function get_jsonarray(array $array): string
     {
         //print_r($array);die;
         $encoders = [new JsonEncoder()];
-        $normalizers = [new DateTimeNormalizer(), new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter())];
+        $normalizers = [new DateTimeNormalizer(),
+            new ObjectNormalizer(
+                self::get_metadata_class(),
+                new CamelCaseToSnakeCaseNameConverter())
+        ];
 
         $serializer = new Serializer($normalizers, $encoders);
         $jsonContent = $serializer->serialize($array, 'json',[
             //ObjectNormalizer::SKIP_NULL_VALUES => true,
+            "groups" => "admins"
         ]);
         //print_r($jsonContent);die;
         return $jsonContent;

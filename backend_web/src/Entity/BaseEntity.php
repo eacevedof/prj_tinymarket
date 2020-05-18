@@ -3,13 +3,14 @@ namespace App\Entity;
 
 use App\Traits\Log;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\SerializedName;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 class BaseEntity
 {
     use Log;
     /**
      * @var string|null
+     * @Groups({"admins"})
      * @ORM\Column(name="processflag", type="string", length=5, nullable=true, options={"default"="NULL"})
      */
     protected $processflag = null;
@@ -28,6 +29,7 @@ class BaseEntity
 
     /**
      * @var \DateTime|null
+     * @Groups({"admins"})
      * @ORM\Column(name="insert_date", type="datetime", nullable=true, options={"default"="NULL"})
      */
     protected $insertDate = null;
