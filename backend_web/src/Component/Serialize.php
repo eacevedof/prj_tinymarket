@@ -33,7 +33,7 @@ class Serialize
         $serializer = new Serializer($normalizers, $encoders);
         $jsonContent = $serializer->serialize($array, 'json',[
             //ObjectNormalizer::SKIP_NULL_VALUES => true,
-            "groups" => "admins"
+            "groups" => ["all","admin",]
         ]);
         //print_r($jsonContent);die;
         return $jsonContent;

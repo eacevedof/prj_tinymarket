@@ -10,99 +10,112 @@ class BaseEntity
     use Log;
     /**
      * @var string|null
-     * @Groups({"admins"})
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="processflag", type="string", length=5, nullable=true, options={"default"="NULL"})
      */
     protected $processflag = null;
 
     /**
      * @var string|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="insert_platform", type="string", length=3, nullable=true, options={"default"="'1'"})
      */
     protected $insertPlatform = '1';
 
     /**
      * @var string|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="insert_user", type="string", length=15, nullable=true, options={"default"="NULL"})
      */
     protected $insertUser = null;
 
     /**
      * @var \DateTime|null
-     * @Groups({"admins"})
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="insert_date", type="datetime", nullable=true, options={"default"="NULL"})
      */
     protected $insertDate = null;
 
     /**
      * @var string|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="update_platform", type="string", length=3, nullable=true, options={"default"="NULL"})
      */
     protected $updatePlatform = null;
 
     /**
      * @var string|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="update_user", type="string", length=15, nullable=true, options={"default"="NULL"})
      */
     protected $updateUser = null;
 
     /**
      * @var \DateTime|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="update_date", type="datetime", nullable=true, options={"default"="NULL"})
      */
     protected $updateDate = null;
 
     /**
      * @var string|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="delete_platform", type="string", length=3, nullable=true, options={"default"="NULL"})
      */
     protected $deletePlatform = null;
 
     /**
      * @var string|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="delete_user", type="string", length=15, nullable=true, options={"default"="NULL"})
      */
     protected $deleteUser = null;
 
     /**
      * @var \DateTime|null
-     *
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="delete_date", type="datetime", nullable=true, options={"default"="NULL"})
      */
     protected $deleteDate = null;
 
     /**
      * @var string|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="cru_csvnote", type="string", length=500, nullable=true, options={"default"="NULL"})
      */
     protected $cruCsvnote = null;
 
     /**
      * @var string|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="is_erpsent", type="string", length=3, nullable=true, options={"default"="'0'"})
      */
     protected $isErpsent = '0';
 
     /**
      * @var string|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="is_enabled", type="string", length=3, nullable=true, options={"default"="'1'"})
      */
     protected $isEnabled = '1';
 
     /**
      * @var int|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="i", type="integer", nullable=true, options={"default"="NULL"})
      */
     protected $i = null;
 
     /**
      * @var string|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="code_erp", type="string", length=25, nullable=true, options={"default"="NULL"})
      */
     protected $codeErp = null;
 
     /**
      * @var string|null
+     * @Groups({"all","admin","system"})
      * @ORM\Column(name="description", type="string", length=250, nullable=true, options={"default"="NULL"})
      */
     protected $description = null;
@@ -303,6 +316,14 @@ class BaseEntity
     {
         $this->cruCsvnote = $cruCsvnote;
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCodeErp(): ?string
+    {
+        return $this->codeErp;
     }
 
     /**
