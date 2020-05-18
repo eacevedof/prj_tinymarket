@@ -3,6 +3,7 @@ namespace App\Entity\App;
 
 use App\Entity\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * AppProduct
@@ -27,6 +28,7 @@ class AppProduct extends BaseEntity
      * @ORM\Column(name="description_full", type="string", length=3000, nullable=true, options={"default"="NULL"})
      */
     private $descriptionFull = null;
+
 
     /**
      * @var string|null
@@ -305,5 +307,94 @@ class AppProduct extends BaseEntity
     {
         $this->codeCache = $codeCache;
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPriceSale1(): ?string
+    {
+        return $this->priceSale1;
+    }
+
+    /**
+     * @param string|null $priceSale1
+     */
+    public function setPriceSale1(?string $priceSale1): void
+    {
+        $this->priceSale1 = $priceSale1;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPriceSale2(): ?string
+    {
+        return $this->priceSale2;
+    }
+
+    /**
+     * @param string|null $priceSale2
+     */
+    public function setPriceSale2(?string $priceSale2): void
+    {
+        $this->priceSale2 = $priceSale2;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getDisplay(): ?bool
+    {
+        return $this->display;
+    }
+
+    /**
+     * @param bool|null $display
+     */
+    public function setDisplay(?bool $display): void
+    {
+        $this->display = $display;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStockUnits(): ?string
+    {
+        return $this->stockUnits;
+    }
+
+    /**
+     * @param string|null $stockUnits
+     */
+    public function setStockUnits(?string $stockUnits): void
+    {
+        $this->stockUnits = $stockUnits;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getIdUnit(): ?int
+    {
+        return $this->idUnit;
+    }
+
+    /**
+     * @param int|null $idUnit
+     */
+    public function setIdUnit(?int $idUnit): void
+    {
+        $this->idUnit = $idUnit;
+    }
+
 }
 
