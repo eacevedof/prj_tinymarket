@@ -14,6 +14,7 @@ class AppProduct extends BaseEntity
 {
     /**
      * @var int
+     * @Groups({"all"})
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -22,37 +23,42 @@ class AppProduct extends BaseEntity
 
     /**
      * @var string|null
+     * @Groups({"all"})
      * @ORM\Column(name="description_full", type="string", length=3000, nullable=true, options={"default"="NULL"})
      */
     private $descriptionFull = null;
 
     /**
      * @var string|null
+     * @Groups({"all"})
      * @ORM\Column(name="slug", type="string", length=75, nullable=true, options={"default"="NULL"})
      */
     private $slug = null;
 
     /**
      * @var int
+     * @Groups({"all"})
      * @ORM\Column(name="units_min", type="integer", nullable=false, options={"default"="1"})
      */
     private $unitsMin = 1;
 
     /**
      * @var int
+     * @Groups({"all"})
      * @ORM\Column(name="units_max", type="integer", nullable=false, options={"default"="99999"})
      */
     private $unitsMax = 99999;
 
     /**
      * @var string|null
-     *
+     * @Groups({"admin","system","enterprise","individual"})
      * @ORM\Column(name="price_gross", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0"})
      */
     private $priceGross = 0;
 
     /**
      * @var string|null
+     * @Groups({"all"})
      * @ORM\Column(name="tax_percent", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0"})
      */
     private $taxPercent = 0;
@@ -65,54 +71,63 @@ class AppProduct extends BaseEntity
 
     /**
      * @var string
+     * @Groups({"all"})
      * @ORM\Column(name="price_sale", type="decimal", precision=10, scale=3, nullable=false, options={"default"="0"})
      */
     private $priceSale = 0;
 
     /**
      * @var string|null
+     * @Groups({"all"})
      * @ORM\Column(name="price_sale1", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000","comment"="precio en otra moneda"})
      */
     private $priceSale1 = 0;
 
     /**
      * @var string|null
+     * @Groups({"all"})
      * @ORM\Column(name="price_sale2", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000","comment"="percio en otra moneda"})
      */
     private $priceSale2 = 0;
 
     /**
      * @var int
+     * @Groups({"all"})
      * @ORM\Column(name="id_user", type="integer", nullable=false, options={"comment"="empresa o usuario propietario"})
      */
     private $idUser;
 
     /**
      * @var int|null
+     * @Groups({"all"})
      * @ORM\Column(name="order_by", type="integer", nullable=true, options={"default"="100"})
      */
     private $orderBy = 100;
 
     /**
      * @var string|null
+     * @Groups({"all"})
      * @ORM\Column(name="code_cache", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
     private $codeCache = null;
 
     /**
      * @var bool|null
+     * @Groups({"all"})
      * @ORM\Column(name="display", type="boolean", nullable=true, options={"default"="NULL"})
      */
     private $display = null;
 
     /**
      * @var string|null
+     * @Groups({"all"})
      * @ORM\Column(name="stock_units", type="decimal", precision=10, scale=0, nullable=true)
      */
     private $stockUnits = 0;
 
     /**
      * @var int|null
+     * @Groups({"all"})
      * @ORM\Column(name="id_unit", type="integer", nullable=true, options={"default"="1","comment"="kg, cajas, unidades, etc"})
      */
     private $idUnit = 1;
