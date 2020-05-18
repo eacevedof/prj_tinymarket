@@ -29,7 +29,6 @@ class AppProduct extends BaseEntity
      */
     private $descriptionFull = null;
 
-
     /**
      * @var string|null
      * @Groups({"all"})
@@ -139,6 +138,13 @@ class AppProduct extends BaseEntity
      * ==========================================================================================================
      * ==========================================================================================================
      */
+    /**
+     * @return string|null
+     */
+    public function getDescriptionFull(): ?string
+    {
+        return $this->descriptionFull;
+    }
 
     /**
      * @param string|null $descriptionFull
