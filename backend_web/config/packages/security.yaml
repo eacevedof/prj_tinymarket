@@ -39,13 +39,14 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/react, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4]  }
+        # role_1 admin, 2: system, 3: enterprise, 4: particular, 5: client
+        - { path: ^/react, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4,ROLE_5]  }
         - { path: ^/users, roles: [ROLE_1,ROLE_2] }
 
 
-        - { path: ^/tareas, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4] }
-        - { path: ^/tarea, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4] }
-        - { path: ^/crear-tarea, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4] }
-        - { path: ^/mis-tareas, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4] }
-        - { path: ^/editar-tarea, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4] }
-        - { path: ^/borrar-tarea, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4] }
+        - { path: ^/tareas, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4, ROLE_5] }
+        - { path: ^/tarea, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4, ROLE_5] }
+        - { path: ^/crear-tarea, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4, ROLE_5] }
+        - { path: ^/mis-tareas, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4, ROLE_5] }
+        - { path: ^/editar-tarea, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4, ROLE_5] }
+        - { path: ^/borrar-tarea, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4, ROLE_5] }

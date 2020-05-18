@@ -14,13 +14,33 @@ use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 class Serialize
 {
 
+    //security.yaml
+    // # role_1 admin, 2: system, 3: enterprise, 4: particular, 5: client
+
+    private $groups = [
+        "ROLE_1" => "admin",
+        "ROLE_2" => "system",
+        "ROLE_3" => "enterprise",
+        "ROLE_4" => "individual",//particular
+        "ROLE_5" => "client",
+    ];
+
+    private static function get_group_bu_userrole($roles){
+        $groups = ["all"];
+
+        foreach($roles as $role)
+            $groups[] = self::$groups[$role];
+
+        return $groups;
+    }
+
 
     private static function get_metadata_class()
     {
         return $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
     }
 
-    public static function get_jsonarray(array $array): string
+    public static function get_jsonarray(array $array, array $roles=[]): string
     {
         //print_r($array);die;
         $encoders = [new JsonEncoder()];
@@ -33,7 +53,7 @@ class Serialize
         $serializer = new Serializer($normalizers, $encoders);
         $jsonContent = $serializer->serialize($array, 'json',[
             //ObjectNormalizer::SKIP_NULL_VALUES => true,
-            "groups" => ["all","admin",]
+            "groups" => self::get_group_bu_userrole($roles)
         ]);
         //print_r($jsonContent);die;
         return $jsonContent;
