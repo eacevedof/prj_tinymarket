@@ -2,6 +2,7 @@
 namespace App\Component;
 
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -13,7 +14,7 @@ class Serialize
     {
         //print_r($array);die;
         $encoders = [new JsonEncoder()];
-        $normalizers = [new DateTimeNormalizer(), new ObjectNormalizer()];
+        $normalizers = [new DateTimeNormalizer(), new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter())];
 
         $serializer = new Serializer($normalizers, $encoders);
         $jsonContent = $serializer->serialize($array, 'json',[

@@ -3,6 +3,7 @@ namespace App\Entity;
 
 use App\Traits\Log;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 class BaseEntity
 {
