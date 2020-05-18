@@ -72,9 +72,9 @@ class AppProduct extends BaseEntity
 
     /**
      * @var int
-     * @ORM\Column(name="user_id", type="integer", nullable=false, options={"comment"="empresa o usuario propietario"})
+     * @ORM\Column(name="id_user", type="integer", nullable=false, options={"comment"="empresa o usuario propietario"})
      */
-    private $userId;
+    private $idUser;
 
     /**
      * @var int|null
@@ -227,17 +227,17 @@ class AppProduct extends BaseEntity
     /**
      * @return int
      */
-    public function getUserId(): int
+    public function getIdUser(): int
     {
-        return $this->userId;
+        return $this->idUser;
     }
 
     /**
-     * @param int $userId
+     * @param int $idUser
      */
-    public function setUserId(int $userId): void
+    public function setIdUser(int $idUser): void
     {
-        $this->userId = $userId;
+        $this->idUser = $idUser;
     }
 
     /**
