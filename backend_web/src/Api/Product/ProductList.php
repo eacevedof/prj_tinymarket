@@ -22,8 +22,17 @@ class ProductList extends BaseController
         $page = $request->query->get("page") ?? 1;
         $perpage = $request->query->get("perpage") ?? 50;
         $codCache = $request->get("enterprise") ?? 0;
+        $search = $request->query->get("search") ?? "";
 
-        $products = $this->productService->get_all_by_page($page,$perpage);
+        $criteria = [];
+        if($search){
+            $criteria = [
+              "description" => $search,
+              "descriptionFull" => $search,
+            ];
+        }
+
+        $products = $this->productService->get_all_by_page($page,$perpage,$criteria);
 
         $json = Serialize::get_jsonarray($products);
 

@@ -37,7 +37,7 @@ class ProductRepository extends BaseRepository
         return $this->objectRepository->findAll();
     }
 
-    public function findAllByPage($currentPage=1, $perpage=50)
+    public function findAllByPage($currentPage=1, $perpage=50, $criteria=[])
     {
         $qb = $this->getOrmQueryBuilder();
         $qb->select("p")
@@ -48,6 +48,16 @@ class ProductRepository extends BaseRepository
             ->setParameter("isEnabled","1")
             ->setParameter("display",1)
             ->orderBy("p.description","ASC");
+        if($criteria){
+            $aror = [];
+            foreach ( $criteria as $field=>$value)
+            {
+                //dump($criteria);die;
+                $aror[] = "p.$field LIKE :$field";
+                $qb->setParameter($field,"%$value%");
+            }
+            $qb->andWhere(implode(" OR ",$aror));
+        }
         $query = $qb->getQuery();
         $this->logd($query->getDQL(),"prodrepo.findallbypage.query.dql");
         $paginator = $this->paginate($query, $currentPage, $perpage);
