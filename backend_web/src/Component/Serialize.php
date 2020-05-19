@@ -25,7 +25,7 @@ class Serialize
         "ROLE_5" => "client",
     ];
 
-    private static function get_group_bu_userrole($roles){
+    private static function get_group_by_roles($roles){
         $groups = ["all"];
 
         foreach($roles as $role)
@@ -53,7 +53,7 @@ class Serialize
         $serializer = new Serializer($normalizers, $encoders);
         $jsonContent = $serializer->serialize($array, 'json',[
             //ObjectNormalizer::SKIP_NULL_VALUES => true,
-            "groups" => self::get_group_bu_userrole($roles)
+            "groups" => self::get_group_by_roles($roles)
         ]);
         //print_r($jsonContent);die;
         return $jsonContent;
