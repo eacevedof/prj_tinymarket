@@ -26,6 +26,7 @@ class ProductList extends BaseController
 
         $criteria = [];
         if($search){
+            $this->log($search,"product.search");
             $criteria = [
               "description" => $search,
               "descriptionFull" => $search,
