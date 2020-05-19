@@ -37,22 +37,24 @@ class ProductRepository extends BaseRepository
         return $this->objectRepository->findAll();
     }
 
-    public function findAllByPage($currentPage=1, $limit=3)
+    public function findAllByPage($currentPage=1, $perpage=50)
     {
         $qb = $this->getOrmQueryBuilder();
         $qb->select("p")
             ->from(self::entityClass(),"p")
             ->where($qb->expr()->isNull("p.deleteDate"))
             ->andWhere("p.isEnabled=:isEnabled")
+            ->andWhere("p.display=:display")
             ->setParameter("isEnabled","1")
+            ->setParameter("display",1)
             ->orderBy("p.description","ASC");
         $query = $qb->getQuery();
         $this->logd($query->getDQL(),"prodrepo.findallbypage.query.dql");
-        $paginator = $this->paginate($query, $currentPage, $limit);
+        $paginator = $this->paginate($query, $currentPage, $perpage);
 
         return [
             "result"  => $paginator,
-            "maxsize" => ceil($paginator->count() / $limit)
+            "maxsize" => ceil($paginator->count() / $perpage)
         ];
     }
 

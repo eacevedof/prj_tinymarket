@@ -24,9 +24,9 @@ class ProductService extends BaseService
         return $products;
     }
     
-    public function get_all_by_page($page = 1, $limit=20)
+    public function get_all_by_page($page = 1, $perpage=20)
     {
-        $paginator = $this->productRepository->findAllByPage($page, $limit);
+        $paginator = $this->productRepository->findAllByPage($page, $perpage);
 
         //ejemplo respuesta: https://laravel-json-api.readthedocs.io/en/latest/fetching/pagination/
         $return = [
@@ -35,7 +35,7 @@ class ProductService extends BaseService
                 "page"=>[
                     'total'=>$paginator["maxsize"],
                     'current-page' => $page,
-                    "per-page" => $limit,
+                    "per-page" => $perpage,
                 ]
             ],
             "errors"=>[]

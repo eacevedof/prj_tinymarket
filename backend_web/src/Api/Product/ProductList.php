@@ -20,9 +20,10 @@ class ProductList extends BaseController
     public function __invoke(Request $request)
     {
         $page = $request->query->get("page") ?? 1;
+        $perpage = $request->query->get("perpage") ?? 50;
         $codCache = $request->get("enterprise") ?? 0;
 
-        $products = $this->productService->get_all_by_page($page);
+        $products = $this->productService->get_all_by_page($page,$perpage);
 
         $json = Serialize::get_jsonarray($products);
 
