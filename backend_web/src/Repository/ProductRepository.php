@@ -50,7 +50,10 @@ class ProductRepository extends BaseRepository
         $this->logd($query->getDQL(),"prodrepo.findallbypage.query.dql");
         $paginator = $this->paginate($query, $currentPage, $limit);
 
-        return $paginator;
+        return [
+            "result"  => $paginator,
+            "maxsize" => ceil($paginator->count() / $limit)
+        ];
     }
 
     public function save(AppProduct $product): void
