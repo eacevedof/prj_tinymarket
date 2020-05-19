@@ -22,7 +22,7 @@ class ProductList extends BaseController
         $page = $request->query->get("page") ?? 1;
         $perpage = $request->query->get("perpage") ?? 50;
         $codCache = $request->get("enterprise") ?? 0;
-        $search = $request->query->get("search") ?? "";
+        $search = $request->query->get("s") ?? "";
 
         $criteria = [];
         if($search){
