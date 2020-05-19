@@ -12,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Doctrine\ORM\QueryBuilder as Qb;
+use Doctrine\ORM\QueryBuilder as OrmQb;
 
 abstract class BaseRepository
 {
@@ -43,12 +43,13 @@ abstract class BaseRepository
         $this->getEntityManager()->flush();
     }
 
-    protected function createQueryBuilder(): QueryBuilder
+
+    protected function getDbalQueryBuilder(): QueryBuilder
     {
         return $this->getEntityManager()->createQueryBuilder();
     }
 
-    protected function createQueryBuilder2(): Qb
+    protected function getOrmQueryBuilder(): OrmQb
     {
         return $this->getEntityManager()->createQueryBuilder();
     }

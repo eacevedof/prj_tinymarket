@@ -39,14 +39,13 @@ class ProductRepository extends BaseRepository
 
     public function findAllByPage($currentPage=1, $limit=3)
     {
-        // Create our query
-        $qb = $this->createQueryBuilder2('p');
+        $qb = $this->getOrmQueryBuilder();
         $qb->select("p")
             ->from(self::entityClass(),"p")
-            //->where("1=1")
-            //->where("p.id=:identifier")
+            ->where($qb->expr()->isNull("p.deleteDate"))
+            ->andWhere("p.isEnabled=:isEnabled")
+            ->setParameter("isEnabled","1")
             ->orderBy("p.description","ASC");
-            //->setParameter("identifier",100);
         $query = $qb->getQuery();
         $paginator = $this->paginate($query, $currentPage, $limit);
 
