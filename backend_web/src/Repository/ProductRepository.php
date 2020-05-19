@@ -47,9 +47,10 @@ class ProductRepository extends BaseRepository
             ->setParameter("isEnabled","1")
             ->orderBy("p.description","ASC");
         $query = $qb->getQuery();
+        $this->logd($query->getDQL(),"prodrepo.findallbypage.query.dql");
         $paginator = $this->paginate($query, $currentPage, $limit);
 
-        return ['paginator' => $paginator, 'query' => $query];
+        return ['paginator' => $paginator];
     }
 
     public function save(AppProduct $product): void
