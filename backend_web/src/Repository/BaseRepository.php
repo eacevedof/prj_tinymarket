@@ -86,14 +86,12 @@ abstract class BaseRepository
     public function paginate($dql, $page = 1, $limit = 3)
     {
         $paginator = new Paginator($dql);
-
         $offset = $limit * ($page -1);
-
         $paginator->getQuery()
             ->setFirstResult($offset)   // Offset
             ->setMaxResults($limit);    // Limit
-
         //dump($offset); dump($limit);die;
         return $paginator;
     }
+
 }

@@ -30,7 +30,7 @@ class ProductService extends BaseService
 
         //ejemplo respuesta: https://laravel-json-api.readthedocs.io/en/latest/fetching/pagination/
         $return = [
-            'data' => $paginator["result"],
+            'result' => $paginator["result"],
             'meta' => [
                 "page"=>[
                     'total'=>$paginator["maxsize"],

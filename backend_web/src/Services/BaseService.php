@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Traits\Log;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\UserRepository;
 
 class BaseService
 {
@@ -37,4 +38,8 @@ class BaseService
         return $this->request->query->get($key) ?? null;
     }
 
+    protected function get_userid($codCache="")
+    {
+
+    }
 }
