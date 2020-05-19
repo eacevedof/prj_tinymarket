@@ -47,7 +47,8 @@ class ProductRepository extends BaseRepository
             ->andWhere("p.display=:display")
             ->setParameter("isEnabled","1")
             ->setParameter("display",1)
-            ->orderBy("p.description","ASC");
+            ->addOrderBy("p.orderBy","ASC")
+            ->addOrderBy("p.description",  "ASC");
         if($criteria){
             $aror = [];
             foreach ( $criteria as $field=>$value)
