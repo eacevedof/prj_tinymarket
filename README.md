@@ -24,9 +24,11 @@ tinymarket
     - cambiar en **.env.local** la ruta a la bd
     - `DATABASE_URL=mysql://root:1234@127.0.0.1:3306/db_tinymarket?serverVersion=5.7 #esto para lanzarlo desde la maquina host`
     - `php bin/console --env=local doctrine:mapping:import "App\Entity" annotation --path=src/Entity`
-- Instalo paginator:
+- Instalo paginator (no se usa ^^):
     - `composer require knplabs/knp-paginator-bundle`
     - `php bin/console debug:autowiring |grep pagi` compruebo el servicio
+- Instalo para corregir acceso CORS:
+    - `composer require nelmio/cors-bundle`
 
 ### Errores
 ```
