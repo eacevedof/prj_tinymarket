@@ -22,7 +22,7 @@ class UserEmail extends BaseController
         $email = $request->get("email") ?? "";
         $email = trim($email);
         $isvalid = filter_var($email, FILTER_VALIDATE_EMAIL);
-
+        $isvalid=1;
         $response = $this->get_response_json();
         if($isvalid) {
             $user = $this->userService->find_one_by_email($email);

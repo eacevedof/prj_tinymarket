@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\User;
-use phpDocumentor\Reflection\Types\Boolean;
 
 class UserRepository extends BaseRepository
 {
     //en el construct se define objectRepository a partir del nombre de la clase de la entidad
-
     protected static function entityClass(): string
     {
         return User::class;
@@ -28,7 +26,9 @@ class UserRepository extends BaseRepository
     public function findOneByEmail(string $email): ?User
     {
         /** @var User $user */
-        $user = $this->objectRepository->findOneBy(['email' => $email]);
+        //$user = $this->objectRepository->findOneBy(["email" => $email]);
+        $user = $this->objectRepository->findOneBy(["id" => 2]);
+        $this->logd($user,"user");
         return $user;
     }
 

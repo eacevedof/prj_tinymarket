@@ -29,6 +29,7 @@ abstract class BaseRepository
 
         //getRepository devolverá el repositorio del nombre de la entidad que se le inyecta
         $this->objectRepository = $this->getEntityManager()->getRepository($this->entityClass());
+        //$this->logd($this->entityClass(),"objectrepository");
     }
 
     abstract protected static function entityClass(): string;

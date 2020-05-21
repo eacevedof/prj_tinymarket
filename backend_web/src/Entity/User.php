@@ -5,10 +5,10 @@ namespace App\Entity;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * User
- *
  * @ORM\Table(name="base_user", uniqueConstraints={@ORM\UniqueConstraint(name="base_user_email_uindex", columns={"email"})})
  * @ORM\Entity
  */
@@ -25,66 +25,77 @@ class User extends BaseEntity implements UserInterface
 
     /**
      * @var string
+     * @Groups({"all"})
      * @ORM\Column(name="email", type="string", length=100, nullable=false)
      */
     private $email;
 
     /**
      * @var string|null
+     * @Groups({"all"})
      * @ORM\Column(name="password", type="string", length=100, nullable=true, options={"default"="NULL"})
      */
     private $password = null;
 
     /**
      * @var string|null
+     * @Groups({"all"})
      * @ORM\Column(name="phone", type="string", length=20, nullable=true, options={"default"="NULL"})
      */
     private $phone = null;
 
     /**
      * @var string|null
+     * @Groups({"all"})
      * @ORM\Column(name="fullname", type="string", length=100, nullable=true, options={"default"="NULL"})
      */
     private $fullname = null;
 
     /**
      * @var string|null
+     * @Groups({"all"})
      * @ORM\Column(name="address", type="string", length=250, nullable=true, options={"default"="NULL"})
      */
     private $address = null;
 
     /**
      * @var bool|null
+     * @Groups({"all"})
      * @ORM\Column(name="age", type="boolean", nullable=true, options={"default"="NULL"})
      */
     private $age = null;
 
     /**
      * @var string|null
+     * @Groups({"all"})
      * @ORM\Column(name="geo_location", type="string", length=500, nullable=true, options={"default"="NULL"})
      */
     private $geoLocation = null;
 
     /**
      * @var int|null
+     * @Groups({"all"})
      * @ORM\Column(name="id_gender", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $idGender = null;
 
     /**
      * @var int|null
+     * @Groups({"all"})
      * @ORM\Column(name="id_nationality", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $idNationality = null;
 
     /**
      * @var int|null
+     * @Groups({"all"})
      * @ORM\Column(name="id_country", type="integer", nullable=true, options={"default"="NULL","comment"="app_array.type=country"})
      */
     private $idCountry = null;
 
     /**
      * @var int|null
+     * @Groups({"all"})
      * @ORM\Column(name="id_language", type="integer", nullable=true, options={"default"="NULL","comment"="su idioma de preferencia"})
      */
     private $idLanguage = null;
