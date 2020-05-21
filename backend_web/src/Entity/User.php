@@ -219,5 +219,238 @@ class User extends BaseEntity implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string|null $phone
+     * @return User
+     */
+    public function setPhone(?string $phone): User
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string|null $address
+     * @return User
+     */
+    public function setAddress(?string $address): User
+    {
+        $this->address = $address;
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getAge(): ?bool
+    {
+        return $this->age;
+    }
+
+    /**
+     * @param bool|null $age
+     * @return User
+     */
+    public function setAge(?bool $age): User
+    {
+        $this->age = $age;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGeoLocation(): ?string
+    {
+        return $this->geoLocation;
+    }
+
+    /**
+     * @param string|null $geoLocation
+     * @return User
+     */
+    public function setGeoLocation(?string $geoLocation): User
+    {
+        $this->geoLocation = $geoLocation;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getIdGender(): ?int
+    {
+        return $this->idGender;
+    }
+
+    /**
+     * @param int|null $idGender
+     * @return User
+     */
+    public function setIdGender(?int $idGender): User
+    {
+        $this->idGender = $idGender;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getIdNationality(): ?int
+    {
+        return $this->idNationality;
+    }
+
+    /**
+     * @param int|null $idNationality
+     * @return User
+     */
+    public function setIdNationality(?int $idNationality): User
+    {
+        $this->idNationality = $idNationality;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getIdCountry(): ?int
+    {
+        return $this->idCountry;
+    }
+
+    /**
+     * @param int|null $idCountry
+     * @return User
+     */
+    public function setIdCountry(?int $idCountry): User
+    {
+        $this->idCountry = $idCountry;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getIdLanguage(): ?int
+    {
+        return $this->idLanguage;
+    }
+
+    /**
+     * @param int|null $idLanguage
+     * @return User
+     */
+    public function setIdLanguage(?int $idLanguage): User
+    {
+        $this->idLanguage = $idLanguage;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPathPicture(): ?string
+    {
+        return $this->pathPicture;
+    }
+
+    /**
+     * @param string|null $pathPicture
+     * @return User
+     */
+    public function setPathPicture(?string $pathPicture): User
+    {
+        $this->pathPicture = $pathPicture;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTokenreset(): ?string
+    {
+        return $this->tokenreset;
+    }
+
+    /**
+     * @param string|null $tokenreset
+     * @return User
+     */
+    public function setTokenreset(?string $tokenreset): User
+    {
+        $this->tokenreset = $tokenreset;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getLogAttempts(): ?int
+    {
+        return $this->logAttempts;
+    }
+
+    /**
+     * @param int|null $logAttempts
+     * @return User
+     */
+    public function setLogAttempts(?int $logAttempts): User
+    {
+        $this->logAttempts = $logAttempts;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    /**
+     * @param int|null $rating
+     * @return User
+     */
+    public function setRating(?int $rating): User
+    {
+        $this->rating = $rating;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDateValidated(): ?string
+    {
+        return $this->dateValidated;
+    }
+
+    /**
+     * @param string|null $dateValidated
+     * @return User
+     */
+    public function setDateValidated(?string $dateValidated): User
+    {
+        $this->dateValidated = $dateValidated;
+        return $this;
+    }
 
 }
