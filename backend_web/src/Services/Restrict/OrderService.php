@@ -1,32 +1,35 @@
 <?php
-namespace App\Services\Common;
+namespace App\Services\Restrict;
 
 use App\Services\BaseService;
-use App\Repository\OrderRepository;
+use App\Repository\OrderheadRepository;
+use App\Repository\OrderlinesRepository;
 use Symfony\Component\Security\Core\Security;
 
 class OrderService extends BaseService
 {
-    private OrderRepository $OrderRepository;
+    private OrderheadRepository $orderheadRepository;
+    private OrderlinesRepository $orderlinesRepository;
     private Security $security;
 
-    public function __construct(OrderRepository $OrderRepository,Security $security)
+    public function __construct(OrderheadRepository $orderheadRepository,OrderlinesRepository $orderlinesRepository, Security $security)
     {
-        $this->OrderRepository = $OrderRepository;
+        $this->orderheadRepository = $orderheadRepository;
+        $this->orderlinesRepository = $orderlinesRepository;
         $this->security = $security;
         // dump($this->security->getUser());die;
     }
 
     public function get_list()
     {
-        $Orders = $this->OrderRepository->findAll();
-        //print_r($Orders);die;
-        return $Orders;
+        $orders = $this->orderheadRepository->findAll();
+        //print_r($orders);die;
+        return $orders;
     }
     
     public function get_all_by_page($page = 1, $perpage=20, $criteria=[])
     {
-        $paginator = $this->OrderRepository->findAllByPage($page, $perpage, $criteria);
+        $paginator = $this->orderheadRepository->findAllByPage($page, $perpage, $criteria);
 
         //ejemplo respuesta: https://laravel-json-api.readthedocs.io/en/latest/fetching/pagination/
         $return = [
@@ -42,14 +45,12 @@ class OrderService extends BaseService
         ];
         return $return;
     }
-    
-    
-    
+
 
     public function get_list_filter(array $criteria=[])
     {
-        $Orders = $this->OrderRepository->findBy($criteria,["id"=>"DESC"]);
-        return $Orders;
+        $orders = $this->orderheadRepository->findBy($criteria,["id"=>"DESC"]);
+        return $orders;
     }
 
 }

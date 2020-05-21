@@ -19,23 +19,8 @@ class OrderPurchase extends BaseController
 
     public function __invoke(Request $request)
     {
-        $page = $request->query->get("page") ?? 1;
-        $perpage = $request->query->get("perpage") ?? 50;
-        $codCache = $request->get("enterprise") ?? 0;
-        $search = $request->query->get("s") ?? "";
-
-        $criteria = [];
-        if($search){
-            $this->log($search,"product.search");
-            $criteria = [
-              "description" => $search,
-              "descriptionFull" => $search,
-            ];
-        }
-
-        $products = $this->productService->get_all_by_page($page,$perpage,$criteria);
-
-        $json = Serialize::get_jsonarray($products);
+        $this->logpost();
+        $json = Serialize::get_jsonarray(["ok"]);
 
         $response = $this->get_response_json();
         $response->setContent($json);
