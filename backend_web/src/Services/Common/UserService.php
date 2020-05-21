@@ -35,4 +35,10 @@ class UserService extends BaseService
         return $users;
     }
 
+    public function check_email($email)
+    {
+        $oUser = $this->userRepository->findOneByEmail($email);
+        return $oUser;
+    }
+
 }

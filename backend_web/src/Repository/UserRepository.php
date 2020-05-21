@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\User;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class UserRepository extends BaseRepository
 {
@@ -42,4 +43,5 @@ class UserRepository extends BaseRepository
     {
         $this->saveEntity($user);
     }
+
 }
