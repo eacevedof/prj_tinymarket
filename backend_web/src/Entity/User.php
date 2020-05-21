@@ -144,6 +144,12 @@ class User extends BaseEntity implements UserInterface
      */
     private $codeCache = null;
 
+/**
+ * ==========================================================================================================
+ * ==========================================================================================================
+ * ==========================================================================================================
+ */
+
     /**
      * @return int
      */
@@ -163,11 +169,6 @@ class User extends BaseEntity implements UserInterface
      * @param string|null $password
      */
     public function setPassword(?string $password): void { $this->password = $password;}
-
-    /**
-     * @return string|null
-     */
-    public function getPassword(): ?string {return $this->password;}
 
     /**
      * @param string|null $fullname
@@ -193,6 +194,12 @@ class User extends BaseEntity implements UserInterface
         $this->idProfile = $idProfile;
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getPassword(): ?string {return $this->password;}
+
     /**
      * @inheritDoc
      */
