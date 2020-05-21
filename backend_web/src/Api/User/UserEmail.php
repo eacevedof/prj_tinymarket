@@ -19,11 +19,11 @@ class UserEmail extends BaseController
 
     public function __invoke(Request $request)
     {
-        //$email = $request->get("email") ?? "";
-        //$email = trim($email);
-        //$user = $this->userService->check_email($email);
+        $email = $request->get("email") ?? "";
+        $email = trim($email);
+        $user = $this->userService->check_email($email);
 
-        $json = Serialize::get_jsonarray(["hola"]);
+        $json = Serialize::get_jsonarray([$user]);
 
         $response = $this->get_response_json();
         $response->setContent($json);

@@ -39,7 +39,7 @@ class BaseController extends AbstractController
     protected function get_response_json()
     {
         $response = new Response();
-        $response->headers->set('Access-Control-Allow-Origin', '*');
+        //$response->headers->set('Access-Control-Allow-Origin', '*');
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
