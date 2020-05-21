@@ -21,11 +21,17 @@ class UserEmail extends BaseController
     {
         $email = $request->get("email") ?? "";
         $email = trim($email);
-        $user = $this->userService->check_email($email);
-
-        $json = Serialize::get_jsonarray([$user]);
+        $isvalid = filter_var($email, FILTER_VALIDATE_EMAIL);
 
         $response = $this->get_response_json();
+        if($isvalid) {
+            $user = $this->userService->find_one_by_email($email);
+            $json = Serialize::get_jsonarray(["result"=>$user,"error"=>""]);
+        }
+        else{
+            $json = Serialize::get_jsonarray(["error"=>"invalid email"]);
+        }
+
         $response->setContent($json);
         return $response;
     }
