@@ -149,6 +149,30 @@ class User extends BaseEntity implements UserInterface
  * ==========================================================================================================
  * ==========================================================================================================
  */
+    /**
+     * @return string|null
+     */
+    public function getPassword(): ?string {return $this->password;}
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles(){ return ["ROLE_$this->idProfile"];}
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt(){return null;}
+
+    /**
+     * @inheritDoc
+     */
+    public function getUsername(){return $this->email;}
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials(){;}
 
     /**
      * @return int
@@ -195,29 +219,5 @@ class User extends BaseEntity implements UserInterface
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPassword(): ?string {return $this->password;}
-
-    /**
-     * @inheritDoc
-     */
-    public function getRoles(){ return ["ROLE_$this->idProfile"];}
-
-    /**
-     * @inheritDoc
-     */
-    public function getSalt(){return null;}
-
-    /**
-     * @inheritDoc
-     */
-    public function getUsername(){return $this->email;}
-
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials(){;}
 
 }
