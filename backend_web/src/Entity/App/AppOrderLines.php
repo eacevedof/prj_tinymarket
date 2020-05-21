@@ -103,6 +103,221 @@ class AppOrderLines
  * ==========================================================================================================
  * ==========================================================================================================
  */
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return AppOrderLines
+     */
+    public function setId(int $id): AppOrderLines
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getIdOrderHead(): ?int
+    {
+        return $this->idOrderHead;
+    }
+
+    /**
+     * @param int|null $idOrderHead
+     * @return AppOrderLines
+     */
+    public function setIdOrderHead(?int $idOrderHead): AppOrderLines
+    {
+        $this->idOrderHead = $idOrderHead;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getIdProduct(): ?int
+    {
+        return $this->idProduct;
+    }
+
+    /**
+     * @param int|null $idProduct
+     * @return AppOrderLines
+     */
+    public function setIdProduct(?int $idProduct): AppOrderLines
+    {
+        $this->idProduct = $idProduct;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getLinenum(): ?int
+    {
+        return $this->linenum;
+    }
+
+    /**
+     * @param int|null $linenum
+     * @return AppOrderLines
+     */
+    public function setLinenum(?int $linenum): AppOrderLines
+    {
+        $this->linenum = $linenum;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getUnits(): ?int
+    {
+        return $this->units;
+    }
+
+    /**
+     * @param int|null $units
+     * @return AppOrderLines
+     */
+    public function setUnits(?int $units): AppOrderLines
+    {
+        $this->units = $units;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTaxPercent(): ?string
+    {
+        return $this->taxPercent;
+    }
+
+    /**
+     * @param string|null $taxPercent
+     * @return AppOrderLines
+     */
+    public function setTaxPercent(?string $taxPercent): AppOrderLines
+    {
+        $this->taxPercent = $taxPercent;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPriceTaxed(): ?string
+    {
+        return $this->priceTaxed;
+    }
+
+    /**
+     * @param string|null $priceTaxed
+     * @return AppOrderLines
+     */
+    public function setPriceTaxed(?string $priceTaxed): AppOrderLines
+    {
+        $this->priceTaxed = $priceTaxed;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param string|null $price
+     * @return AppOrderLines
+     */
+    public function setPrice(?string $price): AppOrderLines
+    {
+        $this->price = $price;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPrice1(): ?string
+    {
+        return $this->price1;
+    }
+
+    /**
+     * @param string|null $price1
+     * @return AppOrderLines
+     */
+    public function setPrice1(?string $price1): AppOrderLines
+    {
+        $this->price1 = $price1;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPrice2(): ?string
+    {
+        return $this->price2;
+    }
+
+    /**
+     * @param string|null $price2
+     * @return AppOrderLines
+     */
+    public function setPrice2(?string $price2): AppOrderLines
+    {
+        $this->price2 = $price2;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getIdUser(): ?int
+    {
+        return $this->idUser;
+    }
+
+    /**
+     * @param int|null $idUser
+     * @return AppOrderLines
+     */
+    public function setIdUser(?int $idUser): AppOrderLines
+    {
+        $this->idUser = $idUser;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNotesAdmin(): ?string
+    {
+        return $this->notesAdmin;
+    }
+
+    /**
+     * @param string|null $notesAdmin
+     * @return AppOrderLines
+     */
+    public function setNotesAdmin(?string $notesAdmin): AppOrderLines
+    {
+        $this->notesAdmin = $notesAdmin;
+        return $this;
+    }
 
 
 }
