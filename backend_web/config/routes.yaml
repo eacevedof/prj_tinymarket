@@ -17,6 +17,11 @@ api-1-user-email:
     # methods: GET | POST
     methods: POST
 
+api-1-order-purchase:
+    path: /api/v1/order/purchase
+    controller: App\Api\Order\OrderPurchase
+    methods: POST
+
 # zona privada
 register:
     path: /register
