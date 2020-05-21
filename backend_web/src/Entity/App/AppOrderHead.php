@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Entity\App;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\BaseEntity;
 
 /**
  * AppOrderHead
@@ -11,7 +10,7 @@ use App\Entity\BaseEntity;
  * @ORM\Table(name="app_order_head")
  * @ORM\Entity
  */
-class AppOrderHead //extends BaseEntity
+class AppOrderHead
 {
     /**
      * @var int
@@ -34,7 +33,7 @@ class AppOrderHead //extends BaseEntity
      *
      * @ORM\Column(name="insert_platform", type="string", length=3, nullable=true, options={"default"="'1'"})
      */
-    private $insertPlatform = '1';
+    private $insertPlatform = '\'1\'';
 
     /**
      * @var string|null
@@ -104,14 +103,14 @@ class AppOrderHead //extends BaseEntity
      *
      * @ORM\Column(name="is_erpsent", type="string", length=3, nullable=true, options={"default"="'0'"})
      */
-    private $isErpsent = '0';
+    private $isErpsent = '\'0\'';
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="is_enabled", type="string", length=3, nullable=true, options={"default"="'1'"})
      */
-    private $isEnabled = '1';
+    private $isEnabled = '\'1\'';
 
     /**
      * @var int|null
@@ -137,16 +136,16 @@ class AppOrderHead //extends BaseEntity
     /**
      * @var int
      *
-     * @ORM\Column(name="id_user_client", type="integer", nullable=false)
+     * @ORM\Column(name="id_user", type="integer", nullable=false, options={"comment"="el comprador"})
      */
-    private $idUserClient;
+    private $idUser;
 
     /**
-     * @var int
+     * @var string|null
      *
-     * @ORM\Column(name="id_user_seller", type="integer", nullable=false)
+     * @ORM\Column(name="address", type="string", length=250, nullable=true, options={"default"="NULL"})
      */
-    private $idUserSeller;
+    private $address = 'NULL';
 
     /**
      * @var string|null
@@ -158,6 +157,48 @@ class AppOrderHead //extends BaseEntity
     /**
      * @var string|null
      *
+     * @ORM\Column(name="total1", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000","comment"="en otra divisa"})
+     */
+    private $total1 = '0.000';
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="total2", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000","comment"="en otra divisa"})
+     */
+    private $total2 = '0.000';
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="date_purchase", type="datetime", nullable=true, options={"default"="NULL"})
+     */
+    private $datePurchase = 'NULL';
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="date_delivery", type="datetime", nullable=true, options={"default"="NULL"})
+     */
+    private $dateDelivery = 'NULL';
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="notes", type="string", length=500, nullable=true, options={"default"="NULL"})
+     */
+    private $notes = 'NULL';
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="notes_admin", type="string", length=500, nullable=true, options={"default"="NULL"})
+     */
+    private $notesAdmin = 'NULL';
+
+    /**
+     * @var string|null
+     *
      * @ORM\Column(name="status", type="string", length=25, nullable=true, options={"default"="NULL"})
      */
     private $status = 'NULL';
@@ -165,9 +206,9 @@ class AppOrderHead //extends BaseEntity
     /**
      * @var string|null
      *
-     * @ORM\Column(name="notes", type="string", length=2000, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="code_cache", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
-    private $notes = 'NULL';
+    private $codeCache = 'NULL';
 
 
 }

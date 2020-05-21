@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Entity\App;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\BaseEntity;
 
 /**
  * AppOrderLines
@@ -11,7 +10,7 @@ use App\Entity\BaseEntity;
  * @ORM\Table(name="app_order_lines")
  * @ORM\Entity
  */
-class AppOrderLines //extends BaseEntity
+class AppOrderLines
 {
     /**
      * @var int
@@ -34,7 +33,7 @@ class AppOrderLines //extends BaseEntity
      *
      * @ORM\Column(name="insert_platform", type="string", length=3, nullable=true, options={"default"="'1'"})
      */
-    private $insertPlatform = '1';
+    private $insertPlatform = '\'1\'';
 
     /**
      * @var string|null
@@ -104,14 +103,14 @@ class AppOrderLines //extends BaseEntity
      *
      * @ORM\Column(name="is_erpsent", type="string", length=3, nullable=true, options={"default"="'0'"})
      */
-    private $isErpsent = '0';
+    private $isErpsent = '\'0\'';
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="is_enabled", type="string", length=3, nullable=true, options={"default"="'1'"})
      */
-    private $isEnabled = '1';
+    private $isEnabled = '\'1\'';
 
     /**
      * @var int|null
@@ -149,11 +148,60 @@ class AppOrderLines //extends BaseEntity
     private $idProduct = 'NULL';
 
     /**
+     * @var int|null
+     *
+     * @ORM\Column(name="units", type="integer", nullable=true, options={"default"="NULL"})
+     */
+    private $units = 'NULL';
+
+    /**
      * @var string|null
      *
-     * @ORM\Column(name="price", type="decimal", precision=10, scale=3, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="tax_percent", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
      */
-    private $price = 'NULL';
+    private $taxPercent = '0.000';
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="price_taxed", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
+     */
+    private $priceTaxed = '0.000';
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="price", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
+     */
+    private $price = '0.000';
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="price1", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
+     */
+    private $price1 = '0.000';
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="price2", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
+     */
+    private $price2 = '0.000';
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="id_user", type="integer", nullable=true, options={"default"="NULL","comment"="el vendedor"})
+     */
+    private $idUser = 'NULL';
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="notes_admin", type="string", length=500, nullable=true, options={"default"="NULL"})
+     */
+    private $notesAdmin = 'NULL';
 
 
 }
