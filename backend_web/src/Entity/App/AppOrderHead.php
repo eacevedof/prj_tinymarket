@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\App;
 
 use App\Entity\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,13 +23,6 @@ class AppOrderHead extends BaseEntity
      */
     private $id;
 
-
-    /**
-     * @var string|null
-     * @Groups({"all"})
-     * @ORM\Column(name="description", type="string", length=250, nullable=true, options={"default"="NULL"})
-     */
-    private $description = null;
     /**
      * @var int
      * @Groups({"all"})
@@ -121,24 +114,6 @@ class AppOrderHead extends BaseEntity
     public function setId(int $id): AppOrderHead
     {
         $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string|null $description
-     * @return AppOrderHead
-     */
-    public function setDescription(?string $description): AppOrderHead
-    {
-        $this->description = $description;
         return $this;
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\App\AppOrderHead;
+use phpDocumentor\Reflection\Types\Integer;
 
 class OrderheadRepository extends BaseRepository
 {
@@ -69,8 +70,9 @@ class OrderheadRepository extends BaseRepository
         ];
     }
 
-    public function save(AppOrderHead $orderhead): void
+    public function save(AppOrderHead $orderhead): ?int
     {
         $this->saveEntity($orderhead);
+        return $orderhead->getId();
     }
 }

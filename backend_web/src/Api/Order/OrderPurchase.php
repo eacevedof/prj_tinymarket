@@ -6,22 +6,41 @@ namespace App\Api\Order;
 use App\Component\Serialize;
 use Symfony\Component\HttpFoundation\Request;
 use App\Controller\BaseController;
-use App\Services\Common\ProductService;
+use App\Services\Restrict\OrderService;
 
 class OrderPurchase extends BaseController
 {
-    private ProductService $productService;
+    private OrderService $orderService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(OrderService $orderService)
     {
-        $this->productService = $productService;
+        $this->orderService = $orderService;
     }
 
     public function __invoke(Request $request)
     {
-        $this->logpost();
-        $json = Serialize::get_jsonarray(["ok"]);
+        //$this->logpost();
+        if(!($request->get("user") && $request->get("user"))){
+            $response = [
+                "result" => null,
+                "error" => "missing data"
+            ];
+        }
+        else {
+            $order = $this->orderService->purchase(
+                $request->get("user"),
+                $request->get("order")
+            );
 
+            $response = [
+                "result" => $order,
+                "error" => ""
+            ];
+        }
+
+
+        $json = Serialize::get_jsonarray($response);
+        //$json = Serialize::get_jsonarray(["xxx"]);
         $response = $this->get_response_json();
         $response->setContent($json);
         return $response;
