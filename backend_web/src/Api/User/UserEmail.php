@@ -19,13 +19,13 @@ class UserEmail extends BaseController
 
     public function __invoke(Request $request)
     {
+        //$this->logpost();
         $email = $request->get("email") ?? "";
         $email = trim($email);
         $isvalid = filter_var($email, FILTER_VALIDATE_EMAIL);
         $isvalid=1;
         $response = $this->get_response_json();
         if($isvalid) {
-            //print_r($email);die;
             $user = $this->userService->find_one_by_email($email);
             $json = Serialize::get_jsonarray(["result"=>$user,"error"=>""]);
         }
