@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * AppOrderHead
@@ -14,7 +16,7 @@ class AppOrderHead
 {
     /**
      * @var int
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -24,76 +26,76 @@ class AppOrderHead
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="description", type="string", length=250, nullable=true, options={"default"="NULL"})
      */
     private $description = null;
     /**
      * @var int
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="id_user", type="integer", nullable=false, options={"comment"="el comprador"})
      */
     private $idUser;
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="address", type="string", length=250, nullable=true, options={"default"="NULL"})
      */
     private $address = null;
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="total", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
      */
     private $total = '0.000';
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="total1", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000","comment"="en otra divisa"})
      */
     private $total1 = '0.000';
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="total2", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000","comment"="en otra divisa"})
      */
     private $total2 = '0.000';
 
     /**
      * @var \DateTime|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="date_purchase", type="datetime", nullable=true, options={"default"="NULL"})
      */
     private $datePurchase = null;
 
     /**
      * @var \DateTime|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="date_delivery", type="datetime", nullable=true, options={"default"="NULL"})
      */
     private $dateDelivery = null;
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="notes", type="string", length=500, nullable=true, options={"default"="NULL"})
      */
     private $notes = null;
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="notes_admin", type="string", length=500, nullable=true, options={"default"="NULL"})
      */
     private $notesAdmin = null;
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="status", type="string", length=25, nullable=true, options={"default"="NULL"})
      */
     private $status = null;

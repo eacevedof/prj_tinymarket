@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * AppOrderLines
@@ -14,7 +16,7 @@ class AppOrderLines
 {
     /**
      * @var int
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -23,77 +25,77 @@ class AppOrderLines
 
     /**
      * @var int|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="id_order_head", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $idOrderHead = null;
 
     /**
      * @var int|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="id_product", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $idProduct = null;
 
     /**
      * @var int|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="linenum", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $linenum = null;
 
     /**
      * @var int|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="units", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $units = null;
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="tax_percent", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
      */
     private $taxPercent = '0.000';
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="price_taxed", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
      */
     private $priceTaxed = '0.000';
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="price", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
      */
     private $price = '0.000';
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="price1", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
      */
     private $price1 = '0.000';
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="price2", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
      */
     private $price2 = '0.000';
 
     /**
      * @var int|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="id_user", type="integer", nullable=true, options={"default"="NULL","comment"="el vendedor"})
      */
     private $idUser = null;
 
     /**
      * @var string|null
-     *
+     * @Groups({"all"})
      * @ORM\Column(name="notes_admin", type="string", length=500, nullable=true, options={"default"="NULL"})
      */
     private $notesAdmin = null;
