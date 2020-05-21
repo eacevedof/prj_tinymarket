@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Table(name="app_order_head")
  * @ORM\Entity
  */
-class AppOrderHead
+class AppOrderHead extends BaseEntity
 {
     /**
      * @var int
