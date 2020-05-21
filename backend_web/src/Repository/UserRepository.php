@@ -27,7 +27,7 @@ class UserRepository extends BaseRepository
     {
         /** @var User $user */
         //$user = $this->objectRepository->findOneBy(["email" => $email]);
-        $user = $this->objectRepository->findOneBy(["id" => 2]);
+        $user = $this->objectRepository->findOneBy(["email" => "aa@aa.com"]);
         $this->logd($user,"user");
         return $user;
     }
