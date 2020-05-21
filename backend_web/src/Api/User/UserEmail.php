@@ -25,6 +25,7 @@ class UserEmail extends BaseController
         $isvalid=1;
         $response = $this->get_response_json();
         if($isvalid) {
+            //print_r($email);die;
             $user = $this->userService->find_one_by_email($email);
             $json = Serialize::get_jsonarray(["result"=>$user,"error"=>""]);
         }

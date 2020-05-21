@@ -19,4 +19,19 @@ trait Log
         $oLog->save($mxVar,$sTitle);
     }
 
+    protected function logpost()
+    {
+        $this->logd($_POST,"POST");
+    }
+
+    protected function logget()
+    {
+        $this->logd($_GET,"GET");
+    }
+
+    protected function logreq()
+    {
+        $this->logd($_REQUEST,"REQUEST");
+    }
+
 }//AppLogTrait
