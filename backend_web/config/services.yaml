@@ -36,3 +36,6 @@ services:
     App\Listener\EmailExceptionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 101 }
+
+    App\Routing\ExtraLoader:
+        tags: [routing.loader]
