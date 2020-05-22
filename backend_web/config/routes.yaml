@@ -1,6 +1,6 @@
 app_extra:
     resource: .
-    type: extra
+    type: routes_api
 
 home:
     path: /

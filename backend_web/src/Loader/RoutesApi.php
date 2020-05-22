@@ -2,11 +2,11 @@
 // src/Repository/UserRepository.php
 declare(strict_types=1);
 
-namespace App\Routing;
+namespace App\Loader;
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\RouteCollection;
 
-class RouterLoader extends Loader
+class RoutesApi extends Loader
 {
     /**
      * @param mixed $resource
@@ -29,6 +29,6 @@ class RouterLoader extends Loader
 
     public function supports($resource, $type = null)
     {
-        return 'extra' === $type;
+        return 'routes_api' === $type;
     }
 }
