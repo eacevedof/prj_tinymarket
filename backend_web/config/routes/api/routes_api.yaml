@@ -1,3 +1,15 @@
+# Api
+api-1-products:
+  path: /api/v1/products
+  controller: App\Api\Product\ProductList
 
+api-1-user-email:
+  path: /api/v1/user/email
+  controller: App\Api\User\UserEmail
+  # methods: GET | POST
+  methods: POST
 
-
+api-1-order-purchase:
+  path: /api/v1/order/purchase
+  controller: App\Api\Order\OrderPurchase
+  methods: POST

@@ -37,5 +37,5 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 101 }
 
-    App\Routing\ExtraLoader:
+    App\Routing\RouterLoader:
         tags: [routing.loader]
