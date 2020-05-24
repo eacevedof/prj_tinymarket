@@ -1,9 +1,8 @@
 /*
 SQLyog Community v12.1 (32 bit)
-MySQL - 10.4.11-MariaDB-1:10.4.11+maria~bionic : Database - dbs433055
+MySQL - 10.4.11-MariaDB-1:10.4.11+maria~bionic : Database - db_tinymarket
 *********************************************************************
-*/
-
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -13,9 +12,9 @@ MySQL - 10.4.11-MariaDB-1:10.4.11+maria~bionic : Database - dbs433055
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`dbs433055` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_tinymarket` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
-USE `dbs433055`;
+USE `db_tinymarket`;
 
 /*Table structure for table `app_array` */
 
@@ -71,11 +70,17 @@ CREATE TABLE `app_order_head` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code_erp` varchar(25) DEFAULT NULL,
   `description` varchar(250) DEFAULT NULL,
-  `id_user_client` int(11) NOT NULL,
-  `id_user_seller` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL COMMENT 'el comprador',
+  `address` varchar(250) DEFAULT NULL,
   `total` decimal(10,3) DEFAULT 0.000,
+  `total1` decimal(10,3) DEFAULT 0.000 COMMENT 'en otra divisa',
+  `total2` decimal(10,3) DEFAULT 0.000 COMMENT 'en otra divisa',
+  `date_purchase` datetime DEFAULT NULL,
+  `date_delivery` datetime DEFAULT NULL,
+  `notes` varchar(500) DEFAULT NULL,
+  `notes_admin` varchar(500) DEFAULT NULL,
   `status` varchar(25) DEFAULT NULL,
-  `notes` varchar(2000) DEFAULT NULL,
+  `code_cache` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='cabecera de pedidos';
 
@@ -105,7 +110,15 @@ CREATE TABLE `app_order_lines` (
   `description` varchar(250) DEFAULT NULL,
   `id_order_head` int(11) DEFAULT NULL,
   `id_product` int(11) DEFAULT NULL,
-  `price` decimal(10,3) DEFAULT NULL,
+  `linenum` int(5) DEFAULT NULL,
+  `units` int(5) DEFAULT NULL,
+  `tax_percent` decimal(10,3) DEFAULT 0.000,
+  `price_taxed` decimal(10,3) DEFAULT 0.000,
+  `price` decimal(10,3) DEFAULT 0.000,
+  `price1` decimal(10,3) DEFAULT 0.000,
+  `price2` decimal(10,3) DEFAULT 0.000,
+  `id_user` int(11) DEFAULT NULL COMMENT 'el vendedor',
+  `notes_admin` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='lineas de pedido';
 
@@ -373,11 +386,12 @@ CREATE TABLE `base_user` (
   `id_country` int(11) DEFAULT NULL COMMENT 'app_array.type=country',
   `id_language` int(11) DEFAULT NULL COMMENT 'su idioma de preferencia',
   `path_picture` varchar(100) DEFAULT NULL,
-  `id_profile` int(11) DEFAULT NULL COMMENT 'app_array.type=profile: user,maintenaince,system',
+  `id_profile` int(11) DEFAULT NULL COMMENT 'app_array.type=profile: user,maintenaince,system,enterprise, individual, client',
   `tokenreset` varchar(250) DEFAULT NULL,
   `log_attempts` int(5) DEFAULT 0,
   `rating` int(11) DEFAULT NULL COMMENT 'la puntuacion',
   `date_validated` varchar(14) DEFAULT NULL COMMENT 'cuando valido su cuenta por email',
+  `is_notificable` tinyint(4) DEFAULT 0 COMMENT 'para enviar notificaciones push',
   `code_cache` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `base_user_email_uindex` (`email`)
@@ -385,7 +399,7 @@ CREATE TABLE `base_user` (
 
 /*Data for the table `base_user` */
 
-insert  into `base_user`(`processflag`,`insert_platform`,`insert_user`,`insert_date`,`update_platform`,`update_user`,`update_date`,`delete_platform`,`delete_user`,`delete_date`,`cru_csvnote`,`is_erpsent`,`is_enabled`,`i`,`id`,`code_erp`,`description`,`email`,`password`,`phone`,`fullname`,`address`,`age`,`geo_location`,`id_gender`,`id_nationality`,`id_country`,`id_language`,`path_picture`,`id_profile`,`tokenreset`,`log_attempts`,`rating`,`date_validated`,`code_cache`) values (NULL,'1',NULL,'2020-05-05 20:33:20',NULL,NULL,'2020-05-18 15:18:24',NULL,NULL,NULL,NULL,'0','1',NULL,1,NULL,NULL,'aa@aa.com','$2y$04$yf.g9VdZ.aQV3fMwr0cQGOP72QkgXp5zqX6qkAdmcF74WQgctyKHa',NULL,'AA',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,0,NULL,NULL,'06c2c795-96a6-11ea-800c-0242ac160003-00000001'),(NULL,'1',NULL,'2020-05-06 09:47:07',NULL,NULL,'2020-05-18 15:18:24',NULL,NULL,NULL,NULL,'0','1',NULL,2,NULL,NULL,'hola@hola.com','$2y$04$mBDCllMenDgX5LkaiKawR.aCftf1u8F7o4AkpVYOqAxCOr.OzAMPK',NULL,'hola',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,0,NULL,NULL,'06c3022d-96a6-11ea-800c-0242ac160003-00000002');
+insert  into `base_user`(`processflag`,`insert_platform`,`insert_user`,`insert_date`,`update_platform`,`update_user`,`update_date`,`delete_platform`,`delete_user`,`delete_date`,`cru_csvnote`,`is_erpsent`,`is_enabled`,`i`,`id`,`code_erp`,`description`,`email`,`password`,`phone`,`fullname`,`address`,`age`,`geo_location`,`id_gender`,`id_nationality`,`id_country`,`id_language`,`path_picture`,`id_profile`,`tokenreset`,`log_attempts`,`rating`,`date_validated`,`is_notificable`,`code_cache`) values (NULL,'1',NULL,'2020-05-05 20:33:20',NULL,NULL,'2020-05-18 15:18:24',NULL,NULL,NULL,NULL,'0','1',NULL,1,NULL,NULL,'aa@aa.com','$2y$04$yf.g9VdZ.aQV3fMwr0cQGOP72QkgXp5zqX6qkAdmcF74WQgctyKHa',NULL,'AA',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,0,NULL,NULL,0,'06c2c795-96a6-11ea-800c-0242ac160003-00000001'),(NULL,'1',NULL,'2020-05-06 09:47:07',NULL,NULL,'2020-05-18 15:18:24',NULL,NULL,NULL,NULL,'0','1',NULL,2,NULL,NULL,'hola@hola.com','$2y$04$mBDCllMenDgX5LkaiKawR.aCftf1u8F7o4AkpVYOqAxCOr.OzAMPK',NULL,'hola',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,0,NULL,NULL,0,'06c3022d-96a6-11ea-800c-0242ac160003-00000002');
 
 /*Table structure for table `base_user_array` */
 
