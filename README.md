@@ -30,6 +30,9 @@ tinymarket
 - Instalo para corregir acceso CORS:
     - `composer require nelmio/cors-bundle`
 
+- **backup db desde docker yog**
+    - `py.sh tinymarket index dump`
+
 ### Errores
 ```
 Google Maps JavaScript API error: ApiNotActivatedMapError

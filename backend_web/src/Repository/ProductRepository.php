@@ -45,8 +45,10 @@ class ProductRepository extends BaseRepository
             ->where($qb->expr()->isNull("p.deleteDate"))
             ->andWhere("p.isEnabled=:isEnabled")
             ->andWhere("p.display=:display")
+            ->andWhere("p.priceSale>:priceSale")
             ->setParameter("isEnabled","1")
             ->setParameter("display",1)
+            ->setParameter("priceSale",0)
             ->addOrderBy("p.orderBy","ASC")
             ->addOrderBy("p.description",  "ASC");
         if($criteria){
@@ -68,6 +70,12 @@ class ProductRepository extends BaseRepository
             "maxsize" => ceil($paginator->count() / $perpage)
         ];
     }
+
+    public function get_prices(array $arproducts): array
+    {
+        $qb = $this->getOrmQueryBuilder();
+    }
+
 
     public function save(AppProduct $product): void
     {

@@ -102,30 +102,35 @@ class User extends BaseEntity implements UserInterface
 
     /**
      * @var string|null
+     *
      * @ORM\Column(name="path_picture", type="string", length=100, nullable=true, options={"default"="NULL"})
      */
     private $pathPicture = null;
 
     /**
      * @var int|null
-     * @ORM\Column(name="id_profile", type="integer", nullable=true, options={"default"="NULL","comment"="app_array.type=profile: user,maintenaince,system"})
+     *
+     * @ORM\Column(name="id_profile", type="integer", nullable=true, options={"default"="NULL","comment"="app_array.type=profile: user,maintenaince,system,enterprise, individual, client"})
      */
     private $idProfile = null;
 
     /**
      * @var string|null
+     *
      * @ORM\Column(name="tokenreset", type="string", length=250, nullable=true, options={"default"="NULL"})
      */
     private $tokenreset = null;
 
     /**
      * @var int|null
+     *
      * @ORM\Column(name="log_attempts", type="integer", nullable=true)
      */
     private $logAttempts = '0';
 
     /**
      * @var int|null
+     *
      * @ORM\Column(name="rating", type="integer", nullable=true, options={"default"="NULL","comment"="la puntuacion"})
      */
     private $rating = null;
@@ -137,18 +142,12 @@ class User extends BaseEntity implements UserInterface
      */
     private $dateValidated = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="code_cache", type="string", length=50, nullable=true, options={"default"="NULL"})
-     */
-    private $codeCache = null;
 
-/**
- * ==========================================================================================================
- * ==========================================================================================================
- * ==========================================================================================================
- */
+    /**
+     * ==========================================================================================================
+     * ==========================================================================================================
+     * ==========================================================================================================
+     */
     /**
      * @return string|null
      */
@@ -180,42 +179,27 @@ class User extends BaseEntity implements UserInterface
     public function getId(): int {return $this->id;}
 
     /**
-     * @param string $email
-     */
-    public function setEmail(string $email): void { $this->email = $email;}
-
-    /**
      * @return string|null
      */
     public function getEmail(): ?string { return $this->email;}
 
     /**
-     * @param string|null $password
-     */
-    public function setPassword(?string $password): void { $this->password = $password;}
-
-    /**
-     * @param string|null $fullname
-     */
-    public function setFullname(?string $fullname): void {$this->fullname = $fullname;}
-
-    /**
-     * @return string|null
-     */
-    public function getFullname(): ?string { return $this->fullname;}
-
-    /**
-     * @return int|null
-     */
-    public function getIdProfile(): ?int { return $this->idProfile;}
-
-    /**
-     * @param int|null $idProfile
+     * @param string $email
      * @return User
      */
-    public function setIdProfile(?int $idProfile): User
+    public function setEmail(string $email): User
     {
-        $this->idProfile = $idProfile;
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @param string|null $password
+     * @return User
+     */
+    public function setPassword(?string $password): User
+    {
+        $this->password = $password;
         return $this;
     }
 
@@ -234,6 +218,24 @@ class User extends BaseEntity implements UserInterface
     public function setPhone(?string $phone): User
     {
         $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFullname(): ?string
+    {
+        return $this->fullname;
+    }
+
+    /**
+     * @param string|null $fullname
+     * @return User
+     */
+    public function setFullname(?string $fullname): User
+    {
+        $this->fullname = $fullname;
         return $this;
     }
 
@@ -382,20 +384,17 @@ class User extends BaseEntity implements UserInterface
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getTokenreset(): ?string
-    {
-        return $this->tokenreset;
-    }
+    public function getIdProfile(): ?int { return $this->idProfile;}
 
     /**
-     * @param string|null $tokenreset
+     * @param int|null $idProfile
      * @return User
      */
-    public function setTokenreset(?string $tokenreset): User
+    public function setIdProfile(?int $idProfile): User
     {
-        $this->tokenreset = $tokenreset;
+        $this->idProfile = $idProfile;
         return $this;
     }
 
@@ -451,6 +450,32 @@ class User extends BaseEntity implements UserInterface
     {
         $this->dateValidated = $dateValidated;
         return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsNotificable(): ?bool
+    {
+        return $this->isNotificable;
+    }
+
+    /**
+     * @param bool|null $isNotificable
+     * @return User
+     */
+    public function setIsNotificable(?bool $isNotificable): User
+    {
+        $this->isNotificable = $isNotificable;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCodeCache(): ?string
+    {
+        return $this->codeCache;
     }
 
 }
