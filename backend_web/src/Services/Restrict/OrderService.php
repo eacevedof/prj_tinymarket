@@ -79,6 +79,7 @@ class OrderService extends BaseService
             $oorderl->setPrice1($oproduct->getPriceSale1());
             $oorderl->setPrice2($oproduct->getPriceSale2());
             $oorderl->setDescription($oproduct->getDescription());
+            //$oorderl->setProduct();
 
 
         }

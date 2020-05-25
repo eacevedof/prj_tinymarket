@@ -45,6 +45,13 @@ class AppOrderLines extends  BaseEntity
     private $linenum = null;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(name="product", type="string", length=250, nullable=true, options={"default"="NULL"})
+     */
+    private $product = null;
+
+    /**
      * @var int|null
      * @Groups({"all"})
      * @ORM\Column(name="units", type="integer", nullable=true, options={"default"="NULL"})
@@ -56,35 +63,57 @@ class AppOrderLines extends  BaseEntity
      * @Groups({"all"})
      * @ORM\Column(name="tax_percent", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
      */
-    private $taxPercent = '0.000';
+    private $taxPercent = 0;
 
     /**
      * @var string|null
      * @Groups({"all"})
      * @ORM\Column(name="price_taxed", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
      */
-    private $priceTaxed = '0.000';
+    private $priceTaxed = 0;
 
     /**
      * @var string|null
      * @Groups({"all"})
      * @ORM\Column(name="price", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
      */
-    private $price = '0.000';
+    private $price = 0;
 
     /**
      * @var string|null
      * @Groups({"all"})
      * @ORM\Column(name="price1", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
      */
-    private $price1 = '0.000';
+    private $price1 = 0;
+
+    /**
+     * @var string|null
+     * @Groups({"asl"})
+     * @ORM\Column(name="price2", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
+     */
+    private $price2 = 0;
 
     /**
      * @var string|null
      * @Groups({"all"})
-     * @ORM\Column(name="price2", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
+     * @ORM\Column(name="total", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
      */
-    private $price2 = '0.000';
+    private $total = 0;
+
+    /**
+     * @var string|null
+     * @Groups({"all"})
+     * @ORM\Column(name="total1", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
+     */
+    private $total1 = 0;
+
+    /**
+     * @var string|null
+     * @Groups({"all"})
+     * @ORM\Column(name="total2", type="decimal", precision=10, scale=3, nullable=true, options={"default"="0.000"})
+     */
+    private $total2 = 0;
+
 
     /**
      * @var int|null
@@ -100,11 +129,11 @@ class AppOrderLines extends  BaseEntity
      */
     private $notesAdmin = null;
 
-/**
- * ==========================================================================================================
- * ==========================================================================================================
- * ==========================================================================================================
- */
+    /**
+     * ==========================================================================================================
+     * ==========================================================================================================
+     * ==========================================================================================================
+     */
     /**
      * @return int
      */
@@ -174,6 +203,24 @@ class AppOrderLines extends  BaseEntity
     public function setLinenum(?int $linenum): AppOrderLines
     {
         $this->linenum = $linenum;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getProduct(): ?string
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param string|null $product
+     * @return AppOrderLines
+     */
+    public function setProduct(?string $product): AppOrderLines
+    {
+        $this->product = $product;
         return $this;
     }
 
@@ -286,6 +333,60 @@ class AppOrderLines extends  BaseEntity
     }
 
     /**
+     * @return string|null
+     */
+    public function getTotal(): ?string
+    {
+        return $this->total;
+    }
+
+    /**
+     * @param string|null $total
+     * @return AppOrderLines
+     */
+    public function setTotal(?string $total): AppOrderLines
+    {
+        $this->total = $total;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTotal1(): ?string
+    {
+        return $this->total1;
+    }
+
+    /**
+     * @param string|null $total1
+     * @return AppOrderLines
+     */
+    public function setTotal1(?string $total1): AppOrderLines
+    {
+        $this->total1 = $total1;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTotal2(): ?string
+    {
+        return $this->total2;
+    }
+
+    /**
+     * @param string|null $total2
+     * @return AppOrderLines
+     */
+    public function setTotal2(?string $total2): AppOrderLines
+    {
+        $this->total2 = $total2;
+        return $this;
+    }
+
+    /**
      * @return int|null
      */
     public function getIdUser(): ?int
@@ -320,6 +421,5 @@ class AppOrderLines extends  BaseEntity
         $this->notesAdmin = $notesAdmin;
         return $this;
     }
-
 
 }
