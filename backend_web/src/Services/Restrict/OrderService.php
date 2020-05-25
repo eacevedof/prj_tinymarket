@@ -10,6 +10,7 @@ use App\Services\BaseService;
 use App\Repository\OrderheadRepository;
 use App\Repository\OrderlinesRepository;
 use App\Repository\UserRepository;
+use mysql_xdevapi\Exception;
 use Symfony\Component\Security\Core\Security;
 use App\Services\EmailService;
 
@@ -47,50 +48,72 @@ class OrderService extends BaseService
         $ouser->setIdProfile(5);
         $ouser->setPhone($aruser["phone"]);
         $this->userRepository->save($ouser);
+        $this->logd($ouser,"ouser after saved");
         return $ouser;
     }
 
     private function _save_header($arorder,User $ouser):AppOrderHead
     {
         $oorderh = new AppOrderHead();
-        $oorderh->setAddress($ouser->getAddress());
-        $oorderh->setNotes($arorder["notes"]);
-        $oorderh->setStatus("pending");
-        $oorderh->setDatePurchase(Date("YmdHis"));
-        $this->orderheadRepository->save($oorderh);
+        if($ouser->getId()) {
+            $oorderh->setAddress($ouser->getAddress());
+            $oorderh->setIdUser($ouser->getId());
+            $oorderh->setNotes($arorder["notes"]);
+            $oorderh->setStatus("pending");
+            $oorderh->setDatePurchase(new \DateTime("NOW"));
+            $this->orderheadRepository->save($oorderh);
+        }
+        //$o = new \DateTime()
         return $oorderh;
     }
 
     private function _save_lines($arorder, AppOrderHead $oorderh): array
     {
-        $oorderl = null;
-        $products = $arorder["products"] ?? [];
+        $arlines = [];
+        if($oorderh->getId()) {
+            $products = $arorder["products"] ?? [];
 
-        $arproducts = [];
-        foreach ($products as $product){
-            //$oproduct = new AppProduct();
-            //$oproduct->setId($product["id"]);
-            $oproduct = $this->productRepository->findOneById($product["id"]);
-            $oorderl = new AppOrderLines();
-            $oorderl->setLinenum(1);
-            $oorderl->setIdOrderHead($oorderh->getId());
-            $oorderl->setIdProduct($product["id"]);
-            $oorderl->setPrice($oproduct->getPriceSale());
-            $oorderl->setPrice1($oproduct->getPriceSale1());
-            $oorderl->setPrice2($oproduct->getPriceSale2());
-            $oorderl->setDescription($oproduct->getDescription());
-            //$oorderl->setProduct();
+            foreach ($products as $k => $product) {
 
+                //$oproduct = new AppProduct();
+                //$oproduct->setId($product["id"]);
+                $oproduct = $this->productRepository->findOneById($product["id"]);
 
+                $oorderl = new AppOrderLines();
+                $oorderl->setLinenum(1);
+                $oorderl->setIdOrderHead($oorderh->getId());
+                $oorderl->setIdProduct($product["id"]);
+                $oorderl->setPrice($oproduct->getPriceSale());
+                $oorderl->setPrice1($oproduct->getPriceSale1());
+                $oorderl->setPrice2($oproduct->getPriceSale2());
+                $oorderl->setDescription($oproduct->getDescription());
+                $oorderl->setProduct($oproduct->getDescription());
+                $oorderl->setUnits((int)$product["units"]);
+                $oorderl->setTaxPercent($oproduct->getTaxPercent());
+                $oorderl->setTotal((int)$oproduct["units"] * $oproduct->getPriceSale());
+                $oorderl->setTotal1((int)$oproduct["units"] * $oproduct->getPriceSale1());
+                $oorderl->setTotal2((int)$oproduct["units"] * $oproduct->getPriceSale2());
+                $oorderl->setIdUser($oproduct->getIdUser());
+                # $this->orderlinesRepository->save($oorderl);
+
+                $arlines[] = $oorderl;
+            }
         }
-
-        return $oorderl;
+        return $arlines;
     }
 
     public function purchase($aruser, $aroder)
     {
-        //$ouser = $this->_save_user($aruser);
-        //$oheaderh = $this->_save_header($aroder,$ouser);
-        //$oheaderl = $this->_save_lines($aroder,$oheaderh);
+        try {
+            $ouser = $this->_save_user($aruser);
+            $oheaderh = $this->_save_header($aroder,$ouser);
+            //$oheaderl = $this->_save_lines($aroder,$oheaderh);
+        }
+        catch (Exception $e)
+        {
+            $this->logd($e->getMessage(),"ERROR on purchase");
+            $this->logd($aruser,"aruser");
+            $this->logd($aroder,"arorder");
+        }
     }
 }
