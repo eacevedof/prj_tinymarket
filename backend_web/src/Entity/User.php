@@ -469,13 +469,4 @@ class User extends BaseEntity implements UserInterface
         $this->isNotificable = $isNotificable;
         return $this;
     }
-
-    /**
-     * @return string|null
-     */
-    public function getCodeCache(): ?string
-    {
-        return $this->codeCache;
-    }
-
 }

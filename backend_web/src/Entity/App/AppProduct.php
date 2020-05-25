@@ -106,13 +106,6 @@ class AppProduct extends BaseEntity
     private $orderBy = 100;
 
     /**
-     * @var string|null
-     * @Groups({"all"})
-     * @ORM\Column(name="code_cache", type="string", length=50, nullable=true, options={"default"="NULL"})
-     */
-    private $codeCache = null;
-
-    /**
      * @var bool|null
      * @Groups({"all"})
      * @ORM\Column(name="display", type="boolean", nullable=true, options={"default"="NULL"})
@@ -296,22 +289,6 @@ class AppProduct extends BaseEntity
     public function setOrderBy(?int $orderBy): void
     {
         $this->orderBy = $orderBy;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getCodeCache(): ?string
-    {
-        return $this->codeCache;
-    }
-
-    /**
-     * @param string|null $codeCache
-     */
-    public function setCodeCache(?string $codeCache): void
-    {
-        $this->codeCache = $codeCache;
     }
 
     /**

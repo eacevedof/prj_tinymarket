@@ -2,6 +2,7 @@
 namespace App\Services\Restrict;
 
 use App\Entity\App\AppOrderHead;
+use App\Entity\App\AppOrderLines;
 use App\Entity\User;
 use App\Entity\AppProduct;
 use App\Repository\ProductRepository;
@@ -33,7 +34,7 @@ class OrderService extends BaseService
         $this->productRepository = $productRepository;
     }
 
-    private function save_user($aruser):User
+    private function _save_user($aruser):User
     {
         $email = $aruser["email"];
         $ouser = $this->userRepository->findOneByEmail($email);
@@ -49,7 +50,7 @@ class OrderService extends BaseService
         return $ouser;
     }
 
-    private function save_header($arorder,User $ouser):AppOrderHead
+    private function _save_header($arorder,User $ouser):AppOrderHead
     {
         $oorderh = new AppOrderHead();
         $oorderh->setAddress($ouser->getAddress());
@@ -60,16 +61,35 @@ class OrderService extends BaseService
         return $oorderh;
     }
 
-    private function save_lines($arorder, AppOrderHead $oorderh): array
+    private function _save_lines($arorder, AppOrderHead $oorderh): array
     {
-        $arorder = ["head"=>$oorderh,"lines"=>[]];
+        $oorderl = null;
+        $products = $arorder["products"] ?? [];
+
+        $arproducts = [];
+        foreach ($products as $product){
+            //$oproduct = new AppProduct();
+            //$oproduct->setId($product["id"]);
+            $oproduct = $this->productRepository->findOneById($product["id"]);
+            $oorderl = new AppOrderLines();
+            $oorderl->setLinenum(1);
+            $oorderl->setIdOrderHead($oorderh->getId());
+            $oorderl->setIdProduct($product["id"]);
+            $oorderl->setPrice($oproduct->getPriceSale());
+            $oorderl->setPrice1($oproduct->getPriceSale1());
+            $oorderl->setPrice2($oproduct->getPriceSale2());
+            $oorderl->setDescription($oproduct->getDescription());
 
 
-        return $arorder;
+        }
+
+        return $oorderl;
     }
 
-    public function purchase($aruser,$aroder)
+    public function purchase($aruser, $aroder)
     {
-
+        //$ouser = $this->_save_user($aruser);
+        //$oheaderh = $this->_save_header($aroder,$ouser);
+        //$oheaderl = $this->_save_lines($aroder,$oheaderh);
     }
 }
