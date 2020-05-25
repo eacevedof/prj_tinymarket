@@ -129,6 +129,9 @@ class AppOrderLines extends  BaseEntity
      */
     private $notesAdmin = null;
 
+    //no existe en bd, la rescribo para evitar error con los getters
+    protected $codeCache = null;
+
     /**
      * ==========================================================================================================
      * ==========================================================================================================

@@ -380,4 +380,3 @@ class AppProduct extends BaseEntity
     }
 
 }
-
