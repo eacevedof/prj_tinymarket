@@ -29,6 +29,7 @@ tinymarket
     - `php bin/console debug:autowiring |grep pagi` compruebo el servicio
 - Instalo para corregir acceso CORS:
     - `composer require nelmio/cors-bundle`
+- Instalo **composer require ramsey/uuid** para generar passw
 
 - **backup db desde docker yog**
     - `py.sh tinymarket index dump`

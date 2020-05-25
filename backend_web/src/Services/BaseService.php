@@ -2,12 +2,13 @@
 namespace App\Services;
 
 use App\Traits\Log;
+use App\Traits\Uid;
 use Symfony\Component\HttpFoundation\Request;
-use App\Repository\UserRepository;
 
 class BaseService
 {
     use Log;
+    use Uid;
 
     private $request;
 

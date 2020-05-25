@@ -13,6 +13,8 @@ use App\Repository\UserRepository;
 use mysql_xdevapi\Exception;
 use Symfony\Component\Security\Core\Security;
 use App\Services\EmailService;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Component\Word;
 
 class OrderService extends BaseService
 {
@@ -21,11 +23,14 @@ class OrderService extends BaseService
     private OrderlinesRepository $orderlinesRepository;
     private Security $security;
     private ProductRepository $productRepository;
+    private UserPasswordEncoderInterface $encoder;
+    private $password;
 
     public function __construct(OrderheadRepository $orderheadRepository,
                                 OrderlinesRepository $orderlinesRepository,
                                 UserRepository $userRepository,
                                 ProductRepository $productRepository,
+                                UserPasswordEncoderInterface $encoder,
                                 Security $security)
     {
         $this->orderheadRepository = $orderheadRepository;
@@ -33,6 +38,18 @@ class OrderService extends BaseService
         $this->userRepository = $userRepository;
         $this->security = $security;
         $this->productRepository = $productRepository;
+        $this->encoder = $encoder;
+    }
+
+    private function _get_password(User $ouser): array
+    {
+        $word = (new Word())->get_password();
+        $arpassword = [
+            "word"    =>$word,
+            "password"=>$this->encoder->encodePassword($ouser,$word)
+        ];
+        $this->logd($arpassword,"ar password");
+        return $arpassword;
     }
 
     private function _save_user($aruser): ?User
@@ -40,9 +57,12 @@ class OrderService extends BaseService
         $email = $aruser["email"];
         $ouser = $this->userRepository->findOneByEmail($email);
 
-        if(!$ouser) $ouser = new User();
-
-        $ouser->setInsertUser("self");
+        if(!$ouser) {
+            $ouser = new User();
+            $ouser->setInsertUser("self");
+            $this->password = $this->_get_password($ouser);
+            $ouser->setPassword($this->password["password"]);
+        }
         $ouser->setUpdateUser("self");
         $ouser->setUpdateDate(new \DateTime());
         $ouser->setAddress($aruser["address"]);
@@ -51,6 +71,7 @@ class OrderService extends BaseService
         $ouser->setFullname($aruser["fullname"]);
         $ouser->setIdProfile(5);
         $ouser->setPhone($aruser["phone"]);
+        $ouser->setCodeCache(self::getUuid());
         $this->userRepository->save($ouser);
         $this->logd($ouser,"ouser after saved");
         return $ouser;
@@ -68,10 +89,10 @@ class OrderService extends BaseService
             $oorderh->setIdUser($ouser->getId());
             $oorderh->setNotes($arorder["notes"]);
             $oorderh->setStatus("pending");
-            $oorderh->setDatePurchase(new \DateTime("NOW"));
+            $oorderh->setDatePurchase(new \DateTime());
+            $oorderh->setCodeCache(self::getUuid());
             $this->orderheadRepository->save($oorderh);
         }
-        //$o = new \DateTime()
         return $oorderh;
     }
 
