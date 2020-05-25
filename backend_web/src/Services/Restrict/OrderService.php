@@ -90,11 +90,11 @@ class OrderService extends BaseService
                 $oorderl->setProduct($oproduct->getDescription());
                 $oorderl->setUnits((int)$product["units"]);
                 $oorderl->setTaxPercent($oproduct->getTaxPercent());
-                $oorderl->setTotal((int)$oproduct["units"] * $oproduct->getPriceSale());
-                $oorderl->setTotal1((int)$oproduct["units"] * $oproduct->getPriceSale1());
-                $oorderl->setTotal2((int)$oproduct["units"] * $oproduct->getPriceSale2());
+                $oorderl->setTotal((int)$product["units"] * $oproduct->getPriceSale());
+                $oorderl->setTotal1((int)$product["units"] * $oproduct->getPriceSale1());
+                $oorderl->setTotal2((int)$product["units"] * $oproduct->getPriceSale2());
                 $oorderl->setIdUser($oproduct->getIdUser());
-                # $this->orderlinesRepository->save($oorderl);
+                $this->orderlinesRepository->save($oorderl);
 
                 $arlines[] = $oorderl;
             }
@@ -102,18 +102,20 @@ class OrderService extends BaseService
         return $arlines;
     }
 
-    public function purchase($aruser, $aroder)
+    public function purchase($aruser, $aroder) : ?AppOrderHead
     {
         try {
             $ouser = $this->_save_user($aruser);
             $oheaderh = $this->_save_header($aroder,$ouser);
-            //$oheaderl = $this->_save_lines($aroder,$oheaderh);
+            $oheaderl = $this->_save_lines($aroder,$oheaderh);
+            return $oheaderh;
         }
         catch (Exception $e)
         {
             $this->logd($e->getMessage(),"ERROR on purchase");
             $this->logd($aruser,"aruser");
             $this->logd($aroder,"arorder");
+            return new AppOrderHead();
         }
     }
 }
