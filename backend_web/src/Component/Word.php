@@ -10,7 +10,26 @@ class Word
     private const NUMBERS = [0,1,2,3,4,5,6,7,8,9];
     private const XCHARS = ["$","@","#","&","%","?",";",".","+","-"];
 
-    public function get_password($iLen=6):string
+    public function get_password($iLen=4):string
+    {
+        $word = [];
+        foreach(range(0,$iLen) as $i){
+            if($i % 2 === 0){
+                $c = $this->_get_random_constant();
+                $c = $this->_get_random_upper($c);
+            }
+            else{
+                $c = $this->_get_random_vowel();
+                $c = $this->_get_random_upper($c);
+            }
+            $word[] = $c;
+        }
+        $word[] = $this->_get_random_xchar();
+        $word[] = $this->_get_random_number(3);
+        return implode("",$word);
+    }
+
+    public function get_password_hard($iLen=6):string
     {
         $word = [];
         foreach(range(0,$iLen) as $i){
@@ -68,7 +87,7 @@ class Word
     private function _get_random_xchar($iLen=1)
     {
         $chars = [];
-        foreach(range(0,$iLen) as $i){
+        foreach(range(0,$iLen-1) as $i){
             $irange = rand(0,9);
             $chars[] = self::XCHARS[$irange];
         }
