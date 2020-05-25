@@ -19,7 +19,7 @@ class OrderPurchase extends BaseController
 
     public function __invoke(Request $request)
     {
-        $this->logpost();
+        //$this->logpost();
         if(!($request->get("user") && $request->get("user"))){
             $response = [
                 "result" => null,
