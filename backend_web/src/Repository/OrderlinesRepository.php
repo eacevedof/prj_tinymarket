@@ -35,6 +35,16 @@ class OrderlinesRepository extends BaseRepository
         return $this->objectRepository->findAll();
     }
 
+    public function getMaxNumline(AppOrderLines $orderLine)
+    {
+        $idorderh = $orderLine->getIdOrderHead();
+        $sql = "SELECT MAX(COALESCE(linenum,0)) maxline FROM app_order_lines WHERE id_order_head=:id_order_head";
+        $result = $this->executeFetchQuery($sql,["id_order_head"=>$idorderh]);
+        $result = $result[0]["maxline"] ?? 0;
+        $this->logd($result,"maxline for {$idorderh} and {$orderLine->getIdProduct()}");
+        return $result;
+    }
+
     public function findAllByPage($currentPage=1, $perpage=50, $criteria=[])
     {
         $qb = $this->getOrmQueryBuilder();

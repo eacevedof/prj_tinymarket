@@ -57,6 +57,9 @@ class OrderService extends BaseService
         $oorderh = new AppOrderHead();
         if($ouser->getId()) {
             $oorderh->setAddress($ouser->getAddress());
+            $oorderh->setInsertUser($ouser->getId());
+            $oorderh->setUpdateUser($ouser->getId());
+            $oorderh->setUpdateDate(new \DateTime());
             $oorderh->setIdUser($ouser->getId());
             $oorderh->setNotes($arorder["notes"]);
             $oorderh->setStatus("pending");
@@ -80,9 +83,12 @@ class OrderService extends BaseService
                 $oproduct = $this->productRepository->findOneById($product["id"]);
 
                 $oorderl = new AppOrderLines();
-                $oorderl->setLinenum(1);
                 $oorderl->setIdOrderHead($oorderh->getId());
                 $oorderl->setIdProduct($product["id"]);
+
+                $imaxline = $this->orderlinesRepository->getMaxNumline($oorderl);
+                $oorderl->setLinenum($imaxline+10);
+
                 $oorderl->setPrice($oproduct->getPriceSale());
                 $oorderl->setPrice1($oproduct->getPriceSale1());
                 $oorderl->setPrice2($oproduct->getPriceSale2());

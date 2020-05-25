@@ -32,10 +32,16 @@ class OrderPurchase extends BaseController
                 $request->get("order")
             );
 
-            $response = [
-                "result" => $order,
-                "error" => ""
-            ];
+            if($order->getId())
+                $response = [
+                    "result" => $order,
+                    "error" => ""
+                ];
+            else
+                $response = [
+                    "result" => null,
+                    "error" => "Sorry some error occurred. We could not process your order. Try later please"
+                ];
         }
 
 
