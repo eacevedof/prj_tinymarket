@@ -35,15 +35,19 @@ class OrderService extends BaseService
         $this->productRepository = $productRepository;
     }
 
-    private function _save_user($aruser):User
+    private function _save_user($aruser): ?User
     {
         $email = $aruser["email"];
         $ouser = $this->userRepository->findOneByEmail($email);
 
         if(!$ouser) $ouser = new User();
 
+        $ouser->setInsertUser("self");
+        $ouser->setUpdateUser("self");
+        $ouser->setUpdateDate(new \DateTime());
         $ouser->setAddress($aruser["address"]);
         $ouser->setEmail($aruser["email"]);
+        $ouser->setPhone($aruser["phone"]);
         $ouser->setFullname($aruser["fullname"]);
         $ouser->setIdProfile(5);
         $ouser->setPhone($aruser["phone"]);
@@ -56,10 +60,11 @@ class OrderService extends BaseService
     {
         $oorderh = new AppOrderHead();
         if($ouser->getId()) {
-            $oorderh->setAddress($ouser->getAddress());
             $oorderh->setInsertUser($ouser->getId());
             $oorderh->setUpdateUser($ouser->getId());
             $oorderh->setUpdateDate(new \DateTime());
+
+            $oorderh->setAddress($ouser->getAddress());
             $oorderh->setIdUser($ouser->getId());
             $oorderh->setNotes($arorder["notes"]);
             $oorderh->setStatus("pending");
@@ -83,16 +88,24 @@ class OrderService extends BaseService
                 $oproduct = $this->productRepository->findOneById($product["id"]);
 
                 $oorderl = new AppOrderLines();
+                //claves
                 $oorderl->setIdOrderHead($oorderh->getId());
                 $oorderl->setIdProduct($product["id"]);
 
                 $imaxline = $this->orderlinesRepository->getMaxNumline($oorderl);
                 $oorderl->setLinenum($imaxline+10);
 
+                //sistema
+                $oorderl->setInsertUser($oorderh->getIdUser());
+                $oorderl->setUpdateUser($oorderh->getIdUser());
+                $oorderl->setUpdateDate(new \DateTime());
+
                 $oorderl->setPrice($oproduct->getPriceSale());
                 $oorderl->setPrice1($oproduct->getPriceSale1());
                 $oorderl->setPrice2($oproduct->getPriceSale2());
-                $oorderl->setDescription($oproduct->getDescription());
+                $description = "%s-%s-%s %s";
+                $description = sprintf($description,$oorderh->getId(),$imaxline,$oproduct->getId(), $oproduct->getDescription());
+                $oorderl->setDescription($description);
                 $oorderl->setProduct($oproduct->getDescription());
                 $oorderl->setUnits((int)$product["units"]);
                 $oorderl->setTaxPercent($oproduct->getTaxPercent());
@@ -103,8 +116,8 @@ class OrderService extends BaseService
                 $this->orderlinesRepository->save($oorderl);
 
                 $arlines[] = $oorderl;
-            }
-        }
+            }//foreach
+        }// if(orderh)
         return $arlines;
     }
 

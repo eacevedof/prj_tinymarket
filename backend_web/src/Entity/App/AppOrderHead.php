@@ -3,6 +3,9 @@
 namespace App\Entity\App;
 
 use App\Entity\BaseEntity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -92,6 +95,12 @@ class AppOrderHead extends BaseEntity
      * @ORM\Column(name="status", type="string", length=25, nullable=true, options={"default"="NULL"})
      */
     private $status = null;
+
+    /**
+     * @var Collection|AppOrderLines[]
+     * @Groups({"all"})
+     */
+    protected ?Collection $orderLines = null;
 
 /**
  * ==========================================================================================================
@@ -297,4 +306,22 @@ class AppOrderHead extends BaseEntity
         return $this;
     }
 
+    /**
+     * @return Collection|AppOrderLines[]
+     */
+    public function getOrderLines(): ?Collection
+    {
+        return $this->orderLines;
+    }
+
+
+    /**
+     * @param Collection|AppOrderLines[] $orderLines
+     * @return AppOrderHead
+     */
+    public function setOrderLines(array  $orderLines): AppOrderHead
+    {
+        $this->orderLines = $orderLines;
+        return $this;
+    }
 }
