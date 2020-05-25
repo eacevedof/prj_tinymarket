@@ -24,7 +24,7 @@ class OrderService extends BaseService
     private Security $security;
     private ProductRepository $productRepository;
     private UserPasswordEncoderInterface $encoder;
-    private $password;
+    private array $password;
 
     public function __construct(OrderheadRepository $orderheadRepository,
                                 OrderlinesRepository $orderlinesRepository,
@@ -39,6 +39,7 @@ class OrderService extends BaseService
         $this->security = $security;
         $this->productRepository = $productRepository;
         $this->encoder = $encoder;
+        $this->password = [];
     }
 
     private function _get_password(User $ouser): array
@@ -48,7 +49,7 @@ class OrderService extends BaseService
             "word"    =>$word,
             "password"=>$this->encoder->encodePassword($ouser,$word)
         ];
-        $this->logd($arpassword,"ar password");
+        $this->logd($arpassword,"password");
         return $arpassword;
     }
 
@@ -62,6 +63,8 @@ class OrderService extends BaseService
             $ouser->setInsertUser("self");
             $this->password = $this->_get_password($ouser);
             $ouser->setPassword($this->password["password"]);
+            $this->logd(self::getUuid(),"uuid");
+            $ouser->setCodeCache(self::getUuid());
         }
         $ouser->setUpdateUser("self");
         $ouser->setUpdateDate(new \DateTime());
@@ -71,9 +74,8 @@ class OrderService extends BaseService
         $ouser->setFullname($aruser["fullname"]);
         $ouser->setIdProfile(5);
         $ouser->setPhone($aruser["phone"]);
-        $ouser->setCodeCache(self::getUuid());
         $this->userRepository->save($ouser);
-        $this->logd($ouser,"ouser after saved");
+        //$this->logd($ouser,"ouser after saved");
         return $ouser;
     }
 

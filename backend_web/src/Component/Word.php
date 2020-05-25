@@ -13,7 +13,7 @@ class Word
     public function get_password($iLen=4):string
     {
         $word = [];
-        foreach(range(0,$iLen) as $i){
+        foreach(range(0,$iLen-1) as $i){
             if($i % 2 === 0){
                 $c = $this->_get_random_constant();
                 $c = $this->_get_random_upper($c);
@@ -32,7 +32,7 @@ class Word
     public function get_password_hard($iLen=6):string
     {
         $word = [];
-        foreach(range(0,$iLen) as $i){
+        foreach(range(0,$iLen-1) as $i){
             if($i == $iLen-1)
             {
                 $nlen = rand(2,4);
@@ -77,7 +77,7 @@ class Word
     private function _get_random_number($iLen=1)
     {
         $number = [];
-        foreach(range(0,$iLen) as $i){
+        foreach(range(0,$iLen-1) as $i){
             $irange = rand(0,9);
             $number[] = self::NUMBERS[$irange];
         }
