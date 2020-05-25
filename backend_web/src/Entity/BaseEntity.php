@@ -120,12 +120,7 @@ class BaseEntity
      */
     protected $description = null;
 
-    /**
-     * @var string|null
-     * @Groups({all})
-     * @ORM\Column(name="code_cache", type="string", length=50, nullable=true, options={"default"="NULL"})
-     */
-    protected $codeCache = null;
+
 /**
  * ==========================================================================================================
  * ==========================================================================================================
