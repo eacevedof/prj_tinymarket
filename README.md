@@ -34,6 +34,9 @@ tinymarket
 - **backup db desde docker yog**
     - `py.sh tinymarket index dump`
 
+### Deploy
+- `py.sh tinymarket index deploy`
+
 ### Errores
 ```
 Google Maps JavaScript API error: ApiNotActivatedMapError

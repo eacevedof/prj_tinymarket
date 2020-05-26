@@ -41,7 +41,21 @@ class OrderlinesRepository extends BaseRepository
         $sql = "SELECT MAX(COALESCE(linenum,0)) maxline FROM app_order_lines WHERE id_order_head=:id_order_head";
         $result = $this->executeFetchQuery($sql,["id_order_head"=>$idorderh]);
         $result = $result[0]["maxline"] ?? 0;
-        $this->logd($result,"maxline for {$idorderh} and {$orderLine->getIdProduct()}");
+        //$this->logd($result,"maxline for {$idorderh} and {$orderLine->getIdProduct()}");
+        return $result;
+    }
+
+    public function getSumTotals(int $idorderhead)
+    {
+        $sql = "
+        SELECT SUM(COALESCE(total,0)) total, SUM(COALESCE(total1,0)) total1, SUM(COALESCE(total2,0)) total2 
+        FROM app_order_lines 
+        WHERE id_order_head=:id_order_head
+        ";
+        $result = $this->executeFetchQuery($sql,["id_order_head"=>$idorderhead]);
+        $result = $result[0] ?? [
+            "total"=>0,"total1"=>0,"total2"=>0
+            ];
         return $result;
     }
 

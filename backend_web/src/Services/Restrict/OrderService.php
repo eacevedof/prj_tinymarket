@@ -149,7 +149,12 @@ class OrderService extends BaseService
         try {
             $ouser = $this->_save_user($aruser);
             $oheaderh = $this->_save_header($aroder,$ouser);
-            $oheaderl = $this->_save_lines($aroder,$oheaderh);
+            $arlines = $this->_save_lines($aroder,$oheaderh);
+            $totals = $this->orderlinesRepository->getSumTotals($oheaderh->getId());
+            $oheaderh->setTotal($totals["total"]);
+            $oheaderh->setTotal1($totals["total1"]);
+            $oheaderh->setTotal2($totals["total2"]);
+            $this->orderheadRepository->save($oheaderh);
             return $oheaderh;
         }
         catch (Exception $e)
