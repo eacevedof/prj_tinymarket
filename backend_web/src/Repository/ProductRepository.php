@@ -62,7 +62,7 @@ class ProductRepository extends BaseRepository
             $qb->andWhere(implode(" OR ",$aror));
         }
         $query = $qb->getQuery();
-        $this->logd($query->getDQL(),"prodrepo.findallbypage.query.dql");
+        $this->log($query->getDQL(),"prodrepo.findallbypage.query.dql");
         $paginator = $this->paginate($query, $currentPage, $perpage);
 
         return [
