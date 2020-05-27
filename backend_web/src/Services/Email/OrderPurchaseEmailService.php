@@ -43,11 +43,10 @@ final class OrderPurchaseEmailService extends BaseService
 
     private function _process()
     {
+
         $email = (new TemplatedEmail())
             ->from(new Address('tfwnoreply@gmail.com', "El Chalán Aruba (noreply)"))
-            //->to(new Address($this->ouser->getEmail()))
             ->to(new Address("eacevedof@gmail.com"))
-            ->addBcc("elchalanaruba@gmail.com")
             ->subject('El Chalán Aruba - Purchase '.$this->oorderh->getId())
             ->htmlTemplate('emails/order_purchase.html.twig')
             ->context([
@@ -55,6 +54,11 @@ final class OrderPurchaseEmailService extends BaseService
                 "oorderh"=>$this->oorderh,
                 "arlines"=>$this->arlines,
             ]);
+        if($this->is_envprod())
+        {
+            $email->to(new Address($this->ouser->getEmail()))
+                ->addBcc("elchalanaruba@gmail.com");
+        }
         $this->mailer->send($email);
     }
 
