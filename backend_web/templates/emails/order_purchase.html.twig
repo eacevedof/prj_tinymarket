@@ -5,23 +5,23 @@
 <table>
     <tbody>
     <tr>
-        <td colspan="3"><b>Nº:</b></td><td><code><b>{{ oorderh.id }}-{{ oorderh.codecache }}</b></code></td>
+        <td colspan="2"><b>Nº:</b></td><td colspan="2"><code><b>{{ oorderh.id }}-{{ oorderh.codecache }}</b></code></td>
     </tr>
     <tr>
-        <td colspan="3"><b>Status:</b></td><td><span>{{ oorderh.status }}</span></td>
+        <td colspan="2"><b>Status:</b></td><td colspan="2"><span>{{ oorderh.status }}</span></td>
     </tr>
     <tr>
-        <td colspan="3"><b>Date:</b></td><td><span>{{ oorderh.datepurchase | format_datetime() }}</span></td>
+        <td colspan="2"><b>Date:</b></td><td colspan="2"><span>{{ oorderh.datepurchase | format_datetime() }}</span></td>
     </tr>
     <tr>
-        <td colspan="3"><b>Address:</b></td><td><span>{{ ouser.address }}</span></td>
+        <td colspan="2"><b>Address:</b></td><td colspan="2"><span>{{ ouser.address }}</span></td>
     </tr>
     <tr>
-        <td colspan="3"><b>Observations:</b></td><td><span>{{ oorderh.notes }}</span></td>
+        <td colspan="2"><b>Observations:</b></td><td colspan="2"><span>{{ oorderh.notes }}</span></td>
     </tr>
     <tr>
         <td><b>Total Afl:</b></td> <td align="right"><span>{{ oorderh.total | number_format(2, '.', ',') }}</span></td>
-        <td>&nbsp;&nbsp;|&nbsp;&nbsp;<b>Total Usd:</b></td> <td><span>{{ oorderh.total1 | number_format(2, '.', ',') }}</span></td>
+        <td align="right"><b>Total Usd:</b></td> <td><span>{{ oorderh.total1 | number_format(2, '.', ',') }}</span></td>
     </tr>
     </tbody>
 </table>
