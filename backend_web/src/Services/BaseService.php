@@ -46,14 +46,16 @@ class BaseService
 
     protected function get_platform()
     {
+        //$this->logd($_SERVER['HTTP_USER_AGENT'],"agente ios");
         //Detect special conditions devices
         $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
         $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
         $iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
         $Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
         $webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
+        $macos = stripos($_SERVER['HTTP_USER_AGENT'],"Macintosh");
 
-        //0: etl, 1: unknownk, 2: desktop, 3:android, 4:iphone, 5:ipad
+        //0: etl, 1: unknownk, 2: desktop, 3:android, 4:iphone, 5:ipad, 6:macos
 
         //do something with this information
         if( $iPod || $iPhone ){
@@ -62,7 +64,10 @@ class BaseService
             return 5;
         }else if($Android){
             return 3;
-        }else if($webOS){
+        }else if($macos){
+            return 6;
+        }else if($webOS)
+        {
             return 2;
         }
         return 1;

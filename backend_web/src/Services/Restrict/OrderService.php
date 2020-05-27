@@ -57,7 +57,10 @@ class OrderService extends BaseService
 
     private function _save_user($aruser): ?User
     {
-        $email = $aruser["email"];
+        $email = strtolower($aruser["email"]);
+        $email = trim($email);
+        $aruser["email"] = $email;
+
         $ouser = $this->userRepository->findOneByEmail($email);
 
         if(!$ouser) {
