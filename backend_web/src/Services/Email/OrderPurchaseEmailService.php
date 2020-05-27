@@ -46,11 +46,12 @@ final class OrderPurchaseEmailService extends BaseService
         $email = (new TemplatedEmail())
             ->from('no-reply@gmail.com')
             ->to(new Address('eacevedof@gmail.com'))
-            ->subject('Envio prueba')
+            ->subject('El Chalán Aruba - Purchase')
             ->htmlTemplate('emails/order_purchase.html.twig')
             ->context([
-                'expiration_date' => new \DateTime('+7 days'),
-                'username' => 'foo',
+                "ouser"=>$this->ouser,
+                "oorderh"=>$this->oorderh,
+                "arlines"=>$this->arlines,
             ]);
         $this->mailer->send($email);
     }

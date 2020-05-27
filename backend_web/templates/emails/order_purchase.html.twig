@@ -1,12 +1,17 @@
 {# templates/emails/signup.html.twig #}
-<h1>Welcome {{ email.toName }}!</h1>
-
+<h1>El Chalán Aruba</h1>
+<h3>Thank you for your purchase  {{ ouser.fullname | split(" ")[0] }}!</h3>
+<h4>Order:</h4>
 <p>
-    You signed up as algo the following email:
+    <span>Nº:</span> <code>{{ oorderh.id }}-{{ oorderh.codecache }}</code><br/>
+    <span>Status:</span> <span>{{ oorderh.status }}</span><br/>
+    <span>Date:</span> <span>{{ oorderh.datepurchase | format_datetime() }}</span><br/>
+    <span>Address:</span> <span>{{ ouser.address }}</span><br/>
+    <span>Observations:</span> <span>{{ oorderh.notes }}</span><br/>
+    <span>Total Afl:</span> <span>{{ oorderh.total }}</span><br/>
+    <span>Total $:</span> <span>{{ oorderh.total1 }}</span><br/>
 </p>
-<p><code>algo</code></p>
-
 <p>
-    <a href="#">Click here to activate your account</a>
-    (this link is valid until {{ expiration_date|date('F jS') }})
+   <a href="#">Click here to activate your account</a>
 </p>
+

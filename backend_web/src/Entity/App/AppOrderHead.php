@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class AppOrderHead extends BaseEntity
 {
     /**
-     * @var int
+     * @var int|null
      * @Groups({"all"})
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
@@ -110,7 +110,7 @@ class AppOrderHead extends BaseEntity
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

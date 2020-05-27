@@ -170,7 +170,7 @@ class OrderService extends BaseService
             $this->_send_email($ouser,$oheaderh,$arlines);
             return $oheaderh;
         }
-        catch (Exception $e)
+        catch (\Exception $e)
         {
             $this->logd($e->getMessage(),"ERROR on purchase");
             $this->logd($aruser,"aruser");
