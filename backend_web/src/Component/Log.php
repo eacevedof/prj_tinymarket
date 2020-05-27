@@ -20,6 +20,12 @@ class Log
         $this->fix_folder();
     }
 
+    private function get_ip()
+    {
+        $ip = $_SERVER["REMOTE_ADDR"];
+        return $ip;
+    }
+
     private function fix_folder()
     {
         $sLogFolder = $this->sPathFolder.self::DS
@@ -29,7 +35,7 @@ class Log
 
     private function merge($sContent,$sTitle)
     {
-        $sReturn = "-- [".date("Ymd-His")."]\n";
+        $sReturn = "-- [".date("Ymd-His")." - {$this->get_ip()}]\n";
         if($sTitle) $sReturn .= $sTitle.":\n";
         if($sContent) $sReturn .= $sContent."\n\n";
         return $sReturn;
