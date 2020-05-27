@@ -27,5 +27,6 @@ bin/.phpunit
 ###> custom ###
 composer.phar
 /public/react/*
+vendor.zip
 ###< custom ###
 
