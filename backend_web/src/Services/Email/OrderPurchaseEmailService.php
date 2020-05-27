@@ -2,8 +2,6 @@
 namespace App\Services\Email;
 
 use App\Services\BaseService;
-use App\Component\Mail;
-use App\Entity\App\AppOrderLines;
 use App\Entity\App\AppOrderHead;
 use App\Entity\User;
 use Symfony\Component\Mailer\MailerInterface;
@@ -41,7 +39,7 @@ final class OrderPurchaseEmailService extends BaseService
         return $this;
     }
 
-    private function _process()
+    private function _get_objemail()
     {
         //por defecto lo tomo como prueba
         $email = (new TemplatedEmail())
@@ -60,11 +58,12 @@ final class OrderPurchaseEmailService extends BaseService
                 ->subject('El Chalán Aruba - Purchase '.$this->oorderh->getId())
                 ->addBcc("elchalanaruba@gmail.com");
         }
-        $this->mailer->send($email);
+        return $email;
     }
 
     public function send()
     {
-        $this->_process();
+        $email = $this->_get_objemail();
+        $this->mailer->send($email);
     }
 }
