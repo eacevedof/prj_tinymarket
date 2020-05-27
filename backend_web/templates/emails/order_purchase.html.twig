@@ -1,18 +1,31 @@
 {# templates/emails/signup.html.twig #}
-<h1>El Chalán Aruba</h1>
 <h2>shop.elchalanaruba.com</h2>
 <h3>Thank you for your purchase  {{ ouser.fullname | split(" ")[0] }}!</h3>
 <h4>Order:</h4>
-<p>
-    <span>Nº:</span> <code>{{ oorderh.id }}-{{ oorderh.codecache }}</code><br/>
-    <span>Status:</span> <span>{{ oorderh.status }}</span><br/>
-    <span>Date:</span> <span>{{ oorderh.datepurchase | format_datetime() }}</span><br/>
-    <span>Address:</span> <span>{{ ouser.address }}</span><br/>
-    <span>Observations:</span> <span>{{ oorderh.notes }}</span><br/>
-    <span>Total Afl:</span> <span>{{ oorderh.total | number_format(2, '.', ',') }}</span><br/>
-    <span>Total Usd:</span> <span>{{ oorderh.total1 | number_format(2, '.', ',') }}</span><br/>
-</p>
-
+<table>
+    <tbody>
+    <tr>
+        <td colspan="3"><b>Nº:</b></td><td><code><b>{{ oorderh.id }}-{{ oorderh.codecache }}</b></code></td>
+    </tr>
+    <tr>
+        <td colspan="3"><b>Status:</b></td><td><span>{{ oorderh.status }}</span></td>
+    </tr>
+    <tr>
+        <td colspan="3"><b>Date:</b></td><td><span>{{ oorderh.datepurchase | format_datetime() }}</span></td>
+    </tr>
+    <tr>
+        <td colspan="3"><b>Address:</b></td><td><span>{{ ouser.address }}</span></td>
+    </tr>
+    <tr>
+        <td colspan="3"><b>Observations:</b></td><td><span>{{ oorderh.notes }}</span></td>
+    </tr>
+    <tr>
+        <td><b>Total Afl:</b></td> <td align="right"><span>{{ oorderh.total | number_format(2, '.', ',') }}</span></td>
+        <td>&nbsp;&nbsp;|&nbsp;&nbsp;<b>Total Usd:</b></td> <td><span>{{ oorderh.total1 | number_format(2, '.', ',') }}</span></td>
+    </tr>
+    </tbody>
+</table>
+<hr/>
 <table>
     <thead>
         <tr>
@@ -29,10 +42,10 @@
         <tr>
             <td>{{ loop.index }}</td>
             <td>{{ oorderl.product }}</td>
-            <td>{{ oorderl.price | number_format(2, '.', ',') }}</td>
-            <td>{{ oorderl.units | number_format(2, '.', ',') }}</td>
-            <td>{{ oorderl.total | number_format(2, '.', ',') }}</td>
-            <td>{{ oorderl.total1 | number_format(2, '.', ',') }}</td>
+            <td align="right">{{ oorderl.price | number_format(2, '.', ',') }}</td>
+            <td align="right">{{ oorderl.units }}</td>
+            <td align="right">{{ oorderl.total | number_format(2, '.', ',') }}</td>
+            <td align="right">{{ oorderl.total1 | number_format(2, '.', ',') }}</td>
         </tr>
     {% endfor %}
     </tbody>
