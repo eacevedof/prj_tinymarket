@@ -10,7 +10,7 @@ use App\Services\BaseService;
 use App\Repository\OrderheadRepository;
 use App\Repository\OrderlinesRepository;
 use App\Repository\UserRepository;
-//use App\Services\Email\XaService;
+use App\Services\Email\OrderPurchaseEmailService;
 use mysql_xdevapi\Exception;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -24,7 +24,7 @@ class OrderService extends BaseService
     private Security $security;
     private ProductRepository $productRepository;
     private UserPasswordEncoderInterface $encoder;
-    //private XaService $emailService;
+    private OrderPurchaseEmailService $emailService;
     private array $password;
 
     public function __construct(OrderheadRepository $orderheadRepository,
@@ -32,7 +32,7 @@ class OrderService extends BaseService
                                 UserRepository $userRepository,
                                 ProductRepository $productRepository,
                                 UserPasswordEncoderInterface $encoder,
-                                //XaService $emailService,
+                                OrderPurchaseEmailService $emailService,
                                 Security $security)
     {
         $this->orderheadRepository = $orderheadRepository;
@@ -41,7 +41,7 @@ class OrderService extends BaseService
         $this->security = $security;
         $this->productRepository = $productRepository;
         $this->encoder = $encoder;
-        //$this->emailService = $emailService;
+        $this->emailService = $emailService;
         $this->password = [];
     }
 
