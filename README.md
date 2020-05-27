@@ -31,6 +31,8 @@ tinymarket
     - `composer require nelmio/cors-bundle`
 - Instalo **composer require ramsey/uuid** para generar passw
 
+- Instalo **composer require twig/intl-extra**
+
 - **backup db desde docker yog**
     - `py.sh tinymarket index dump`
 
