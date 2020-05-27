@@ -1,5 +1,6 @@
 {# templates/emails/signup.html.twig #}
 <h1>El Chalán Aruba</h1>
+<h2>shop.elchalanaruba.com</h2>
 <h3>Thank you for your purchase  {{ ouser.fullname | split(" ")[0] }}!</h3>
 <h4>Order:</h4>
 <p>
@@ -8,10 +9,31 @@
     <span>Date:</span> <span>{{ oorderh.datepurchase | format_datetime() }}</span><br/>
     <span>Address:</span> <span>{{ ouser.address }}</span><br/>
     <span>Observations:</span> <span>{{ oorderh.notes }}</span><br/>
-    <span>Total Afl:</span> <span>{{ oorderh.total }}</span><br/>
-    <span>Total $:</span> <span>{{ oorderh.total1 }}</span><br/>
-</p>
-<p>
-   <a href="#">Click here to activate your account</a>
+    <span>Total Afl:</span> <span>{{ oorderh.total | round(2, 'ceil')}}</span><br/>
+    <span>Total Usd:</span> <span>{{ oorderh.total1 | round(2, 'ceil')}}</span><br/>
 </p>
 
+<table>
+    <thead>
+        <tr>
+            <th>Nº</th>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Units</th>
+            <th>Total Afl</th>
+            <th>Total Usd</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for oorderl in arlines %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ oorderl.product }}</td>
+            <td>{{ oorderl.price | round(2, 'ceil')}}</td>
+            <td>{{ oorderl.units | round(2, 'ceil')}}</td>
+            <td>{{ oorderl.total | round(2, 'ceil')}}</td>
+            <td>{{ oorderl.total1 | round(2, 'ceil')}}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
