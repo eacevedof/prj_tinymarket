@@ -11,7 +11,6 @@ use App\Repository\OrderheadRepository;
 use App\Repository\OrderlinesRepository;
 use App\Repository\UserRepository;
 use App\Services\Email\OrderPurchaseEmailService;
-use mysql_xdevapi\Exception;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Component\Word;
@@ -64,12 +63,14 @@ class OrderService extends BaseService
         if(!$ouser) {
             $ouser = new User();
             $ouser->setInsertUser("self");
+            $ouser->setInsertPlatform($this->get_platform());
             $this->password = $this->_get_password($ouser);
             $ouser->setPassword($this->password["password"]);
             $this->logd(self::getUuid(),"uuid");
             $ouser->setCodeCache(self::getUuid());
         }
         $ouser->setUpdateUser("self");
+        $ouser->setUpdatePlatform($this->get_platform());
         $ouser->setUpdateDate(new \DateTime());
         $ouser->setAddress($aruser["address"]);
         $ouser->setEmail($aruser["email"]);
@@ -87,7 +88,9 @@ class OrderService extends BaseService
         $oorderh = new AppOrderHead();
         if($ouser->getId()) {
             $oorderh->setInsertUser($ouser->getId());
+            $oorderh->setInsertPlatform($this->get_platform());
             $oorderh->setUpdateUser($ouser->getId());
+            $oorderh->setUpdatePlatform($this->get_platform());
             $oorderh->setUpdateDate(new \DateTime());
 
             $oorderh->setAddress($ouser->getAddress());
@@ -123,7 +126,9 @@ class OrderService extends BaseService
 
                 //sistema
                 $oorderl->setInsertUser($oorderh->getIdUser());
+                $oorderl->setInsertPlatform($this->get_platform());
                 $oorderl->setUpdateUser($oorderh->getIdUser());
+                $oorderl->setUpdatePlatform($this->get_platform());
                 $oorderl->setUpdateDate(new \DateTime());
 
                 $oorderl->setPrice($oproduct->getPriceSale());
@@ -154,8 +159,6 @@ class OrderService extends BaseService
         $this->emailService->send();
     }
 
-
-
     public function purchase($aruser, $aroder) : ?AppOrderHead
     {
         try {
@@ -168,6 +171,7 @@ class OrderService extends BaseService
             $oheaderh->setTotal2($totals["total2"]);
             $this->orderheadRepository->save($oheaderh);
             $this->_send_email($ouser,$oheaderh,$arlines);
+            //return new AppOrderHead(); //prueba de error
             return $oheaderh;
         }
         catch (\Exception $e)
