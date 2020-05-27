@@ -73,6 +73,13 @@ class AppProduct extends BaseEntity
     /**
      * @var string
      * @Groups({"all"})
+     * @ORM\Column(name="price_prev", type="decimal", precision=10, scale=3, nullable=false, options={"default"="0"})
+     */
+    private $pricePrev = 0;
+
+    /**
+     * @var string
+     * @Groups({"all"})
      * @ORM\Column(name="price_sale", type="decimal", precision=10, scale=3, nullable=false, options={"default"="0"})
      */
     private $priceSale = 0;
@@ -241,6 +248,22 @@ class AppProduct extends BaseEntity
     public function setPriceTaxed(?string $priceTaxed): void
     {
         $this->priceTaxed = $priceTaxed;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPricePrev(): string
+    {
+        return $this->pricePrev;
+    }
+
+    /**
+     * @param string $pricePrev
+     */
+    public function setPricePrev(string $pricePrev): void
+    {
+        $this->pricePrev = $pricePrev;
     }
 
     /**

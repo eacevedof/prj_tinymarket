@@ -1,5 +1,7 @@
 <?php
 namespace App\Services\Email;
+
+use App\Services\BaseService;
 use App\Component\Mail;
 use App\Entity\App\AppOrderLines;
 use App\Entity\App\AppOrderHead;
@@ -44,11 +46,7 @@ final class OrderPurchaseEmailService extends BaseService
             ->from('no-reply@gmail.com')
             ->to(new Address('eacevedof@gmail.com'))
             ->subject('Envio prueba')
-
-            // path of the Twig template to render
             ->htmlTemplate('emails/order_purchase.html.twig')
-
-            // pass variables (name => value) to the template
             ->context([
                 'expiration_date' => new \DateTime('+7 days'),
                 'username' => 'foo',

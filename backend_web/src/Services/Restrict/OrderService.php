@@ -10,9 +10,9 @@ use App\Services\BaseService;
 use App\Repository\OrderheadRepository;
 use App\Repository\OrderlinesRepository;
 use App\Repository\UserRepository;
+//use App\Services\Email\XaService;
 use mysql_xdevapi\Exception;
 use Symfony\Component\Security\Core\Security;
-use App\Services\Email\OrderPurchaseEmailService;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Component\Word;
 
@@ -24,7 +24,7 @@ class OrderService extends BaseService
     private Security $security;
     private ProductRepository $productRepository;
     private UserPasswordEncoderInterface $encoder;
-    private OrderPurchaseEmailService $emailService;
+    //private XaService $emailService;
     private array $password;
 
     public function __construct(OrderheadRepository $orderheadRepository,
@@ -32,7 +32,7 @@ class OrderService extends BaseService
                                 UserRepository $userRepository,
                                 ProductRepository $productRepository,
                                 UserPasswordEncoderInterface $encoder,
-                                OrderPurchaseEmailService $emailService,
+                                //XaService $emailService,
                                 Security $security)
     {
         $this->orderheadRepository = $orderheadRepository;
@@ -41,7 +41,7 @@ class OrderService extends BaseService
         $this->security = $security;
         $this->productRepository = $productRepository;
         $this->encoder = $encoder;
-        $this->emailService = $emailService;
+        //$this->emailService = $emailService;
         $this->password = [];
     }
 
@@ -146,14 +146,14 @@ class OrderService extends BaseService
         }// if(orderh)
         return $arlines;
     }
-
     private function _send_email(User $ouser, AppOrderHead $oorderh, array $arlines)
     {
-        $this->emailService->set_user($ouser);
-        $this->emailService->set_order_head($oorderh);
-        $this->emailService->set_order_lines($arlines);
-        $this->emailService->send();
+        //$this->emailService->set_user($ouser);
+        //$this->emailService->set_order_head($oorderh);
+        //$this->emailService->set_order_lines($arlines);
+        //$this->emailService->send();
     }
+
 
 
     public function purchase($aruser, $aroder) : ?AppOrderHead
