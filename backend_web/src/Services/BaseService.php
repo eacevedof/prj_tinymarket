@@ -25,7 +25,7 @@ class BaseService
     protected function is_envprod()
     {
         $env = $this->get_env("APP_ENV");
-        $this->logd($env,"service.is_envprod");
+        //$this->logd($env,"service.is_envprod");
         return $env==="prod";
     }
 
