@@ -9,8 +9,8 @@
     <span>Date:</span> <span>{{ oorderh.datepurchase | format_datetime() }}</span><br/>
     <span>Address:</span> <span>{{ ouser.address }}</span><br/>
     <span>Observations:</span> <span>{{ oorderh.notes }}</span><br/>
-    <span>Total Afl:</span> <span>{{ oorderh.total | round(2, 'ceil')}}</span><br/>
-    <span>Total Usd:</span> <span>{{ oorderh.total1 | round(2, 'ceil')}}</span><br/>
+    <span>Total Afl:</span> <span>{{ oorderh.total | number_format(2, '.', ',') }}</span><br/>
+    <span>Total Usd:</span> <span>{{ oorderh.total1 | number_format(2, '.', ',') }}</span><br/>
 </p>
 
 <table>
@@ -29,10 +29,10 @@
         <tr>
             <td>{{ loop.index }}</td>
             <td>{{ oorderl.product }}</td>
-            <td>{{ oorderl.price | round(2, 'ceil')}}</td>
-            <td>{{ oorderl.units | round(2, 'ceil')}}</td>
-            <td>{{ oorderl.total | round(2, 'ceil')}}</td>
-            <td>{{ oorderl.total1 | round(2, 'ceil')}}</td>
+            <td>{{ oorderl.price | number_format(2, '.', ',') }}</td>
+            <td>{{ oorderl.units | number_format(2, '.', ',') }}</td>
+            <td>{{ oorderl.total | number_format(2, '.', ',') }}</td>
+            <td>{{ oorderl.total1 | number_format(2, '.', ',') }}</td>
         </tr>
     {% endfor %}
     </tbody>
