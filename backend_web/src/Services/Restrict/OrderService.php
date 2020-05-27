@@ -148,10 +148,10 @@ class OrderService extends BaseService
     }
     private function _send_email(User $ouser, AppOrderHead $oorderh, array $arlines)
     {
-        //$this->emailService->set_user($ouser);
-        //$this->emailService->set_order_head($oorderh);
-        //$this->emailService->set_order_lines($arlines);
-        //$this->emailService->send();
+        $this->emailService->set_user($ouser);
+        $this->emailService->set_order_head($oorderh);
+        $this->emailService->set_order_lines($arlines);
+        $this->emailService->send();
     }
 
 

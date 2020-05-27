@@ -8,6 +8,7 @@ use App\Entity\App\AppOrderHead;
 use App\Entity\User;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mime\Address;
 
 final class OrderPurchaseEmailService extends BaseService
 {
