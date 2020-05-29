@@ -133,6 +133,12 @@ class AppProduct extends BaseEntity
      */
     private $idUnit = 1;
 
+    /**
+     * @var string|null
+     * @Groups({"all"})
+     * @ORM\Column(name="url_image", type="string", length=250, nullable=true, options={"default"="NULL"})
+     */
+    private $urlImage = null;
 /**
  * ==========================================================================================================
  * ==========================================================================================================
@@ -400,6 +406,22 @@ class AppProduct extends BaseEntity
     public function setIdUnit(?int $idUnit): void
     {
         $this->idUnit = $idUnit;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUrlImage(): ?string
+    {
+        return $this->urlImage;
+    }
+
+    /**
+     * @param string|null $urlImage
+     */
+    public function setUrlImage(?string $urlImage): void
+    {
+        $this->urlImage = $urlImage;
     }
 
 }
