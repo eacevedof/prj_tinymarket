@@ -28,5 +28,6 @@ bin/.phpunit
 composer.phar
 /public/react/*
 vendor.zip
+/public/pictures.zip
 ###< custom ###
 
