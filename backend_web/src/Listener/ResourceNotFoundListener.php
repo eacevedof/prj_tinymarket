@@ -44,7 +44,7 @@ class ResourceNotFoundListener
                 $response->setStatusCode($exception->getStatusCode());
                 $response->headers->replace($exception->getHeaders());
             } else {
-                $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+                $response->setStatusCode(Response::HTTP_NOT_FOUND);
             }
 
             // sends the modified response object to the event
