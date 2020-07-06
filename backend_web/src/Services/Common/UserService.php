@@ -19,7 +19,7 @@ class UserService extends BaseService
     public function register(UserPasswordEncoderInterface $encoder, User $user)
     {
         //roles: 1:admin, 2:system, 3:enterprise, 4:user, 5:anonymous
-        $user->setIdProfile(3);//user
+        if(!$user->getIdProfile()) $user->setIdProfile(3);//user
         $user->setUpdateDate(new \DateTime("now"));
         //cifrando la contraseña
         $encoded = $encoder->encodePassword($user,$user->getPassword());

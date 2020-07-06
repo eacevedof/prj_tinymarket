@@ -42,6 +42,7 @@ class CreateUserCommand extends Command
             // ...
             ->addArgument('email', InputArgument::REQUIRED, 'User email')
             ->addArgument('password', InputArgument::REQUIRED, 'User password')
+            ->addArgument('profile', InputArgument::OPTIONAL, 'User profile: 1:admin, 2:system, 3:enterprise, 4:user, 5:anonymous')
         ;
     }
 
@@ -59,28 +60,47 @@ class CreateUserCommand extends Command
         if(!$password) throw new \Exception("Password required");
 
         $oUser = $this->userService->find_one_by_email($email);
-        if(!$oUser)
-            return [
-                "email" => $email,
-                "password" => $password
-            ];
+        if($oUser)
+            throw new \Exception("User with email: {$email} already exists");
 
-        throw new \Exception("User with email: {$email} already exists");
-        return self::FAILURE;
+        $profile = $input->getArgument("profile");
+        $profile = trim($profile);
+        if($profile){
+            $iprofile = (int) $profile;
+            $profile = $iprofile;
+
+            if($iprofile>5 || $iprofile<1)
+                throw new \Exception("Wrong profile submited: {$iprofile}");
+        }
+
+        if(!$profile) $profile = 3; //user
+
+        return [
+            "email" => $email,
+            "password" => $password,
+            "profile" => $profile
+        ];
+
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // outputs multiple lines to the console (adding "\n" at the end of each line)
         $ardata = $this->handleInput($input);
-        $output->writeln($ardata);
+        //$output->writeln($ardata);
+        $output->writeln([
+            "Usuario creado:",
+            "email: {$ardata["email"]}",
+            "password: {$ardata["password"]}",
+            "profile: {$ardata["profile"]}",
+        ]);
 
         $oUser = new User();
         $oUser->setEmail($ardata["email"]);
         $oUser->setPassword($ardata["password"]);
+        $oUser->setIdProfile($ardata["profile"]);
         $this->userService->register($this->encoder, $oUser);
 
-        $output->write("User: ");
         return self::SUCCESS;
     }
 }
