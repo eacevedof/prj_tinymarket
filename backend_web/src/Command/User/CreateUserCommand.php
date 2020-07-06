@@ -29,6 +29,10 @@ class CreateUserCommand extends Command
             // the "--help" option
             ->setHelp('This command allows you to create a user...')
         ;
+        $this
+            // ...
+            ->addArgument('password', $this->requirePassword ? InputArgument::REQUIRED : InputArgument::OPTIONAL, 'User password')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
