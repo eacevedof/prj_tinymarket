@@ -1,5 +1,5 @@
 <?php
-//  php bin/console app:create-user
+//  php bin/console app:createuser <email> <password>
 namespace App\Command\User;
 
 use App\Entity\User;
