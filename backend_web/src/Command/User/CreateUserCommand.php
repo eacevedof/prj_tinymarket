@@ -2,10 +2,14 @@
 //  php bin/console app:create-user
 namespace App\Command\User;
 
+use App\Entity\User;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+
+use App\Services\Common\UserService;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CreateUserCommand extends Command
 {
@@ -13,57 +17,69 @@ class CreateUserCommand extends Command
     const FAILURE = 1;
 
     // the name of the command (the part after "bin/console")
-    protected static $defaultName = 'app:create-user';
+    protected static $defaultName = 'app:createuser';
+    private UserService $userService;
+    private UserPasswordEncoderInterface $encoder;
 
-    public function __construct(bool $requirePassword = false)
+    public function __construct(UserPasswordEncoderInterface $encoder, UserService $userService)
     {
-        // best practices recommend to call the parent constructor first and
-        // then set your own properties. That wouldn't work in this case
-        // because configure() needs the properties set in this constructor
-        $this->requirePassword = $requirePassword;
+        $this->userService = $userService;
+        $this->encoder = $encoder;
         parent::__construct();
+
     }
 
+    //datos del menú: php bin/console
     protected function configure()
     {
-        $this
-            // the short description shown while running "php bin/console list"
-            ->setDescription('Creates a new user.')
-
-            // the full command description shown when running the command with
+        //php bin/console list
+        $this->setDescription("Creates a new user.")
             // the "--help" option
             ->setHelp('This command allows you to create a user...')
         ;
         $this
             // ...
-            ->addArgument('password', $this->requirePassword ? InputArgument::REQUIRED : InputArgument::OPTIONAL, 'User password')
+            ->addArgument('email', InputArgument::REQUIRED, 'User email')
+            ->addArgument('password', InputArgument::REQUIRED, 'User password')
         ;
     }
 
-    private function someMethod(){
-        print_r("some-method ::)) ");
+    private function handleInput(InputInterface $input)
+    {
+        $email = $input->getArgument("email");
+        $email = trim($email);
+        if(!$email)  throw new \Exception("Email required");
+
+        if(!filter_var($email,FILTER_VALIDATE_EMAIL))
+            throw new \Exception("Invalid email: {$email}");
+
+        $password = $input->getArgument("password");
+        $password = trim($password);
+        if(!$password) throw new \Exception("Password required");
+
+        $oUser = $this->userService->find_one_by_email($email);
+        if(!$oUser)
+            return [
+                "email" => $email,
+                "password" => $password
+            ];
+
+        throw new \Exception("User with email: {$email} already exists");
+        return self::FAILURE;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // outputs multiple lines to the console (adding "\n" at the end of each line)
-        $output->writeln([
-            'User Creator',
-            '============',
-            '',
-        ]);
+        $ardata = $this->handleInput($input);
+        $output->writeln($ardata);
 
-        // the value returned by someMethod() can be an iterator (https://secure.php.net/iterator)
-        // that generates and returns the messages with the 'yield' PHP keyword
-        $output->writeln($this->someMethod());
+        $oUser = new User();
+        $oUser->setEmail($ardata["email"]);
+        $oUser->setPassword($ardata["password"]);
+        $this->userService->register($this->encoder, $oUser);
 
-        // outputs a message followed by a "\n"
-        $output->writeln('Whoa!');
-
-        // outputs a message without adding a "\n" at the end of the line
-        $output->write('You are about to ');
-        $output->write('create a user.');
-
+        $output->write("User: ");
         return self::SUCCESS;
     }
 }

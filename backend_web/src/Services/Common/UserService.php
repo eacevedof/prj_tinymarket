@@ -10,15 +10,13 @@ use App\Entity\User;
 class UserService extends BaseService
 {
     private UserRepository $userRepository;
-    private UserPasswordEncoderInterface $encoder;
-    private User $user;
 
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
 
-    public function register(Request $request, UserPasswordEncoderInterface $encoder, User $user)
+    public function register(UserPasswordEncoderInterface $encoder, User $user)
     {
         //roles: 1:admin, 2:system, 3:enterprise, 4:user, 5:anonymous
         $user->setIdProfile(3);//user
@@ -35,7 +33,7 @@ class UserService extends BaseService
         return $users;
     }
 
-    public function find_one_by_email($email)
+    public function find_one_by_email($email): ?User
     {
         $oUser = $this->userRepository->findOneByEmail($email);
         return $oUser;
