@@ -1,6 +1,6 @@
 <?php
 //  php bin/console app:create-user
-namespace App\Command;
+namespace App\Command\User;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
