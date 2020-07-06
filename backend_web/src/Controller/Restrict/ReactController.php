@@ -8,6 +8,6 @@ class ReactController extends BaseController
     {
         //$response->headers->set('Content-Type', 'application/json');
         //$response->headers->set('Access-Control-Allow-Origin', '*');
-        return $this->render("restrict/restrict-react.html.twig");
+        return $this->render("restrict/restrict-react-layout.html.twig");
     }
 }//ReactController

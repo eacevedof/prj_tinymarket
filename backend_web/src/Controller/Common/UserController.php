@@ -40,7 +40,7 @@ class UserController extends BaseController
         //$response->headers->set('Content-Type', 'application/json');
         //$response->headers->set('Access-Control-Allow-Origin', '*');
         $users = $this->userService->index();
-        return $this->render("restrict/restrict-react.html.twig",["users"=>$users]);
+        return $this->render("restrict/restrict-react-layout.html.twig",["users"=>$users]);
     }
 
 
