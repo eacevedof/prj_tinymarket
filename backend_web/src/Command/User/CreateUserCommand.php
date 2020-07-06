@@ -5,9 +5,13 @@ namespace App\Command\User;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
 
 class CreateUserCommand extends Command
 {
+    const SUCCESS = 0;
+    const FAILURE = 1;
+
     // the name of the command (the part after "bin/console")
     protected static $defaultName = 'app:create-user';
 
@@ -36,6 +40,10 @@ class CreateUserCommand extends Command
         ;
     }
 
+    private function someMethod(){
+        print_r("some-method ::)) ");
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // outputs multiple lines to the console (adding "\n" at the end of each line)
@@ -56,6 +64,6 @@ class CreateUserCommand extends Command
         $output->write('You are about to ');
         $output->write('create a user.');
 
-        return Command::SUCCESS;
+        return self::SUCCESS;
     }
 }
