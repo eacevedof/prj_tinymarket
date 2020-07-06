@@ -19,15 +19,15 @@ class CreateUserCommand extends Command
 
     // the name of the command (the part after "bin/console")
     protected static $defaultName = 'app:createuser';
+
     private UserService $userService;
     private UserPasswordEncoderInterface $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder, UserService $userService)
     {
+        parent::__construct();
         $this->userService = $userService;
         $this->encoder = $encoder;
-        parent::__construct();
-
     }
 
     //datos del menú: php bin/console
