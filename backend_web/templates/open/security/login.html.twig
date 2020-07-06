@@ -15,8 +15,8 @@
         </div>
 
         <div class="form-label-group">
-            <input type="email" v-model="username" id="username" ref="username" class="form-control" placeholder="Email" required autofocus>
-            <label for="username">Email</label>
+            <input type="email" v-model="email" id="email" ref="email" class="form-control" placeholder="Email" required autofocus>
+            <label for="email">Email</label>
         </div>
 
         <div class="form-label-group">
@@ -39,7 +39,8 @@ const app = new Vue({
             errors: [],
             btnsend: BTN_INISTATE,
             issending: false,
-
+            email: "eaf@ya.com",
+            password: "1234",
         }
     },
     methods:{
@@ -48,45 +49,46 @@ const app = new Vue({
             const self = this
             self.issending = true
             self.btnsend = BTN_IN_PROGRESS
-            const slug = get_slug()
-            const url = `/promotion/confirm/${slug}`
+            const url = `/`
             const data = new FormData();
-            data.append("action","confirm-code")
-            data.append("codeconfirm",self.codeconfirm)
+            data.append("action","signin")
+            data.append("email",self.email)
+            data.append("password",self.password)
+
             fetch(url, {
                 method: 'post',
                 body: data
             })
-                .then(response => response.json())
-                .then(response => {
-                    console.log("reponse",response)
-                    self.issending = false
-                    self.btnsend = BTN_INISTATE
-                    if(response.title == "success") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Enhorabuena! <br/> Subscripción realizada correctamente',
-                            html: response.description
-                        })
-
-                    } else {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Esta acción no se ha podido completar',
-                            text: response.description,
-                        })
-                    }
-                })
-                .catch(function(error){
-                    self.issending = false
-                    self.btnsend = BTN_INISTATE
-                    console.log("error catched:",error)
+            .then(response => response.json())
+            .then(response => {
+                console.log("reponse",response)
+                self.issending = false
+                self.btnsend = BTN_INISTATE
+                if(response.title == "success") {
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Vaya! Ha ocurrido un error',
-                        text: error.toString(),
+                        icon: 'success',
+                        title: 'Enhorabuena! <br/> Subscripción realizada correctamente',
+                        html: response.description
                     })
+
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Esta acción no se ha podido completar',
+                        text: response.description,
+                    })
+                }
+            })
+            .catch(error => {
+                self.issending = false
+                self.btnsend = BTN_INISTATE
+                console.log("error catched:",error)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Vaya! Ha ocurrido un error',
+                    text: error.toString(),
                 })
+            })
         }//handleSubmit(e)
     },//methods
     mounted(){
