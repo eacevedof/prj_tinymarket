@@ -19,3 +19,10 @@ api-1-order-purchase:
   methods: POST
   defaults:
     _format: json
+
+api-1-restrict-products:
+  path: /api/v1/restrict/products
+  controller: App\Api\Restrict\Product\ProductList
+  methods: POST
+  defaults:
+    _format: json
