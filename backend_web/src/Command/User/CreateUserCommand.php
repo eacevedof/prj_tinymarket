@@ -37,17 +37,24 @@ class CreateUserCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // ... put here the code to run in your command
+        // outputs multiple lines to the console (adding "\n" at the end of each line)
+        $output->writeln([
+            'User Creator',
+            '============',
+            '',
+        ]);
 
-        // this method must return an integer number with the "exit status code"
-        // of the command. You can also use these constants to make code more readable
+        // the value returned by someMethod() can be an iterator (https://secure.php.net/iterator)
+        // that generates and returns the messages with the 'yield' PHP keyword
+        $output->writeln($this->someMethod());
 
-        // return this if there was no problem running the command
-        // (it's equivalent to returning int(0))
+        // outputs a message followed by a "\n"
+        $output->writeln('Whoa!');
+
+        // outputs a message without adding a "\n" at the end of the line
+        $output->write('You are about to ');
+        $output->write('create a user.');
+
         return Command::SUCCESS;
-
-        // or return this if some error happened during the execution
-        // (it's equivalent to returning int(1))
-        // return Command::FAILURE;
     }
 }
