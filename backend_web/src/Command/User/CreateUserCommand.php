@@ -1,5 +1,6 @@
 <?php
 //  php bin/console app:createuser <email> <password>
+// para que funcione hay que sar .env.local con ip 127 no el contenedor
 namespace App\Command\User;
 
 use App\Entity\User;
