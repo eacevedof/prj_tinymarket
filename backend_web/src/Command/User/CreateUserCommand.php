@@ -1,4 +1,5 @@
 <?php
+//  php bin/console app:create-user
 namespace App\Command;
 
 use Symfony\Component\Console\Command\Command;
