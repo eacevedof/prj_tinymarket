@@ -17,10 +17,9 @@ class SecurityController extends BaseController
 
     public function check_login(AuthenticationUtils $authentication)
     {
-        print_r("xxx");die;
         $error = $authentication->getLastAuthenticationError();
-        $this->logd($error, "authentication.error");
-        $this->logd($authentication, "authentication");
+        //$this->logd($error, "authentication.error");
+        //$this->logd($authentication, "authentication");
 
         $lastUsername = $authentication->getLastUsername();
         $response = $this->get_response_json();
