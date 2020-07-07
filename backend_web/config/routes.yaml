@@ -10,7 +10,20 @@ mail:
     path: /mail
     controller: App\Controller\Open\HomeController::mail
 
+# zona comun
+login:
+    path: /login
+    controller: App\Controller\Common\SecurityController
 
+check-login:
+    path: /check-login
+    controller: App\Controller\Common\SecurityController::check_login
+    methods: POST
+    defaults:
+        _format: json
+
+logout:
+    path: /logout
 
 # zona privada
 register:
@@ -19,11 +32,6 @@ register:
     name_prefix: _private
     # defaults: {_controller: app.common.user_controller}
 
-login:
-    path: /login
-    controller: App\Controller\Common\SecurityController
-    # defaults: {_controller: app.common.security_controller}
-
 react:
     path: /react
     controller: App\Controller\Restrict\ReactController
@@ -31,6 +39,3 @@ react:
 users:
     path: /users
     controller: App\Controller\Common\UserController::index
-
-logout:
-    path: /logout

@@ -10,10 +10,20 @@ class SecurityController extends BaseController
     public function __invoke(AuthenticationUtils $authentication)
     {
         $error = $authentication->getLastAuthenticationError();
-        $lastUsername = $authentication->getLastUsername();
         return $this->render("open/security/login.html.twig",[
             "error" => $error,
-            "_last_username"=>$lastUsername
         ]);
+    }
+
+    public function check_login(AuthenticationUtils $authentication)
+    {
+        $error = $authentication->getLastAuthenticationError();
+        $this->logd($error, "authentication.error");
+        $this->logd($authentication, "authentication");
+
+        $lastUsername = $authentication->getLastUsername();
+        $response = $this->get_response_json();
+        $response->setContent(json_encode(["error"=>$error,"username"=>$lastUsername]));
+        return $response;
     }
 }//SecurityController

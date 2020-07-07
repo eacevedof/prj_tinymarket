@@ -49,14 +49,18 @@ const app = new Vue({
             const self = this
             self.issending = true
             self.btnsend = BTN_IN_PROGRESS
-            const url = `/`
+            const url = `/check-login`
             const data = new FormData();
             data.append("action","signin")
-            data.append("email",self.email)
+            data.append("username",self.email)
             data.append("password",self.password)
+
+            const oheader = new Headers()
+            oheader.set("Content-Type","application/json")
 
             fetch(url, {
                 method: 'post',
+                headers: oheader,
                 body: data
             })
             .then(response => response.json())
