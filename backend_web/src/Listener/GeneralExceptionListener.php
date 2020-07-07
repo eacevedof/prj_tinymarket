@@ -62,7 +62,7 @@ class GeneralExceptionListener
 
     private function _handle_403($event, $exception){
         if($exception instanceof AccessDeniedException){
-            die("{$exception->getStatusCode()} - AccessDeniedException");
+            die("{$exception->getCode()} - AccessDeniedException");
         }
     }
 
