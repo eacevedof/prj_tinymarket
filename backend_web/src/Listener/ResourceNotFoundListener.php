@@ -7,6 +7,7 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ResourceNotFoundListener
 {
@@ -17,13 +18,9 @@ class ResourceNotFoundListener
         $this->container = $container;
     }
 
-    public function onKernelException(ExceptionEvent $event): void
+    private function _handle_404($event, $exception)
     {
-        //print_r($event->template);
-        // You get the exception object from the received event
-        $exception = $event->getThrowable();
-
-        if($exception instanceof HttpExceptionInterface)
+        if($exception instanceof NotFoundHttpException)
         {
             $message = sprintf(
                 'Resource: %s with code: %s',
@@ -48,9 +45,17 @@ class ResourceNotFoundListener
             }
 
             // sends the modified response object to the event
-            $event->setResponse($response);
+            $event->setResponse($response);            
         }
     }
+    
+    public function onKernelException(ExceptionEvent $event): void
+    {
+        $exception = $event->getThrowable();
 
+        if($exception instanceof HttpExceptionInterface) {
+            $this->_handle_404($event, $exception);
+        }
+    }
 
 }
