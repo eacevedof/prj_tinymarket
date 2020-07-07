@@ -40,7 +40,7 @@ const app = new Vue({
             btnsend: BTN_INISTATE,
             issending: false,
             email: "eaf@ya.com",
-            password: "1234",
+            password: "eaf",
         }
     },
     methods:{
@@ -50,25 +50,32 @@ const app = new Vue({
             self.issending = true
             self.btnsend = BTN_IN_PROGRESS
             const url = `/check-login`
-            const data = new FormData();
-            data.append("action","signin")
-            data.append("username",self.email)
-            data.append("password",self.password)
+            //const data = new FormData();
+            //data.append("action","signin")
+            //data.append("username",self.email)
+            //data.append("password",self.password)
+
+            const data = {
+                username: self.email,
+                password: self.password,
+            }
 
             const oheader = new Headers()
             oheader.set("Content-Type","application/json")
+            const json = JSON.stringify(data)
+            console.log("json to post",json)
 
             fetch(url, {
-                method: 'post',
+                method: 'POST',
                 headers: oheader,
-                body: data
+                body: json,
             })
             .then(response => response.json())
             .then(response => {
                 console.log("reponse",response)
                 self.issending = false
                 self.btnsend = BTN_INISTATE
-                if(response.title == "success") {
+                if(!response.error) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Enhorabuena! <br/> Subscripción realizada correctamente',
@@ -79,7 +86,7 @@ const app = new Vue({
                     Swal.fire({
                         icon: 'warning',
                         title: 'Esta acción no se ha podido completar',
-                        text: response.description,
+                        text: response.error,
                     })
                 }
             })

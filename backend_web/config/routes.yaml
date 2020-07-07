@@ -15,10 +15,10 @@ login:
     path: /login
     controller: App\Controller\Common\SecurityController::login
 
-checklogin:
+check-login:
     path: /check-login
     controller: App\Controller\Common\SecurityController::check_login
-    # methods: POST
+    methods: POST
     defaults:
         _format: json
 
