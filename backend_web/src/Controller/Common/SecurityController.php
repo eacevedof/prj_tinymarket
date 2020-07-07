@@ -7,7 +7,7 @@ use App\Controller\BaseController;
 
 class SecurityController extends BaseController
 {
-    public function __invoke(AuthenticationUtils $authentication)
+    public function login(AuthenticationUtils $authentication)
     {
         $error = $authentication->getLastAuthenticationError();
         return $this->render("open/security/login.html.twig",[

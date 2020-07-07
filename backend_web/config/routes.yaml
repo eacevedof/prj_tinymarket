@@ -13,12 +13,12 @@ mail:
 # zona comun
 login:
     path: /login
-    controller: App\Controller\Common\SecurityController
+    controller: App\Controller\Common\SecurityController::login
 
-check-login:
+checklogin:
     path: /check-login
     controller: App\Controller\Common\SecurityController::check_login
-    methods: POST
+    # methods: POST
     defaults:
         _format: json
 

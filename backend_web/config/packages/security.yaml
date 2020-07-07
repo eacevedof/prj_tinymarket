@@ -24,7 +24,7 @@ security:
                 # default_target_path: react
             json_login:
                 # desde donde se enviarán los datos de login, con /check-login no ha funcionado
-                check_path: login
+                check_path: /check-login
                 provider: proveedor
 
             logout:
