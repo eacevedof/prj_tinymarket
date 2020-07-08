@@ -37,11 +37,16 @@ class GeneralExceptionListener
         if($exception instanceof NotFoundHttpException) {
             //die("404");
             $twig = $this->container->get("twig");
-            $message = "1 - Resource: {$exception->getMessage()} with code: {$exception->getCode()}";
-            $objcontent = $twig->render("errors/404.html.twig", ["message" => $message]);
+            $message = "1 - Error: {$exception->getMessage()}";
+            $objcontent = $twig->render("errors/404.html.twig", [
+                    "title"=>"{$exception->getCode()} | {$exception->getMessage()}"
+                    ,"message" => $message]
+            );
 
             //no se primte code 0 en status code
-            //$this->response->setStatusCode($exception->getCode());
+            $code = !$exception->getCode() ? Response::HTTP_NOT_FOUND: $exception->getCode();
+            $this->response->setStatusCode($code);
+            $this->response->headers->replace($exception->getHeaders());
             $this->response->setContent($objcontent);
             // sends the modified response object to the event
             $event->setResponse($this->response);
@@ -50,34 +55,39 @@ class GeneralExceptionListener
 
     private function _handle_404($event, $exception)
     {
-        //if($exception instanceof HttpExceptionInterface)
-            if($exception instanceof NotFoundHttpException) {
-                //die("404");
-                $message = "2 - Resource: {$exception->getMessage()} with code: {$exception->getCode()}";
+        if($exception instanceof ResourceNotFoundException) {
+            //die("404");
+            $twig = $this->container->get("twig");
+            $message = "2 - Error: {$exception->getMessage()}";
+            $objcontent = $twig->render("errors/404.html.twig", [
+                    "title"=>"{$exception->getCode()} | {$exception->getMessage()}"
+                    ,"message" => $message]
+            );
+            $code = !$exception->getCode() ? $exception->getStatusCode() : $exception->getCode();
+            $this->response->setStatusCode($code);
+            $this->response->headers->replace($exception->getHeaders());
+            $this->response->setContent($objcontent);
 
-                $twig = $this->container->get("twig");
-                $objcontent = $twig->render("errors/404.html.twig", ["message" => $message]);
-
-                //$this->response->setStatusCode($exception->getCode());
-                $this->response->setContent($objcontent);
-
-                // HttpExceptionInterface is a special type of exception that
-                // holds status code and header details
-                if ($exception instanceof ResourceNotFoundException) {
-                    $this->response->setStatusCode($exception->getStatusCode());
-                    $this->response->headers->replace($exception->getHeaders());
-                } else {
-                    $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
-                }
-
-                // sends the modified response object to the event
-                $event->setResponse($this->response);
-            }
+            $event->setResponse($this->response);
+        }
     }//_handle_404
 
     private function _handle_403($event, $exception){
         if($exception instanceof AccessDeniedException){
-            die("{$exception->getCode()} - AccessDeniedException");
+            //die("403");
+            $twig = $this->container->get("twig");
+            $message = "3 - Error: {$exception->getMessage()}";
+            $objcontent = $twig->render("errors/403.html.twig", [
+                "title"=>"{$exception->getCode()} | {$exception->getMessage()}"
+                ,"message" => $message]
+            );
+
+            $code = !$exception->getCode() ? $exception->getStatusCode() : $exception->getCode();
+            $this->response->setStatusCode($code);
+            //$this->response->headers->replace($exception->getHeaders());
+            $this->response->setContent($objcontent);
+
+            $event->setResponse($this->response);
         }
     }
 

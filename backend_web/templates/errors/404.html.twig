@@ -1,9 +1,9 @@
 {% extends 'errors/errors-layout.html.twig' %}
-{% block title %}Error 404{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block body %}
 <!-- templates.errors.404.html.twig -->
 <div>
-    <h1>404 - Resource not found!</h1>
+    <h1>{{ title }}</h1>
     <p>
         {{ message }}
     </p>

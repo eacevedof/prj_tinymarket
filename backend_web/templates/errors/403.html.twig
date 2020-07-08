@@ -1,9 +1,9 @@
 {% extends 'errors/errors-layout.html.twig' %}
-{% block title %}Error 403 | Access denied{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block body %}
 <!-- templates.errors.403.html.twig -->
 <div>
-    <h1>403 - Access denied!</h1>
+    <h1>{{ title }}</h1>
     <p>
         {{ message }}
     </p>
