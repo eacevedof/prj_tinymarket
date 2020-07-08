@@ -15,11 +15,15 @@ use App\Traits\Log;
 class GeneralExceptionListener
 {
     use Log;
-    private $container;
+    private ContainerInterface $container;
+    private Response $response;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(
+        ContainerInterface $container
+    )
     {
         $this->container = $container;
+        $this->response = new Response();
     }
 
     private function _log($event, $exception)
@@ -28,35 +32,46 @@ class GeneralExceptionListener
         $this->logd(get_class($exception),"exception type");
     }
 
+    private function _handle_simple404($event, $exception)
+    {
+        if($exception instanceof NotFoundHttpException) {
+            //die("404");
+            $twig = $this->container->get("twig");
+            $message = "1 - Resource: {$exception->getMessage()} with code: {$exception->getCode()}";
+            $objcontent = $twig->render("errors/404.html.twig", ["message" => $message]);
+
+            //no se primte code 0 en status code
+            //$this->response->setStatusCode($exception->getCode());
+            $this->response->setContent($objcontent);
+            // sends the modified response object to the event
+            $event->setResponse($this->response);
+        }
+    }
+
     private function _handle_404($event, $exception)
     {
         //if($exception instanceof HttpExceptionInterface)
             if($exception instanceof NotFoundHttpException) {
                 //die("404");
-                $message = sprintf(
-                    'Resource: %s with code: %s',
-                    $exception->getMessage(),
-                    $exception->getCode()
-                );
+                $message = "2 - Resource: {$exception->getMessage()} with code: {$exception->getCode()}";
 
-                $engine = $this->container->get('twig');
-                $content = $engine->render("errors/404.html.twig", ["message" => $message]);
+                $twig = $this->container->get("twig");
+                $objcontent = $twig->render("errors/404.html.twig", ["message" => $message]);
 
-                // Customize your response object to display the exception details
-                $response = new Response();
-                $response->setContent($content);
+                //$this->response->setStatusCode($exception->getCode());
+                $this->response->setContent($objcontent);
 
                 // HttpExceptionInterface is a special type of exception that
                 // holds status code and header details
                 if ($exception instanceof ResourceNotFoundException) {
-                    $response->setStatusCode($exception->getStatusCode());
-                    $response->headers->replace($exception->getHeaders());
+                    $this->response->setStatusCode($exception->getStatusCode());
+                    $this->response->headers->replace($exception->getHeaders());
                 } else {
-                    $response->setStatusCode(Response::HTTP_NOT_FOUND);
+                    $this->response->setStatusCode(Response::HTTP_NOT_FOUND);
                 }
 
                 // sends the modified response object to the event
-                $event->setResponse($response);
+                $event->setResponse($this->response);
             }
     }//_handle_404
 
@@ -72,7 +87,9 @@ class GeneralExceptionListener
         $this->_log($event,$exception);
         //forbidden
         $this->_handle_403($event, $exception);
-        //not found
+        //NotFoundHttpException
+        $this->_handle_simple404($event, $exception);
+        //ResourceNotFoundException
         $this->_handle_404($event, $exception);
     }
 
