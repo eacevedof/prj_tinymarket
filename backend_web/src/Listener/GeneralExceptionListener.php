@@ -38,13 +38,14 @@ class GeneralExceptionListener
             //die("404");
             $twig = $this->container->get("twig");
             $message = "1 - Error: {$exception->getMessage()}";
+            $code = !$exception->getCode() ? Response::HTTP_NOT_FOUND: $exception->getCode();
+
             $objcontent = $twig->render("errors/404.html.twig", [
-                    "title"=>"{$exception->getCode()} | {$exception->getMessage()}"
+                    "title"=>"{$code} | {$exception->getMessage()}"
                     ,"message" => $message]
             );
 
-            //no se primte code 0 en status code
-            $code = !$exception->getCode() ? Response::HTTP_NOT_FOUND: $exception->getCode();
+
             $this->response->setStatusCode($code);
             $this->response->headers->replace($exception->getHeaders());
             $this->response->setContent($objcontent);
@@ -59,11 +60,13 @@ class GeneralExceptionListener
             //die("404");
             $twig = $this->container->get("twig");
             $message = "2 - Error: {$exception->getMessage()}";
+            $code = !$exception->getCode() ? Response::HTTP_NOT_FOUND: $exception->getCode();
+
             $objcontent = $twig->render("errors/404.html.twig", [
-                    "title"=>"{$exception->getCode()} | {$exception->getMessage()}"
+                    "title"=>"{$code} | {$exception->getMessage()}"
                     ,"message" => $message]
             );
-            $code = !$exception->getCode() ? $exception->getStatusCode() : $exception->getCode();
+
             $this->response->setStatusCode($code);
             $this->response->headers->replace($exception->getHeaders());
             $this->response->setContent($objcontent);
@@ -77,12 +80,13 @@ class GeneralExceptionListener
             //die("403");
             $twig = $this->container->get("twig");
             $message = "3 - Error: {$exception->getMessage()}";
+            $code = !$exception->getCode() ? $exception->getStatusCode() : $exception->getCode();
+
             $objcontent = $twig->render("errors/403.html.twig", [
-                "title"=>"{$exception->getCode()} | {$exception->getMessage()}"
+                "title"=>"{$code} | {$exception->getMessage()}"
                 ,"message" => $message]
             );
 
-            $code = !$exception->getCode() ? $exception->getStatusCode() : $exception->getCode();
             $this->response->setStatusCode($code);
             //$this->response->headers->replace($exception->getHeaders());
             $this->response->setContent($objcontent);
