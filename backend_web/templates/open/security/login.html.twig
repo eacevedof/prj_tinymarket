@@ -7,6 +7,7 @@
 
 {% block body %}
 <div class="example-wrapper">
+    {% verbatim %}
     <form id="form-login" @submit="handleSubmit" class="form-signin">
         <div class="text-center mb-4" >
             <img class="mb-4" src="http://www.elchalanaruba.com/wp-content/uploads/2020/01/El-Chala%CC%81n-logo-m.png" alt="" width="150" height="55">
@@ -24,9 +25,10 @@
             <label for="password">Password</label>
         </div>
 
-        <button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-dark btn-block" type="submit">{{ btnsend }}</button>
         <p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
     </form>
+    {% endverbatim %}
 </div>
 <script src="/modules/login/vuelogin.js"></script>
 {% endblock %}

@@ -1,4 +1,4 @@
-const BTN_INISTATE = "Confirmar"
+const BTN_INISTATE = "Sign in"
 const BTN_IN_PROGRESS = "Procesando..."
 const formid = "form-login"
 const app = new Vue({
