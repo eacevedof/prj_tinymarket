@@ -32,6 +32,10 @@ register:
     name_prefix: _private
     # defaults: {_controller: app.common.user_controller}
 
+admin:
+    path: /admin
+    controller: App\Controller\Restrict\ReactController
+
 react:
     path: /react
     controller: App\Controller\Restrict\ReactController

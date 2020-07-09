@@ -18,12 +18,7 @@ const app = new Vue({
             const self = this
             self.issending = true
             self.btnsend = BTN_IN_PROGRESS
-            const url = `/check-login`
-            //const data = new FormData();
-            //data.append("action","signin")
-            //data.append("username",self.email)
-            //data.append("password",self.password)
-
+            const url = "/check-login"
             const data = {
                 username: self.email,
                 password: self.password,
@@ -45,12 +40,12 @@ const app = new Vue({
                     self.issending = false
                     self.btnsend = BTN_INISTATE
                     if(!response.error) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Enhorabuena! <br/> Subscripción realizada correctamente',
-                            html: response.description
-                        })
-
+                        // Swal.fire({
+                        //     icon: 'success',
+                        //     title: 'Enhorabuena! <br/> Subscripción realizada correctamente',
+                        //     html: response.description
+                        // })
+                        window.location.href = "/admin"
                     } else {
                         Swal.fire({
                             icon: 'warning',
