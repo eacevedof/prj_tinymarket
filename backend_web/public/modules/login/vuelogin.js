@@ -40,11 +40,8 @@ const app = new Vue({
                     self.issending = false
                     self.btnsend = BTN_INISTATE
                     if(!response.error) {
-                        // Swal.fire({
-                        //     icon: 'success',
-                        //     title: 'Enhorabuena! <br/> Subscripción realizada correctamente',
-                        //     html: response.description
-                        // })
+                        //tengo que recibir 2 tokens apify y resources
+                        //useruid
                         window.location.href = "/admin"
                     } else {
                         Swal.fire({

@@ -1,14 +1,14 @@
 <?php
 namespace App\Services;
 
-use App\Traits\Log;
-use App\Traits\Uid;
+use App\Traits\LogTrait;
+use App\Traits\UidTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class BaseService
 {
-    use Log;
-    use Uid;
+    use LogTrait;
+    use UidTrait;
 
     private $request;
 

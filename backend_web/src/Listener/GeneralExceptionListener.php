@@ -10,11 +10,11 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-use App\Traits\Log;
+use App\Traits\LogTrait;
 
 class GeneralExceptionListener
 {
-    use Log;
+    use LogTrait;
     private ContainerInterface $container;
     private Response $response;
 

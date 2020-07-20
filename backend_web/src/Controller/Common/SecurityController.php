@@ -4,6 +4,7 @@ namespace App\Controller\Common;
 
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Controller\BaseController;
+use App\Component\Curl;
 
 class SecurityController extends BaseController
 {
@@ -15,11 +16,17 @@ class SecurityController extends BaseController
         ]);
     }
 
+    private function _get_apifytoken()
+    {}
+
+    private function _get_resourcetoken()
+    {}
+
     public function check_login(AuthenticationUtils $authentication)
     {
         $error = $authentication->getLastAuthenticationError();
         //$this->logd($error, "authentication.error");
-        //$this->logd($authentication, "authentication");
+        $this->logd($authentication, "authentication");
 
         $lastUsername = $authentication->getLastUsername();
         $response = $this->get_response_json();

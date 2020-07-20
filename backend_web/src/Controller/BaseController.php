@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 namespace App\Controller;
-use App\Traits\Log;
+use App\Traits\LogTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
 class BaseController extends AbstractController
 {
-    use Log;
+    use LogTrait;
 
     private $request;
 

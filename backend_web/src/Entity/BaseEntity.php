@@ -1,13 +1,13 @@
 <?php
 namespace App\Entity;
 
-use App\Traits\Log;
+use App\Traits\LogTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 class BaseEntity
 {
-    use Log;
+    use LogTrait;
     /**
      * @var string|null
      * @Groups({"admin","system"})

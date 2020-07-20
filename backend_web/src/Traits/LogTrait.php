@@ -3,7 +3,7 @@
 namespace App\Traits;
 use App\Component\Log As L;
 
-trait Log
+trait LogTrait
 {
     protected function log($mxVar,$sTitle=NULL)
     {
