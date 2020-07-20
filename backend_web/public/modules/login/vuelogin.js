@@ -53,13 +53,22 @@ const app = new Vue({
             })
             .then(response => {
                 console.log("reponse",response)
-                alert(JSON.stringify(response))
+                //alert(JSON.stringify(response))
                 self.issending = false
                 self.btnsend = BTN_INISTATE
                 if(!response.error && respstatus!="401"){
-                    localStorage.setItem("token_dbsapify",response.token_dbsapify)
-                    localStorage.setItem("token_upload",response.token_upload)
-                    //window.location.href = "/admin"
+                    if(!response.token_dbsapify) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'No token received',
+                        })
+                        localStorage.clear();
+                    }
+                    else{
+                        localStorage.setItem("token_dbsapify",response.token_dbsapify)
+                        localStorage.setItem("token_upload",response.token_upload)
+                        //window.location.href = "/admin"
+                    }
                 } else {
                     Swal.fire({
                         icon: 'warning',
