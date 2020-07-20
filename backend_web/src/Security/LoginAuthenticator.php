@@ -122,8 +122,8 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
     {
         $this->logd($_ENV,"-ENV-");
         $tokens = [
-          "dbapifytoken" => "",
-          "uploadtoken"  => "",
+          "token_dbsapify" => "",
+          "token_upload"  => "",
         ];
 
         //API DBSAPIFY
@@ -136,7 +136,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         $r = \json_decode($r,1);
         $this->logd($r,"curl.r");
 
-        $tokens["dbapifytoken"] = $r["data"]["token"] ?? "";
+        $tokens["token_dbsapify"] = $r["data"]["token"] ?? "";
 
         //API UPLOAD
         $url = $this->_get_env("API_UPLOAD_URL");
@@ -148,7 +148,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         $r = \json_decode($r,1);
         $this->logd($r,"curl.r");
 
-        $tokens["uploadtoken"] = $r["data"]["token"] ?? "";
+        $tokens["token_upload"] = $r["data"]["token"] ?? "";
 
         return $tokens;
     }
