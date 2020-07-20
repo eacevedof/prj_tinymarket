@@ -53,12 +53,12 @@ const app = new Vue({
             })
             .then(response => {
                 console.log("reponse",response)
-                alert(respstatus)
+                alert(JSON.stringify(response))
                 self.issending = false
                 self.btnsend = BTN_INISTATE
                 if(!response.error && respstatus!="401"){
-                    //tengo que recibir 2 tokens apify y resources
-                    //useruid
+                    localStorage.setItem("token_dbsapify",response.token_dbsapify)
+                    localStorage.setItem("token_upload",response.token_upload)
                     //window.location.href = "/admin"
                 } else {
                     Swal.fire({
