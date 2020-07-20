@@ -56,7 +56,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
      */
     public function getCredentials(Request $request)
     {
-        $this->logd($_POST,"_POST");
+        //$this->logd($_POST,"_POST");
 
         $credentials = [
             "action" => $request->get('action'),
@@ -65,7 +65,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
             //'csrf_token' => $request->get('_csrf_token'),
         ];
 
-        $this->logd($credentials,"credentials");
+        //$this->logd($credentials,"credentials");
 
         $request->getSession()->set(
             Security::LAST_USERNAME,
@@ -120,7 +120,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
 
     private function _get_tokens()
     {
-        $this->logd($_ENV,"-ENV-");
+        //$this->logd($_ENV,"-ENV-");
         $tokens = [
           "token_dbsapify" => "",
           "token_upload"  => "",
@@ -134,7 +134,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         $curl->request_post();
         $r = $curl->get_response();
         $r = \json_decode($r,1);
-        $this->logd($r,"curl.r");
+        $this->logd($r,"curl.apify.r");
 
         $tokens["token_dbsapify"] = $r["data"]["token"] ?? "";
 
@@ -146,7 +146,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         $curl->request_post();
         $r = $curl->get_response();
         $r = \json_decode($r,1);
-        $this->logd($r,"curl.r");
+        $this->logd($r,"curl.upload.r");
 
         $tokens["token_upload"] = $r["data"]["token"] ?? "";
 
