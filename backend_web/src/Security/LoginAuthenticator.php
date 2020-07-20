@@ -116,13 +116,17 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
     }
 
+    private function _get_env($key){return $_ENV[$key] ?? "";}
+
     private function _get_tokens()
     {
+        $this->logd($_ENV,"-ENV-");
         $tokens = [
-          "dbapifytoken" => "bbbb",
-          "uploadtoken"  => "aaa",
+          "dbapifytoken" => "",
+          "uploadtoken"  => "",
         ];
 
+        //API DBSAPIFY
         $url = $this->_get_env("API_APIFY_URL");
         $curl = new Curl($url);
         $curl->add_post("user",$this->_get_env("API_APIFY_USERNAME"));
@@ -132,9 +136,18 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         $r = \json_decode($r,1);
         $this->logd($r,"curl.r");
 
-
-
         $tokens["dbapifytoken"] = $r["data"]["token"] ?? "";
+
+        //API UPLOAD
+        $url = $this->_get_env("API_UPLOAD_URL");
+        $curl = new Curl($url);
+        $curl->add_post("user",$this->_get_env("API_UPLOAD_USERNAME"));
+        $curl->add_post("password",$this->_get_env("API_UPLOAD_PASSWORD"));
+        $curl->request_post();
+        $r = $curl->get_response();
+        $r = \json_decode($r,1);
+        $this->logd($r,"curl.r");
+
         $tokens["uploadtoken"] = $r["data"]["token"] ?? "";
 
         return $tokens;
@@ -155,5 +168,4 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
 
     public function supportsRememberMe(){return false;}
 
-    private function _get_env($key){return $_ENV[$key] ?? "";}
 }
