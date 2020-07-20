@@ -18,8 +18,11 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            #anonymous: lazy
-            anonymous: true
+            anonymous: lazy
+            guard:
+                provider: proveedor
+                authenticators:
+                    - App\Security\LoginAuthenticator
 
             # form_login:
                 #login_path: login
@@ -45,8 +48,9 @@ security:
     access_control:
         # role_1 admin, 2: system, 3: enterprise, 4: particular, 5: client
 
-        # - { path: ^/check-login, roles: IS_AUTHENTICATED_ANONYMOUSLY } #esto esta en el tutorial
-        - { path: ^/react, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4,ROLE_5]  }
+        # - { path: ^/admin, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4,ROLE_5]  }
+        - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/react, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4,ROLE_5]  }
         - { path: ^/users, roles: [ROLE_1,ROLE_2] }
 
         - { path: ^/tareas, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4, ROLE_5] }

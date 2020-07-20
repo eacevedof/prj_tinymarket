@@ -42,9 +42,8 @@ class GeneralExceptionListener
 
             $objcontent = $twig->render("errors/404.html.twig", [
                     "title"=>"{$code} | {$exception->getMessage()}"
-                    ,"message" => $message]
-            );
-
+                    ,"message" => $message
+                ]);
 
             $this->response->setStatusCode($code);
             $this->response->headers->replace($exception->getHeaders());
@@ -64,8 +63,8 @@ class GeneralExceptionListener
 
             $objcontent = $twig->render("errors/404.html.twig", [
                     "title"=>"{$code} | {$exception->getMessage()}"
-                    ,"message" => $message]
-            );
+                    ,"message" => $message
+                ]);
 
             $this->response->setStatusCode($code);
             $this->response->headers->replace($exception->getHeaders());

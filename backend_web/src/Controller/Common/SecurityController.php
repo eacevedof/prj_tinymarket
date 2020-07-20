@@ -1,14 +1,12 @@
 <?php
 //proyecto\src\Controller\Common\SecurityController.php
 namespace App\Controller\Common;
-
-use App\Security\LoginAuthenticator;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+//use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Controller\BaseController;
-use App\Component\Curl;
 
 class SecurityController extends BaseController
 {
+    //solo muestra la vista del formulario con vue
     public function login()
     {
         $error = "";
@@ -16,13 +14,8 @@ class SecurityController extends BaseController
             "error" => $error,
         ]);
     }
-
-    private function _get_apifytoken()
-    {}
-
-    private function _get_resourcetoken()
-    {}
-
+/*
+ * al existir LoginAuthenticator la ruta /check-login pasa por este "pseudo controlador"
     public function check_login(AuthenticationUtils $authentication)
     {
         $error = $authentication->getLastAuthenticationError();
@@ -34,4 +27,5 @@ class SecurityController extends BaseController
         $response->setContent(json_encode(["error"=>$error,"username"=>$lastUsername]));
         return $response;
     }
+*/
 }//SecurityController
