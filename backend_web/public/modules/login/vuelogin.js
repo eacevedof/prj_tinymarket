@@ -66,6 +66,7 @@ const app = new Vue({
                         title: 'This action could not be completed',
                         text: response.error || response.message,
                     })
+                    localStorage.clear();
                 }
             })
             .catch(error => {
@@ -77,6 +78,7 @@ const app = new Vue({
                     title: 'Oops! Some error has occured',
                     text: JSON.stringify(error),
                 })
+                localStorage.clear();
             })
         }//handleSubmit(e)
     },//methods
