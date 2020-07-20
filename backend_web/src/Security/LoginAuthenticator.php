@@ -98,13 +98,8 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        $data = [
-            // you may want to customize or obfuscate the message first
-            "usertoken" => "xxx",
-            "resourcetoken" => "yyyy",
-            // $this->translator->trans($exception->getMessageKey(), $exception->getMessageData())
-        ];
-
+        // $this->translator->trans($exception->getMessageKey(), $exception->getMessageData())
+        $data = $this->_get_tokens();
         return new JsonResponse($data, Response::HTTP_ACCEPTED);
     }
 
@@ -121,6 +116,30 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
     }
 
+    private function _get_tokens()
+    {
+        $tokens = [
+          "dbapifytoken" => "bbbb",
+          "uploadtoken"  => "aaa",
+        ];
+
+        $url = $this->_get_env("API_APIFY_URL");
+        $curl = new Curl($url);
+        $curl->add_post("user",$this->_get_env("API_APIFY_USERNAME"));
+        $curl->add_post("password",$this->_get_env("API_APIFY_PASSWORD"));
+        $curl->request_post();
+        $r = $curl->get_response();
+        $r = \json_decode($r,1);
+        $this->logd($r,"curl.r");
+
+
+
+        $tokens["dbapifytoken"] = $r["data"]["token"] ?? "";
+        $tokens["uploadtoken"] = $r["data"]["token"] ?? "";
+
+        return $tokens;
+    }
+
     /**
      * Called when authentication is needed, but it's not sent
      */
@@ -135,4 +154,6 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
     }
 
     public function supportsRememberMe(){return false;}
+
+    private function _get_env($key){return $_ENV[$key] ?? "";}
 }

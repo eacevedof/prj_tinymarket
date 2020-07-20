@@ -75,7 +75,7 @@ const app = new Vue({
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops! Some error has occured',
-                    text: error.toString(),
+                    text: JSON.stringify(error),
                 })
             })
         }//handleSubmit(e)
