@@ -1,6 +1,6 @@
 <?php
 // https://ourcodeworld.com/articles/read/1059/how-to-implement-your-own-user-authentication-system-in-symfony-4-3-part-3-creating-a-login-form-and-logout-route
-// src/Security/LoginFormAuthenticator.php
+// src/Security/LoginAuthenticator.php
 namespace App\Security;
 
 use App\Entity\User;
@@ -21,7 +21,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
+class LoginAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
@@ -42,7 +42,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request)
     {
-        return 'app_login' === $request->attributes->get('_route')
+        //si es la ruta login
+        return 'check-login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
@@ -95,6 +96,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     protected function getLoginUrl()
     {
-        return $this->router->generate('app_login');
+        return $this->router->generate('check-login');
     }
 }

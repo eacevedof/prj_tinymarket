@@ -2,15 +2,16 @@
 //proyecto\src\Controller\Common\SecurityController.php
 namespace App\Controller\Common;
 
+use App\Security\LoginAuthenticator;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Controller\BaseController;
 use App\Component\Curl;
 
 class SecurityController extends BaseController
 {
-    public function login(AuthenticationUtils $authentication)
+    public function login()
     {
-        $error = $authentication->getLastAuthenticationError();
+        $error = "";
         return $this->render("open/security/login.html.twig",[
             "error" => $error,
         ]);

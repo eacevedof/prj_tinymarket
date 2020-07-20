@@ -20,10 +20,7 @@ security:
         main:
             #anonymous: lazy
             anonymous: true
-            guard:
-                provider: proveedor
-                authenticators:
-                    - App\Security\LoginFormAuthenticator
+
             # form_login:
                 #login_path: login
                 # default_target_path: react
@@ -47,7 +44,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # role_1 admin, 2: system, 3: enterprise, 4: particular, 5: client
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # - { path: ^/check-login, roles: IS_AUTHENTICATED_ANONYMOUSLY } #esto esta en el tutorial
         - { path: ^/react, roles: [ROLE_1,ROLE_2,ROLE_3,ROLE_4,ROLE_5]  }
         - { path: ^/users, roles: [ROLE_1,ROLE_2] }
 
