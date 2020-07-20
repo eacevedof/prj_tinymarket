@@ -81,8 +81,7 @@ const app = new Vue({
         }//handleSubmit(e)
     },//methods
     mounted(){
-        alert("aaa")
-        console.log("mounted")
+        console.log("login.vue.mounted")
         this.$refs.email.focus();
     }
 })

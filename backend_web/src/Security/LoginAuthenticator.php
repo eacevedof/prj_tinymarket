@@ -81,7 +81,8 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         // Code 401 "Unauthorized"
         if (null === $credentials) return null;
 
-        $action = $credentials["actionx"] ?? "";
+        $action = $credentials["action"] ?? "";
+        //ya lanza el 401
         if ($action !== "admin-login") throw new CustomUserMessageAuthenticationException("Wrong action provided");
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
