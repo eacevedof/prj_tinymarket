@@ -56,8 +56,8 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
      */
     public function getCredentials(Request $request)
     {
-//$this->logd($request,"obj request");
-$this->logd($_POST,"_POST");
+        $this->logd($_POST,"_POST");
+
         $credentials = [
             "action" => $request->get('action'),
             'email' => $request->get('username'),
@@ -65,7 +65,7 @@ $this->logd($_POST,"_POST");
             //'csrf_token' => $request->get('_csrf_token'),
         ];
 
-$this->logd($credentials,"credentials");
+        $this->logd($credentials,"credentials");
 
         $request->getSession()->set(
             Security::LAST_USERNAME,
@@ -81,8 +81,8 @@ $this->logd($credentials,"credentials");
         // Code 401 "Unauthorized"
         if (null === $credentials) return null;
 
-        $action = $credentials["action"] ?? "";
-        if ($action !== "admin-login") throw new \Exception("Wrong action provided",401);
+        $action = $credentials["actionx"] ?? "";
+        if ($action !== "admin-login") throw new CustomUserMessageAuthenticationException("Wrong action provided");
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
         if (!$user) throw new CustomUserMessageAuthenticationException('Email could not be found.');
