@@ -126,11 +126,18 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
           "token_upload"  => "",
         ];
 
+        $this->logd($_SERVER["HTTP_USER_AGENT"] ?? "","HTTP_USER_AGENT");
+        $this->logd($_SERVER["REMOTE_ADDR"] ?? "","REMOTE_ADDR");
+        $this->logd($_SERVER["REMOTE_HOST"] ?? "","REMOTE_HOST");
+        $this->logd($_SERVER["HTTP_HOST"] ?? "","HTTP_HOST");
+
         //API DBSAPIFY
         $url = $this->_get_env("API_APIFY_URL");
         $curl = new Curl($url);
         $curl->add_post("user",$this->_get_env("API_APIFY_USERNAME"));
         $curl->add_post("password",$this->_get_env("API_APIFY_PASSWORD"));
+        $curl->add_post("remoteip",$_SERVER["REMOTE_ADDR"]);
+        $curl->add_post("remotehost",$_SERVER["REMOTE_HOST"] ?? "*");
         $curl->request_post();
         $r = $curl->get_response();
         $r = \json_decode($r,1);
@@ -143,6 +150,8 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         $curl = new Curl($url);
         $curl->add_post("user",$this->_get_env("API_UPLOAD_USERNAME"));
         $curl->add_post("password",$this->_get_env("API_UPLOAD_PASSWORD"));
+        $curl->add_post("remoteip",$_SERVER["REMOTE_ADDR"]);
+        $curl->add_post("remotehost",$_SERVER["REMOTE_HOST"] ?? "*");
         $curl->request_post();
         $r = $curl->get_response();
         $r = \json_decode($r,1);
