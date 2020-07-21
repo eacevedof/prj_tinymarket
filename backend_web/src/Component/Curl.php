@@ -81,6 +81,7 @@ class Curl
 
     private function curl_execute($arOptions,$sMethod="")
     {
+        $this->logd($arOptions,"curl.curl_execute.options");
         $oCurl = curl_init();
         curl_setopt_array($oCurl,$arOptions);
         $this->sResponse = curl_exec($oCurl);

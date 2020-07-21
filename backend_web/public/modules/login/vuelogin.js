@@ -94,5 +94,6 @@ const app = new Vue({
     mounted(){
         console.log("login.vue.mounted")
         this.$refs.email.focus();
+        localStorage.clear();
     }
 })
