@@ -67,7 +67,7 @@ const app = new Vue({
                     else{
                         localStorage.setItem("token_dbsapify",response.token_dbsapify)
                         localStorage.setItem("token_upload",response.token_upload)
-                        //window.location.href = "/admin"
+                        window.location.href = "/admin"
                     }
                 } else {
                     Swal.fire({
