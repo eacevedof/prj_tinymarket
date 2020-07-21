@@ -10,6 +10,7 @@ services:
         UID: $U_ID
     ports:
       - 300:80
+
     volumes:
       - ./public:/appdata/www/public
     depends_on:
@@ -37,9 +38,6 @@ services:
     networks:
       - sf-tinymarket-net
       - mariadb-univ_net
-      # https://forums.docker.com/t/accessing-host-machine-from-within-docker-container/14248/4
-      # docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 host-univ_net
-      - host-univ_net
 
 volumes:
   sf-tinymarket-be-sync:
@@ -47,8 +45,6 @@ volumes:
 
 networks:
   sf-tinymarket-net:
-  host-univ_net:
-    external: true
   mariadb-univ_net:
     external: true
 
