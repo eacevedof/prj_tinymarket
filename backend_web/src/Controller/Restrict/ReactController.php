@@ -7,6 +7,7 @@ class ReactController extends BaseController
     public function __invoke($reactslug)
     {
         $this->logd($reactslug,"reactslug");
-        return $this->render("restrict/admin-react.html.twig",["reactslug"=>$reactslug]);
+
+        return $this->render("restrict/admin-react.html.twig",["reactslug"=>""]);
     }
 }//ReactController

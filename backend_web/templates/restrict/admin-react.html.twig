@@ -3,8 +3,9 @@
 <script>
 let reactslug = "{{ reactslug }}"
 if(reactslug!=""){
+    console.log("reactslug",reactslug)
     //history.pushState(state, title[, url])
-    window.history.pushState("","","/admin/"+reactslug) //no va
+    //window.history.pushState("","","/admin/"+reactslug) //no va
     //window.location.pathname = "/admin/"+reactslug //no va, bucle infinito
     //window.location = "http://localhost:300/admin/"+reactslug   //no va, bucle infinito
 }
