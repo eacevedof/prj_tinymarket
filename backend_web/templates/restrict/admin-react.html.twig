@@ -1,1 +1,12 @@
 {% extends 'restrict/restrict-layout.html.twig' %}
+{% block script %}
+<script>
+let reactslug = "{{ reactslug }}"
+if(reactslug!=""){
+    //history.pushState(state, title[, url])
+    window.history.pushState("","","/admin/"+reactslug) //no va
+    //window.location.pathname = "/admin/"+reactslug //no va, bucle infinito
+    //window.location = "http://localhost:300/admin/"+reactslug   //no va, bucle infinito
+}
+</script>
+{% endblock %}
