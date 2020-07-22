@@ -34,8 +34,8 @@ register:
 admin:
     path: /admin/{reactslug}
     defaults: { _controller: App\Controller\Restrict\ReactController, reactslug: null }
-    #requirements: reactslug: ".+"
-        
+    requirements:
+        reactslug: ".+"
 react:
     path: /react
     controller: App\Controller\Restrict\ReactController
