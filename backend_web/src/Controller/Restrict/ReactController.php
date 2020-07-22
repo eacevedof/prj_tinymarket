@@ -4,8 +4,9 @@ use App\Controller\BaseController;
 
 class ReactController extends BaseController
 {
-    public function __invoke()
+    public function __invoke($reactslug)
     {
-        return $this->render("restrict/admin-react.html.twig");
+        $this->logd($reactslug,"reactslug");
+        return $this->render("restrict/admin-react.html.twig",["reactslug"=>$reactslug]);
     }
 }//ReactController

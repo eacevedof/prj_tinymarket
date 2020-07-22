@@ -31,10 +31,15 @@ register:
     controller: App\Controller\Common\UserController::register
     name_prefix: _private
 
-admin:
-    path: /admin
+adminx:
+    path: /adminx
     controller: App\Controller\Restrict\ReactController
-
+admin:
+    path: /admin/{reactslug}
+    defaults: { _controller: App\Controller\Restrict\ReactController, reactslug: null }
+    requirements:
+        reactslug: ".+"
+        
 react:
     path: /react
     controller: App\Controller\Restrict\ReactController
