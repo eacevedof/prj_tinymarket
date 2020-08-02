@@ -15,12 +15,13 @@ login:
     path: /login
     controller: App\Controller\Common\SecurityController::login
 
+# no se gestiona por el controlador sino por App\Security\LoginAuthenticator (security.yaml)
 check-login:
     path: /check-login
-    controller: App\Controller\Common\SecurityController::check_login
-    methods: POST
-    defaults:
-        _format: json
+    #controller: App\Controller\Common\SecurityController::check_login
+    # methods: POST
+    # defaults:
+        # _format: json
 
 logout:
     path: /logout
