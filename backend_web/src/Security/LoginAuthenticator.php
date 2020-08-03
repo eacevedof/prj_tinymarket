@@ -131,7 +131,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
 
     private function _get_origin(){
         $domain = $this->_get_header("origin");
-        return str_replace(["https://","http://","",$domain]);
+        return str_replace(["https://","http://"],"",$domain);
     }
 
     private function _get_tokens()
