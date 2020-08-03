@@ -118,6 +118,22 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
 
     private function _get_env($key){return $_ENV[$key] ?? "";}
 
+    private function _get_header($key=null)
+    {
+        $all = getallheaders();
+        $this->logd($all,"get_header.all");
+        if(!$key) return $all;
+        foreach ($all as $k=>$v)
+            if(strtolower($k)===strtolower($key))
+                return $v;
+        return null;
+    }
+
+    private function _get_origin(){
+        $domain = $this->_get_header("origin");
+        return str_replace(["https://","http://","",$domain]);
+    }
+
     private function _get_tokens()
     {
         //$this->logd($_ENV,"-ENV-");
@@ -130,6 +146,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         $this->logd($_SERVER["REMOTE_ADDR"] ?? "","REMOTE_ADDR");
         $this->logd($_SERVER["REMOTE_HOST"] ?? "","REMOTE_HOST");
         $this->logd($_SERVER["HTTP_HOST"] ?? "","HTTP_HOST");
+        $this->logd($this->_get_origin(),"origin to forward");
 
         //API DBSAPIFY
         $url = $this->_get_env("API_APIFY_URL");
@@ -137,7 +154,8 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         $curl->add_post("user",$this->_get_env("API_APIFY_USERNAME"));
         $curl->add_post("password",$this->_get_env("API_APIFY_PASSWORD"));
         $curl->add_post("remoteip",$_SERVER["REMOTE_ADDR"]);
-        $curl->add_post("remotehost",$_SERVER["REMOTE_HOST"] ?? "*");
+        //$curl->add_post("remotehost",$_SERVER["REMOTE_HOST"] ?? "*");
+        $curl->add_post("remotehost",$this->_get_origin());
         $curl->request_post();
         $r = $curl->get_response();
         $r = \json_decode($r,1);
@@ -151,7 +169,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         $curl->add_post("user",$this->_get_env("API_UPLOAD_USERNAME"));
         $curl->add_post("password",$this->_get_env("API_UPLOAD_PASSWORD"));
         $curl->add_post("remoteip",$_SERVER["REMOTE_ADDR"]);
-        $curl->add_post("remotehost",$_SERVER["REMOTE_HOST"] ?? "*");
+        $curl->add_post("remotehost",$this->_get_origin());
         $curl->request_post();
         $r = $curl->get_response();
         $r = \json_decode($r,1);
